@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iconHazard"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/icon_for_hazard_level"
+        android:cropToPadding="true"
+        android:maxWidth="80dp"
+        android:maxHeight="80dp"
+        app:srcCompat="@drawable/ic_warning_critical" />
+
+    <TextView
+        android:id="@+id/txtNumCrit"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@+id/iconHazard"
+        android:text="@string/num_crit" />
+
+    <TextView
+        android:id="@+id/txtNumNonCrit"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtNumCrit"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/iconHazard"
+        android:text="@string/num_non_crit" />
+
+    <TextView
+        android:id="@+id/txtTimeSinceInspection"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtNumNonCrit"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/iconHazard"
+        android:text="@string/time_since_inspection" />
+
+</RelativeLayout>

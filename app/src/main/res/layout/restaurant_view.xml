@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iconRestaurant"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/icon_for_restaurant_general"
+        android:cropToPadding="true"
+        android:maxWidth="80dp"
+        android:maxHeight="80dp"
+        app:srcCompat="@drawable/ic_baseline_fastfood_24" />
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="217dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:text="@string/restaurant_name"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/iconWarning"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
+        android:contentDescription="@string/icon_for_warning"
+        app:srcCompat="@drawable/ic_warning_critical" />
+
+    <TextView
+        android:id="@+id/txtNumViolations"
+        android:layout_width="217dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp"
+        android:text="@string/num_violations"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/txtInspectionDate"
+        android:layout_width="214dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtNumViolations"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:text="@string/time_since_inspection"
+        android:textSize="14sp" />
+
+</RelativeLayout>
