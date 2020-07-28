@@ -84,8 +84,15 @@
     <string name = "menu_map"> Carte </string>
     <string name = "menu_restaurant_list"> Liste des restaurants </string>
     <string name = "update_prompt"> De nouvelles données sont disponibles, souhaitez-vous les télécharger maintenant? </string>
+    <string name="updating">Mise à jour …</string>
     <string name = "cancel"> Annuler </string>
+    <string name="leave_update_activity">Continuer</string>
+    <string name = "Leave_update_activity"> Continuer </string>
     <string name = "update_complete"> Mise à jour terminée! </string>
     <string name = "image_button_for_list_view"> bouton d\'image pour la vue de liste </string>
     <string name="update">mettre à jour</string>
+    <string name="Address">Adresse:</string>
+    <string name="No_inspections_found">\n Aucune inspection trouvée</string>
+    <string name="Hazard_level">Niveau de danger:</string>
+    <string name="Update_Available">Mise à jour disponible</string>
 </resources>

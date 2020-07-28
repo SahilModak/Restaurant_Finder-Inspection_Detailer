@@ -83,10 +83,10 @@ public class RestaurantMarkerRenderer extends DefaultClusterRenderer<Restaurant>
 
     private String getInfoWindowStr(Restaurant restaurant){
         if(restaurant.getAllInspections().size() == 0){
-            return "Address: " + restaurant.getRestaurantAddress() +
-                    "\nAddress: No inspections found";
+            return R.string.Address + restaurant.getRestaurantAddress() +
+                    R.string.No_inspections_found;
         }
-        return "Address: " + restaurant.getRestaurantAddress() +
-                "\nHazard Level: " + restaurant.getInspection(0).getHazardLevel();
+        return R.string.Address + restaurant.getRestaurantAddress() +
+                 R.string.Hazard_level+ restaurant.getInspection(0).getHazardLevel();
     }
 }

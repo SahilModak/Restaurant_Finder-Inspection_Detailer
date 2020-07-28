@@ -84,10 +84,15 @@
     <string name="menu_map">Map</string>
     <string name="menu_restaurant_list">Restaurant List</string>
     <string name="update_prompt">There is new data available, would you like to download now?</string>
-    <string name="updating" translatable="false">Updating …</string>
+    <string name="updating">Updating …</string>
     <string name="cancel">Cancel</string>
-    <string name="leave_update_activity" translatable="false">Continue</string>
+    <string name="leave_update_activity">Continue</string>
     <string name="update_complete">Update Complete!</string>
     <string name="image_button_for_list_view">image button for list view</string>
-    <string name="update">update</string>
+    <string name="update">update</string>=
+    <string name="Leave_update_activity">continue</string>
+    <string name="Address">Address: </string>
+    <string name="No_inspections_found">\n No inspections found</string>
+    <string name="Hazard_level">Hazard Level:</string>
+    <string name="Update_Available">Update Available</string>
 </resources>
