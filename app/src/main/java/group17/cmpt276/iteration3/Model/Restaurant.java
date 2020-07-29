@@ -45,6 +45,11 @@ public class Restaurant implements Iterable<Inspection>, ClusterItem {
     }
 
 
+    //template
+    public boolean isFav(){
+        return false;
+    }
+
     @Override
     public Iterator<Inspection> iterator() {
         //override to make the class iterable
