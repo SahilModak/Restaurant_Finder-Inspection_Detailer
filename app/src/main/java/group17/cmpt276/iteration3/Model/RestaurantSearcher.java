@@ -39,6 +39,28 @@ public class RestaurantSearcher {
         }
     }
 
+    private void searchForNCriticalLastYear(int nCriticalLastYear, boolean nCriticalLess){
+        if(nCriticalLastYear == -1){
+            return;
+        }
+        //check to see if we want the n critical violations less than input value ie: last years violations <= 5
+        //Remove restaurants who do have more or fewer than nCriticalLastYear
+        if(nCriticalLess){
+            for(Restaurant restaurant: searchedRestaurants){
+                if((restaurant.getNCriticalLastYear() > nCriticalLastYear)){
+                    searchedRestaurants.remove(restaurant);
+                }
+            }
+        }
+        else{
+            for(Restaurant restaurant: searchedRestaurants){
+                if((restaurant.getNCriticalLastYear() < nCriticalLastYear)){
+                    searchedRestaurants.remove(restaurant);
+                }
+            }
+        }
+    }
+
 
     public List<Restaurant> getSearchedRestaurants(){
         return searchedRestaurants;
