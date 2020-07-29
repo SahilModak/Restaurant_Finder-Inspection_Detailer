@@ -92,7 +92,7 @@
     <string name="update">update</string>=
     <string name="Leave_update_activity">continue</string>
     <string name="Address">Address: </string>
-    <string name="No_inspections_found">\n No inspections found</string>
-    <string name="Hazard_level">Hazard Level:</string>
+    <string name="No_inspections_found">\nNo inspections found</string>
+    <string name="Hazard_level">\nHazard Level:</string>
     <string name="Update_Available">Update Available</string>
 </resources>

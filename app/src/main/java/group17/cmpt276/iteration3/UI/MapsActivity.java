@@ -377,8 +377,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
-
-
     private void startLocationRunnable(){
         Log.d(TAG, "startsLocationRunnable: starting runnable for retrieving updated device location");
         mapHandler.postDelayed(mapRunnable = new Runnable() {
