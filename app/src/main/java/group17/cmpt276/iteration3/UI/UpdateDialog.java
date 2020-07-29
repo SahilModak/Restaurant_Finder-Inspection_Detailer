@@ -42,7 +42,7 @@ public class UpdateDialog extends AppCompatDialogFragment {
         // create view
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.update_layout, null);
 
-        return new AlertDialog.Builder(getActivity()).setTitle("Update Available").setView(view)
+        return new AlertDialog.Builder(getActivity()).setTitle(R.string.Update_Available).setView(view)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // Send the positive button event back to the host activity
