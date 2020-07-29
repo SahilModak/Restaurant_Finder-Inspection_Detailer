@@ -72,6 +72,8 @@ public class Restaurant implements Iterable<Inspection>, ClusterItem {
         return nCrit;
     }
 
+
+
     @Override
     public Iterator<Inspection> iterator() {
         //override to make the class iterable

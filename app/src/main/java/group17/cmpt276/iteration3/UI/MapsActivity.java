@@ -245,6 +245,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void setmClusterManager(){
         mClusterManager = new ClusterManager<>(this,mMap);
+        //todo: set sorted restaurants here
         mClusterManager.addItems(manager.getAllRestaurants());
         RestaurantMarkerRenderer renderer = new RestaurantMarkerRenderer(this,mMap,mClusterManager);
         mClusterManager.setRenderer(renderer);
@@ -276,6 +277,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         mMap.setInfoWindowAdapter(new CustomWindowAdapter(MapsActivity.this));
+    }
+
+    //todo: update map method
+    private void updateMap(){
+        //clear
+        //recall cluster manager to add searched items
     }
 
     private void getLocPermissions() {
@@ -464,6 +471,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onClusterItemInfoWindowClick(ClusterItem restaurant) {
         Log.i(TAG, "onClusterItemInfoWindowClick: registered click on restaurant : " + restaurant.toString());
+        //todo: change to sorted list
         Intent intent = RestaurantDetailsActivity.makeIntent(MapsActivity.this, (Integer) manager.getRestaurantPositionInArray((Restaurant)restaurant));
         startActivity(intent);
     }

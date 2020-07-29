@@ -58,7 +58,17 @@ public class MainActivity extends AppCompatActivity{
 
         populateListView();
         registerClickCallback();
+        updateSearchedRestaurants();
     }
+
+    //todo: add method to call when search list modified
+    private void updateSearchedRestaurants(){
+        restaurantManager.setSearchedRestaurants("bar",false,20,true,"");
+        adapter.clear();
+        adapter.addAll(restaurantManager.getAllRestaurants());
+        adapter.notifyDataSetChanged();
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -155,6 +165,7 @@ public class MainActivity extends AppCompatActivity{
             Log.i(TAG, "onCreate: caught exception");
             e.printStackTrace();
         }
+
     }
 
     private void populateListView() {
@@ -168,6 +179,9 @@ public class MainActivity extends AppCompatActivity{
     Returns a view for each Restaurant in a collection of Restaurant objects
      */
     private class listAdapter extends ArrayAdapter<Restaurant> {
+        //todo: here is where we can use the searcher
+        //todo: use a dataset modified?
+
         public listAdapter() {
             super(MainActivity.this, R.layout.restaurant_view, restaurantManager.getAllRestaurants());
         }
@@ -303,5 +317,4 @@ public class MainActivity extends AppCompatActivity{
             }
         });
     }
-
 }

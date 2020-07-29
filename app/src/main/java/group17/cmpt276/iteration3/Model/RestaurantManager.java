@@ -1,5 +1,7 @@
 package group17.cmpt276.iteration3.Model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,16 +13,108 @@ Implements an arraylist of Restaurants and methods to operate and access this li
 
 public class RestaurantManager implements Iterable<Restaurant>{
 
+    private static final String TAG = "RestaurantManager";
     //Array List to store all Restaurants
     private List<Restaurant> allRestaurants = new ArrayList<>();
+    private List<Restaurant> searchedRestaurants = new ArrayList<>();
     private static RestaurantManager instance;
     private boolean flag = true;
+    private boolean calledSearch = false; //determines if the class should return a search list
 
     //private constructor to stop duplication
     private RestaurantManager(){
     }
 
+    public void setSearchedRestaurants(String searchString, boolean checkFavorites, int nCriticalLastYear, boolean nCriticalLess, String recentHazardLevel){
+        calledSearch = true;
+
+        Log.i(TAG, "setSearchedRestaurants: looking for restaurnats");
+        Log.i(TAG, "setSearchedRestaurants: search critera: " + searchString + ":" + checkFavorites + ":" + nCriticalLastYear + ":" + nCriticalLess + ":" + recentHazardLevel);
+
+        //iterate though all resaurants, selecting only those that match criteria
+        for(int i = 0; i < allRestaurants.size(); i++){
+            Restaurant restaurant = allRestaurants.get(i);
+            //Log.i(TAG, "setSearchedRestaurants: looking at restaurnat i: " + i + ": " + restaurant.toString());
+            boolean matchSearchString = false;
+            boolean matchFavorite = false;
+            boolean matchNCritical = false;
+            boolean matchHazard = false;
+
+            //check if it is a favorite
+            if(checkFavorites){
+                if(restaurant.isFav()){
+                    matchFavorite = true;
+                }
+            }
+            else{
+                matchFavorite = true;
+            }
+
+            //check if it matches search string
+            if(searchString.equals("")) {
+                matchSearchString = true;
+            }
+            else{
+                if (restaurant.getRestaurantName().toLowerCase().contains(searchString.toLowerCase())){
+                    Log.i(TAG, "setSearchedRestaurants: found match" + restaurant.getRestaurantName() +" : " + searchString);
+                    matchSearchString = true;
+                }
+            }
+
+
+            //check to see if it matches
+            if(nCriticalLastYear == -1){
+                matchNCritical = true;
+            }
+            else{
+                //check if we need less than or more than
+                if(nCriticalLess){
+                    if(restaurant.getNCriticalLastYear() <= nCriticalLastYear){
+                        matchNCritical = true;
+                        Log.i(TAG, "setSearchedRestaurants: found match" + restaurant.getNCriticalLastYear() +" : " + nCriticalLastYear);
+                    }
+                }
+                else{
+                    if(restaurant.getNCriticalLastYear() >= nCriticalLastYear){
+                        matchNCritical = true;
+                        Log.i(TAG, "setSearchedRestaurants: found match" + restaurant.getNCriticalLastYear() +" : " + nCriticalLastYear);
+                    }
+                }
+            }
+
+
+            //check to see if match hazard level
+            if(recentHazardLevel.equals("")) {
+                matchHazard = true;
+            }
+            else {
+                if(restaurant.numOfInspections() > 0){
+                    if(restaurant.getInspection(0).getHazardLevel().equals(recentHazardLevel)){
+                        matchHazard = true;
+                        Log.i(TAG, "setSearchedRestaurants: found match" + restaurant.getInspection(0).getHazardLevel() +" : " + recentHazardLevel);
+                    }
+                }
+            }
+
+            if(matchFavorite && matchHazard && matchNCritical && matchSearchString){
+                searchedRestaurants.add(restaurant);
+                Log.i(TAG, "setSearchedRestaurants: found matching restaurnat" + restaurant.toString());
+            }
+        }
+    }
+
+
+    public void clearSearch(){
+        searchedRestaurants.clear();
+        calledSearch = false;
+    }
+
+
+
     public List<Restaurant> getAllRestaurants(){
+        if(calledSearch){
+            return searchedRestaurants;
+        }
         return allRestaurants;
     }
 
