@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.094"></RadioButton>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/favouriteLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search in favourites"
@@ -27,5 +27,44 @@
         app:layout_constraintBottom_toTopOf="@+id/favouriteCheck"
         app:layout_constraintStart_toStartOf="@+id/favouriteCheck" />
 
+
+    <RadioGroup
+        android:id="@+id/favouriteRadioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.097"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.267">
+
+        <RadioButton
+            android:id="@+id/hazard_low"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Low"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/hazard_moderate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Moderate"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/hazard_critical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Critical"></RadioButton>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/hazardLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hazard Level of most recent inspection"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/favouriteRadioButton"
+        app:layout_constraintStart_toStartOf="@+id/favouriteRadioButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
