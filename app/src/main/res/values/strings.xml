@@ -89,5 +89,11 @@
     <string name="leave_update_activity">Continue</string>
     <string name="update_complete">Update Complete!</string>
     <string name="image_button_for_list_view">image button for list view</string>
+    <string name="yes">Yes</string>
+    <string name="search_in_favourites">Search in favourites</string>
+    <string name="low">Low</string>
+    <string name="moderate">Moderate</string>
+    <string name="critical">Critical</string>
+    <string name="hazard_level_of_most_recent_inspection">Hazard Level of most recent inspection</string>
 
 </resources>

@@ -10,7 +10,7 @@
         android:id="@+id/favouriteCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Yes"
+        android:text="@string/yes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.087"
@@ -22,7 +22,7 @@
         android:id="@+id/favouriteLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search in favourites"
+        android:text="@string/search_in_favourites"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/favouriteCheck"
         app:layout_constraintStart_toStartOf="@+id/favouriteCheck" />
@@ -43,26 +43,26 @@
             android:id="@+id/hazard_low"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Low"></RadioButton>
+            android:text="@string/low"></RadioButton>
 
         <RadioButton
             android:id="@+id/hazard_moderate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Moderate"></RadioButton>
+            android:text="@string/moderate"></RadioButton>
 
         <RadioButton
             android:id="@+id/hazard_critical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Critical"></RadioButton>
+            android:text="@string/critical"></RadioButton>
     </RadioGroup>
 
     <TextView
         android:id="@+id/hazardLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hazard Level of most recent inspection"
+        android:text="@string/hazard_level_of_most_recent_inspection"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/favouriteRadioButton"
         app:layout_constraintStart_toStartOf="@+id/favouriteRadioButton" />
