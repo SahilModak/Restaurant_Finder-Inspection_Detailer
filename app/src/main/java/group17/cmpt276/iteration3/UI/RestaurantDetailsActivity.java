@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -54,7 +56,26 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         getRestaurantDetails();
         updateView();
         populateListView();
+        setupFavouriteButton();
         registerClickCallback();
+    }
+
+    private void setupFavouriteButton() {
+        final ImageButton favouriteButton = (ImageButton) findViewById(R.id.btnFavourite);
+        favouriteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isFavourite = restaurant.isFavourite();
+                if (isFavourite) {
+                    favouriteButton.setImageResource(android.R.drawable.btn_star_big_off);
+                    restaurant.setFavourite(false);
+                } else {
+                    favouriteButton.setImageResource(android.R.drawable.btn_star_big_on);
+                    restaurant.setFavourite(true);
+                }
+            }
+        });
+
     }
 
     private void setToolBar(){
