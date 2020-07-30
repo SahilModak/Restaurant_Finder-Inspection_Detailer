@@ -1,9 +1,12 @@
 package group17.cmpt276.iteration3.UI;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+
+
 import androidx.annotation.NonNull;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -82,11 +85,17 @@ public class RestaurantMarkerRenderer extends DefaultClusterRenderer<Restaurant>
     }
 
     private String getInfoWindowStr(Restaurant restaurant){
-        if(restaurant.getAllInspections().size() == 0){
-            return "Address: " + restaurant.getRestaurantAddress() +
-                    "\nAddress: No inspections found";
+
+        if(restaurant.getAllInspections().size() == 0)
+        {
+            return  mContext.getString(R.string.Address)
+                    + restaurant.getRestaurantAddress()
+                    + mContext.getString(R.string.No_inspections_found);
         }
-        return "Address: " + restaurant.getRestaurantAddress() +
-                "\nHazard Level: " + restaurant.getInspection(0).getHazardLevel();
+
+        return mContext.getString(R.string.Address)
+                + restaurant.getRestaurantAddress()
+                + mContext.getString(R.string.Hazard_level)
+                + restaurant.getInspection(0).getHazardLevel();
     }
 }

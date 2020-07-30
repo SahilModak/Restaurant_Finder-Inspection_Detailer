@@ -33,7 +33,7 @@
             android:value="@string/google_maps_key" />
         <activity
             android:name="group17.cmpt276.iteration3.UI.UpdateActivity"
-            android:label="Update" />
+            android:label="@string/update" />
         <activity
             android:name="group17.cmpt276.iteration3.UI.InspectionDetail"
             android:label="@string/details_of_inspection"
