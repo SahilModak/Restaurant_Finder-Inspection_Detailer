@@ -28,7 +28,7 @@ public class CustomWindowAdapter implements GoogleMap.InfoWindowAdapter {
         title.setText(marker.getTitle());
 
         TextView str = (TextView) view.findViewById(R.id.RestaurantStrInfo);
-        str.setText("Address: " + marker.getSnippet());
+        str.setText(marker.getSnippet());
     }
 
     @Override
