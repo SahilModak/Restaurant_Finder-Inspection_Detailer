@@ -38,7 +38,6 @@ public class OptionsScreen extends AppCompatActivity {
                 RadioGroup hazardGroup = (RadioGroup) findViewById(R.id.hazardGroup);
                 RadioButton hazard = findViewById(hazardGroup.getCheckedRadioButtonId());
                 thisSearch.setSearchHazardLevel((String) hazard.getText());
-
                 startActivity(new Intent(OptionsScreen.this, MainActivity.class));
             }
         });
