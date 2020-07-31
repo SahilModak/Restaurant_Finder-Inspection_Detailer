@@ -95,5 +95,6 @@
     <string name="moderate">Moderate</string>
     <string name="critical">Critical</string>
     <string name="hazard_level_of_most_recent_inspection">Hazard Level of most recent inspection</string>
+    <string name="save_criteria">Save Criteria</string>
 
 </resources>
