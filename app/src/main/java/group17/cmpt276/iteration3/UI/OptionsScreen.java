@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -38,6 +39,12 @@ public class OptionsScreen extends AppCompatActivity {
                 RadioGroup hazardGroup = (RadioGroup) findViewById(R.id.hazardGroup);
                 RadioButton hazard = findViewById(hazardGroup.getCheckedRadioButtonId());
                 thisSearch.setSearchHazardLevel((String) hazard.getText());
+                EditText minViolations = (EditText) findViewById(R.id.minViolation);
+                EditText maxViolation = (EditText) findViewById(R.id.maxViolation);
+                int minV = Integer.parseInt(minViolations.getText().toString());
+                int maxV = Integer.parseInt(maxViolation.getText().toString());
+                thisSearch.setMinViolations(minV);
+                thisSearch.setMaxViolations(maxV);
                 startActivity(new Intent(OptionsScreen.this, MainActivity.class));
             }
         });

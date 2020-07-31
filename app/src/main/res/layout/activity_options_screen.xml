@@ -64,8 +64,8 @@
         android:layout_height="wrap_content"
         android:text="@string/hazard_level_of_most_recent_inspection"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/favouriteRadioButton"
-        app:layout_constraintStart_toStartOf="@+id/favouriteRadioButton" />
+        app:layout_constraintBottom_toTopOf="@+id/hazardGroup"
+        app:layout_constraintStart_toStartOf="@+id/hazardGroup" />
 
     <TextView
         android:id="@+id/minViolationLabel"
@@ -73,11 +73,11 @@
         android:layout_height="wrap_content"
         android:text="Minimum critical violations (inclusive)"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextNumber"
-        app:layout_constraintStart_toStartOf="@+id/editTextNumber" />
+        app:layout_constraintBottom_toTopOf="@+id/minViolation"
+        app:layout_constraintStart_toStartOf="@+id/minViolation" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/minViolation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -94,11 +94,11 @@
         android:layout_height="wrap_content"
         android:text="Maximum Critical Violations (inclusive)"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextNumber3"
-        app:layout_constraintStart_toStartOf="@+id/editTextNumber3" />
+        app:layout_constraintBottom_toTopOf="@+id/maxViolation"
+        app:layout_constraintStart_toStartOf="@+id/maxViolation" />
 
     <EditText
-        android:id="@+id/editTextNumber3"
+        android:id="@+id/maxViolation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
