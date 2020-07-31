@@ -37,8 +37,11 @@ public class OptionsScreen extends AppCompatActivity {
                 RadioButton fav = (RadioButton) findViewById(R.id.favouriteCheck);
                 thisSearch.setSearchFavourites(fav.isChecked());
                 RadioGroup hazardGroup = (RadioGroup) findViewById(R.id.hazardGroup);
-                RadioButton hazard = findViewById(hazardGroup.getCheckedRadioButtonId());
-                thisSearch.setSearchHazardLevel((String) hazard.getText());
+                int radioId = hazardGroup.getCheckedRadioButtonId();
+                if(radioId != -1){
+                    RadioButton hazard = findViewById(radioId);
+                    thisSearch.setSearchHazardLevel((String) hazard.getText());
+                }
                 EditText minViolations = (EditText) findViewById(R.id.minViolation);
                 EditText maxViolation = (EditText) findViewById(R.id.maxViolation);
                 int minV = Integer.parseInt(minViolations.getText().toString());
