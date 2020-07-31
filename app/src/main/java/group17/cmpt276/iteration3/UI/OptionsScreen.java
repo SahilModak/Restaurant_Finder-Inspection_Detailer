@@ -43,12 +43,31 @@ public class OptionsScreen extends AppCompatActivity {
                     thisSearch.setSearchHazardLevel((String) hazard.getText());
                 }
                 EditText minViolations = (EditText) findViewById(R.id.minViolation);
-                EditText maxViolation = (EditText) findViewById(R.id.maxViolation);
-                int minV = Integer.parseInt(minViolations.getText().toString());
-                int maxV = Integer.parseInt(maxViolation.getText().toString());
-                thisSearch.setMinViolations(minV);
-                thisSearch.setMaxViolations(maxV);
-                startActivity(new Intent(OptionsScreen.this, MainActivity.class));
+                EditText maxViolations = (EditText) findViewById(R.id.maxViolation);
+                int maxV = 999999;
+                int minV = 0;
+                boolean flag = true;
+                if(!(minViolations.getText().toString() == "")){
+                    minV = Integer.parseInt(minViolations.getText().toString());
+                    thisSearch.setMinViolations(minV);
+                    if(!(maxViolations.getText().toString() == "")){
+                        maxV = Integer.parseInt(maxViolations.getText().toString());
+                        if(maxV < minV){
+                            flag = false;
+                            maxViolations.setError("The maximum number of violations cant be less than the minimum number of of violations");
+                        }
+                        else{
+                            thisSearch.setMaxViolations(maxV);
+                        }
+                    }
+                }
+                else if (!(maxViolations.getText().toString() == "")){
+                    maxV = Integer.parseInt(maxViolations.getText().toString());
+                    thisSearch.setMaxViolations(maxV);
+                }
+                if(flag) {
+                    startActivity(new Intent(OptionsScreen.this, MainActivity.class));
+                }
             }
         });
     }
