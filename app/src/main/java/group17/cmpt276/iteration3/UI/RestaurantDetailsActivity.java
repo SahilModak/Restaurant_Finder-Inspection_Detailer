@@ -62,6 +62,11 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
 
     private void setupFavouriteButton() {
         final ImageButton favouriteButton = (ImageButton) findViewById(R.id.btnFavourite);
+        if (restaurant.isFavourite()) {
+            favouriteButton.setImageResource(android.R.drawable.btn_star_big_on);
+        }
+
+
         favouriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

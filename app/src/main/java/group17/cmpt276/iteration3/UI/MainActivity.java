@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -58,6 +59,12 @@ public class MainActivity extends AppCompatActivity{
 
         populateListView();
         registerClickCallback();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -202,6 +209,10 @@ public class MainActivity extends AppCompatActivity{
 
         TextView txtTimeSinceInspection = (TextView) restaurantView.findViewById(R.id.txtInspectionDate);
         setupInspectionTime(txtTimeSinceInspection,current);
+
+        if (current.isFavourite()) {
+            restaurantView.setBackgroundColor(Color.YELLOW);
+        }
     }
 
     private void setupRestaurantIcon(ImageView imageRestaurant,Restaurant current){
