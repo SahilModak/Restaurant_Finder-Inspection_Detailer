@@ -1,17 +1,21 @@
 package group17.cmpt276.iteration3.Model;
 
 public class SearchCriteria {
-    private SearchCriteria instance;
+    private static SearchCriteria instance;
     private boolean searchFavourites = false;
     private String searchHazardLevel = "";
     private int maxViolations;
     private int minViolations = 0;
 
-    private SearchCriteria getInstance(){
-        if(this.instance == null){
+    public static SearchCriteria getInstance(){
+        if(instance == null){
             instance = new SearchCriteria();
         }
-        return this.instance;
+        return instance;
+    }
+
+    private SearchCriteria(){
+
     }
 
     public boolean isSearchFavourites() {
