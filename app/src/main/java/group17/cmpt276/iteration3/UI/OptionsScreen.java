@@ -44,8 +44,8 @@ public class OptionsScreen extends AppCompatActivity {
                 }
                 EditText minViolations = (EditText) findViewById(R.id.minViolation);
                 EditText maxViolations = (EditText) findViewById(R.id.maxViolation);
-                int maxV = 999999;
-                int minV = 0;
+                int maxV;
+                int minV;
                 boolean flag = true;
                 if(!(minViolations.getText().toString() == "")){
                     minV = Integer.parseInt(minViolations.getText().toString());
@@ -66,7 +66,7 @@ public class OptionsScreen extends AppCompatActivity {
                     thisSearch.setMaxViolations(maxV);
                 }
                 if(flag) {
-                    startActivity(new Intent(OptionsScreen.this, MainActivity.class));
+                    startActivity(new Intent(OptionsScreen.this, MapsActivity.class));
                 }
             }
         });
