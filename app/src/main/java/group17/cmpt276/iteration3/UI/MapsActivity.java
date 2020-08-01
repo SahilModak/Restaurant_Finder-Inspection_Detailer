@@ -73,10 +73,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static float newLatitude = 9999;
     private static float newLongitude = 9999;
 
-    private List<Marker> allMarkers;
     private ClusterManager<Restaurant> mClusterManager;
     private boolean flag = false;
-    private boolean show =false;
     private boolean camflag;
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
@@ -85,6 +83,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Location currentLocation;
     private RestaurantManager manager = RestaurantManager.getInstance();
     private Marker marker;
+    private boolean calledSearch = false;
 
     public static final int REQUEST_CODE_FOR_UPDATE = 42;
     private DatabaseInfo databaseInfo;
@@ -100,6 +99,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         camflag = true;
         getLocPermissions();
         getToRestaurantList();
+        startSearchInMap();
+
+        Log.i(TAG, "onCreate: (resume????)");
         //startLocationRunnable();
 
         if(!databaseInfo.getHasAskedForUpdate()) {
@@ -137,7 +139,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-
         SharedPreferences prefs = this.getSharedPreferences("shared preferences", MODE_PRIVATE);
         databaseInfo.updateAccepted(prefs);
 
@@ -181,7 +182,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             manager.sortByRestaurantName();
             manager.setFlagFalse();
             manager.sortAllRestaurantsInspections();
-//            startActivity(new Intent(this, MapsActivity.class));
         }
     }
 
@@ -215,7 +215,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
 
-        Log.i(TAG, "onCreate: created csvreader");
+        //create csv reader
         try {
             assert restFileStream != null;
             Reader readerR = new InputStreamReader(restFileStream);
@@ -243,8 +243,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
+    //starts the search activity from within map
+    private void startSearchInMap(){
+        ImageButton imageButton = findViewById(R.id.IB_search_in_map);
+        imageButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                calledSearch = true;
+                startActivity(new Intent(MapsActivity.this, OptionsScreen.class));
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(calledSearch){
+            refreshItems();
+            calledSearch = false;
+        }
+    }
+
+    private void refreshItems(){
+        mMap.clear();
+        mClusterManager.clearItems();  // calling just in case (may not be needed)
+        mClusterManager.addItems(manager.getAllRestaurants());
+    }
+
     private void setmClusterManager(){
         mClusterManager = new ClusterManager<>(this,mMap);
+        //todo: set sorted restaurants here
         mClusterManager.addItems(manager.getAllRestaurants());
         RestaurantMarkerRenderer renderer = new RestaurantMarkerRenderer(this,mMap,mClusterManager);
         mClusterManager.setRenderer(renderer);
@@ -277,6 +305,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.setInfoWindowAdapter(new CustomWindowAdapter(MapsActivity.this));
     }
+
+
 
     private void getLocPermissions() {
         Log.d(TAG, "Getting Location Permissions");
@@ -462,6 +492,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onClusterItemInfoWindowClick(ClusterItem restaurant) {
         Log.i(TAG, "onClusterItemInfoWindowClick: registered click on restaurant : " + restaurant.toString());
+        //todo: change to sorted list
         Intent intent = RestaurantDetailsActivity.makeIntent(MapsActivity.this, (Integer) manager.getRestaurantPositionInArray((Restaurant)restaurant));
         startActivity(intent);
     }

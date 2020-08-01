@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="group17.cmpt276.iteration3.UI.OptionsScreen">
+
+<!--todo: add clear search button (linear layout at bottom) -->
+
+    <TextView
+        android:id="@+id/text_search_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/editText_search_name"
+        app:layout_constraintStart_toStartOf="@+id/editText_search_name" />
+
+
+    <EditText
+        android:id="@+id/editText_search_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="15"
+        android:hint="ex: pizza"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.319"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.093" />
+
+    <TextView
+        android:id="@+id/favouriteLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_in_favourites"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/favouriteCheck"
+        app:layout_constraintStart_toStartOf="@+id/favouriteCheck" />
+
+
+    <RadioButton
+        android:id="@+id/favouriteCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/yes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.087"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.23">
+    </RadioButton>
+
+
+    <TextView
+        android:id="@+id/hazardLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hazard_level_of_most_recent_inspection"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/hazardGroup"
+        app:layout_constraintStart_toStartOf="@+id/hazardGroup" />
+
+    <RadioGroup
+        android:id="@+id/hazardGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.097"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.37">
+
+        <RadioButton
+            android:id="@+id/hazard_low"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/low">
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/hazard_moderate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/moderate">
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/hazard_critical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="High">
+        </RadioButton>
+    </RadioGroup>
+
+
+    <TextView
+        android:id="@+id/minViolationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Minimum critical violations (inclusive)"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/minViolation"
+        app:layout_constraintStart_toStartOf="@+id/minViolation" />
+
+    <EditText
+        android:id="@+id/minViolation"
+        android:layout_width="147dp"
+        android:layout_height="43dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.169"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.58" />
+
+    <TextView
+        android:id="@+id/maxViolationsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Maximum Critical Violations (inclusive)"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/maxViolation"
+        app:layout_constraintStart_toStartOf="@+id/maxViolation" />
+
+    <EditText
+        android:id="@+id/maxViolation"
+        android:layout_width="147dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.169"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.7" />
+
+    <Button
+        android:id="@+id/saveBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save_criteria"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.858"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.879" />
+
+    <Button
+        android:id="@+id/cancelBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/saveBtn"
+        app:layout_constraintEnd_toStartOf="@+id/saveBtn"
+        app:layout_constraintHorizontal_bias="0.38"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/saveBtn"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
