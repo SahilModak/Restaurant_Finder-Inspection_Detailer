@@ -127,6 +127,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         checkFavourites();
     }
 
+    // Gets list of favourites from SharedPreferences and converts it from json to ArrayList<String>
     private void loadFromFavourites() {
         SharedPreferences prefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -139,8 +140,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    // sets previously favourited restaurants isFavourite to true for subsequent launches
     private void checkFavourites() {
-
+        for (int i = 0; i < favList.size(); i++) {
+            Restaurant restaurant = manager.searchById(favList.get(i));
+            if (restaurant != null ) {
+                restaurant.setFavourite(true);
+            }
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

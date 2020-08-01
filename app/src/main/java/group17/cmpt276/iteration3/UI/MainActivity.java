@@ -63,13 +63,6 @@ public class MainActivity extends AppCompatActivity{
         registerClickCallback();
     }
 
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        adapter.notifyDataSetChanged();
-//    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -173,7 +166,6 @@ public class MainActivity extends AppCompatActivity{
 
     private void populateListView() {
         ListView listView = (ListView) findViewById(R.id.restaurantListView);
-
         if (adapter == null) {
             adapter = new listAdapter();
             listView.setAdapter(adapter);
@@ -193,7 +185,6 @@ public class MainActivity extends AppCompatActivity{
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-//            Log.i("TAG", "getview:"+position+" "+convertView);
             View restaurantView = convertView;
             if (restaurantView == null) {
                 restaurantView = getLayoutInflater().inflate(R.layout.restaurant_view, parent, false);
