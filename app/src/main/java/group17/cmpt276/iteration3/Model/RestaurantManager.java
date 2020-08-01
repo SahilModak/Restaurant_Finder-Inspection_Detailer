@@ -25,16 +25,15 @@ public class RestaurantManager implements Iterable<Restaurant>{
     private RestaurantManager(){
     }
 
-    public void setSearchedRestaurants(String searchString, boolean checkFavorites, int nCriticalLastYear, boolean nCriticalLess, String recentHazardLevel){
+    public void setSearchedRestaurants(String searchString, boolean checkFavorites, int maxCriticalViolation, int minCriticalViolation, String recentHazardLevel){
         calledSearch = true;
 
         Log.i(TAG, "setSearchedRestaurants: looking for restaurnats");
-        Log.i(TAG, "setSearchedRestaurants: search critera: " + searchString + ":" + checkFavorites + ":" + nCriticalLastYear + ":" + nCriticalLess + ":" + recentHazardLevel);
+        Log.i(TAG, "setSearchedRestaurants: search critera:" + searchString + ":" + checkFavorites + ":" + maxCriticalViolation + ":" + minCriticalViolation + ":" + recentHazardLevel);
 
         //iterate though all resaurants, selecting only those that match criteria
         for(int i = 0; i < allRestaurants.size(); i++){
             Restaurant restaurant = allRestaurants.get(i);
-            //Log.i(TAG, "setSearchedRestaurants: looking at restaurnat i: " + i + ": " + restaurant.toString());
             boolean matchSearchString = false;
             boolean matchFavorite = false;
             boolean matchNCritical = false;
@@ -61,27 +60,23 @@ public class RestaurantManager implements Iterable<Restaurant>{
                 }
             }
 
-
-            //check to see if it matches
-            if(nCriticalLastYear == -1){
+            //check to see if searching violations in necessary
+            if(maxCriticalViolation == -1 && minCriticalViolation == -1){
                 matchNCritical = true;
             }
             else{
-                //check if we need less than or more than
-                if(nCriticalLess){
-                    if(restaurant.getNCriticalLastYear() <= nCriticalLastYear){
+                //just looking for [min, noMax]
+                if(maxCriticalViolation != -1 && minCriticalViolation == -1){
+                    if(restaurant.getNCriticalLastYear() >= minCriticalViolation){
                         matchNCritical = true;
-                        Log.i(TAG, "setSearchedRestaurants: found match" + restaurant.getNCriticalLastYear() +" : " + nCriticalLastYear);
                     }
                 }
                 else{
-                    if(restaurant.getNCriticalLastYear() >= nCriticalLastYear){
+                    if(restaurant.getNCriticalLastYear() >= minCriticalViolation && restaurant.getNCriticalLastYear() <= maxCriticalViolation){
                         matchNCritical = true;
-                        Log.i(TAG, "setSearchedRestaurants: found match" + restaurant.getNCriticalLastYear() +" : " + nCriticalLastYear);
                     }
                 }
             }
-
 
             //check to see if match hazard level
             if(recentHazardLevel.equals("")) {
@@ -89,13 +84,14 @@ public class RestaurantManager implements Iterable<Restaurant>{
             }
             else {
                 if(restaurant.numOfInspections() > 0){
-                    if(restaurant.getInspection(0).getHazardLevel().equals(recentHazardLevel)){
+                    if(restaurant.getInspection(0).getHazardLevel().toLowerCase().equals(recentHazardLevel.toLowerCase())){
                         matchHazard = true;
                         Log.i(TAG, "setSearchedRestaurants: found match" + restaurant.getInspection(0).getHazardLevel() +" : " + recentHazardLevel);
                     }
                 }
             }
 
+            Log.i(TAG, "setSearchedRestaurants: " + matchFavorite + matchHazard + matchNCritical + matchSearchString);
             if(matchFavorite && matchHazard && matchNCritical && matchSearchString){
                 searchedRestaurants.add(restaurant);
                 Log.i(TAG, "setSearchedRestaurants: found matching restaurnat" + restaurant.toString());

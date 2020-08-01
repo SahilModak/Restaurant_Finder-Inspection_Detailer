@@ -102,7 +102,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         getToRestaurantList();
         startSearchInMap();
 
-
+        Log.i(TAG, "onCreate: (resume????)");
         //startLocationRunnable();
 
         if(!databaseInfo.getHasAskedForUpdate()) {
@@ -140,7 +140,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-
         SharedPreferences prefs = this.getSharedPreferences("shared preferences", MODE_PRIVATE);
         databaseInfo.updateAccepted(prefs);
 
@@ -184,7 +183,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             manager.sortByRestaurantName();
             manager.setFlagFalse();
             manager.sortAllRestaurantsInspections();
-//            startActivity(new Intent(this, MapsActivity.class));
         }
     }
 
@@ -218,7 +216,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
 
-        Log.i(TAG, "onCreate: created csvreader");
+        //create csv reader
         try {
             assert restFileStream != null;
             Reader readerR = new InputStreamReader(restFileStream);
@@ -257,6 +255,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG, "onResume: resumed maps");
+        //refreshItems();
+    }
+
+    private void refreshItems(){
+        mMap.clear();
+        mClusterManager.clearItems();  // calling just in case (may not be needed)
+        mClusterManager.addItems(manager.getAllRestaurants());
+    }
+
     private void setmClusterManager(){
         mClusterManager = new ClusterManager<>(this,mMap);
         //todo: set sorted restaurants here
@@ -293,11 +304,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setInfoWindowAdapter(new CustomWindowAdapter(MapsActivity.this));
     }
 
-    //todo: update map method
-    private void updateMap(){
-        //clear
-        //recall cluster manager to add searched items
-    }
+
 
     private void getLocPermissions() {
         Log.d(TAG, "Getting Location Permissions");

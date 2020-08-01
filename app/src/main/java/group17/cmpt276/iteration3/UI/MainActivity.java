@@ -58,8 +58,10 @@ public class MainActivity extends AppCompatActivity{
 
         populateListView();
         registerClickCallback();
-        updateSearchedRestaurants();
+        //updateSearchedRestaurants();
     }
+
+    /*
 
     //todo: add method to call when search list modified
     private void updateSearchedRestaurants(){
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity{
         adapter.addAll(restaurantManager.getAllRestaurants());
         adapter.notifyDataSetChanged();
     }
+     */
 
 
     @Override
