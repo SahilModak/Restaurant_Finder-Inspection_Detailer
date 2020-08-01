@@ -203,7 +203,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                    //adapter.notifyDataSetChanged();
+                    checkFavourites();
                 }
         }
     }
