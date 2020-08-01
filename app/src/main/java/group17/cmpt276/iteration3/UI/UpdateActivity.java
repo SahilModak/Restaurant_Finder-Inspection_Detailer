@@ -135,6 +135,4 @@ public class UpdateActivity extends AppCompatActivity {
             });
         }
     }
-
-
 }
