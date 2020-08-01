@@ -10,6 +10,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import group17.cmpt276.iteration3.Model.CSV.DatabaseInfo;
+
 /*
 Restaurant Class contains metadata about a single restaurant including a list of inspections,
 name, address, id and gps coordinates and methods to access these fields
@@ -43,6 +45,33 @@ public class Restaurant implements Iterable<Inspection>, ClusterItem {
     public String getRestaurantID() {
         return restaurantID;
     }
+
+
+    //template
+    public boolean isFav(){
+        return false;
+    }
+
+    //returns number of critical violations a restaurant had within the last year
+    public int getNCriticalLastYear(){
+        if(allInspections.size() == 0){
+            return 0;
+        }
+
+        DatabaseInfo databaseInfo = DatabaseInfo.getInstance();
+        Date inspectionDate = allInspections.get(0).getDate();
+        Date today = new Date(inspectionDate.getCurrentDateAsString());
+
+        int nCrit = 0;
+        for(Inspection inspection: allInspections){
+            //check if inspection was within the last year
+            if( Math.abs(databaseInfo.dateDifference(today,inspection.getDate())) <=  8760.0){
+                nCrit += inspection.getNumCriticalViolations();
+            }
+        }
+        return nCrit;
+    }
+
 
 
     @Override

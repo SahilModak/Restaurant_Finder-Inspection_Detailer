@@ -137,7 +137,7 @@ public class DatabaseInfo {
     }
 
     //gets the difference between 2 Dates (more recent date, previous date) in hours
-    private double dateDifference(Date firstDate, Date lastDate){
+    public double dateDifference(Date firstDate, Date lastDate){
         float dateDifference = 0;
         dateDifference += (firstDate.getYear() - lastDate.getYear()) * 8760.0;
         dateDifference += (firstDate.getMonth() - lastDate.getMonth()) * 730.001;

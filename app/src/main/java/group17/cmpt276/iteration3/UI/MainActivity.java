@@ -42,9 +42,11 @@ public class MainActivity extends AppCompatActivity{
     SharedPreferences sharedPreferences;
 
     private ArrayAdapter<Restaurant> adapter;
+    private boolean calledSearch = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG, "onCreate: created");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         databaseInfo = DatabaseInfo.getInstance();
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity{
         populateListView();
         registerClickCallback();
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -97,6 +100,9 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(new Intent(this, MapsActivity.class));
                 finish();
                 return true;
+            case R.id.item_menu_search:
+                calledSearch = true;
+                startActivity(new Intent(this, OptionsScreen.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -155,6 +161,7 @@ public class MainActivity extends AppCompatActivity{
             Log.i(TAG, "onCreate: caught exception");
             e.printStackTrace();
         }
+
     }
 
     private void populateListView() {
@@ -182,6 +189,17 @@ public class MainActivity extends AppCompatActivity{
             Restaurant currentRestaurant = restaurantManager.getRestaurant(position);
             setupRestaurantView(currentRestaurant, restaurantView);
             return restaurantView;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(calledSearch){
+            adapter.clear();
+            adapter.addAll(restaurantManager.getAllRestaurants());
+            adapter.notifyDataSetChanged();
+            calledSearch = false;
         }
     }
 
@@ -303,5 +321,4 @@ public class MainActivity extends AppCompatActivity{
             }
         });
     }
-
 }
