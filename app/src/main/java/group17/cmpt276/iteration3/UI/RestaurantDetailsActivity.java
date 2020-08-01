@@ -2,15 +2,16 @@ package group17.cmpt276.iteration3.UI;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -19,6 +20,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import group17.cmpt276.iteration3.Model.Inspection;
@@ -42,6 +49,8 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
     private int currentRestaurantIndex;
     private Restaurant restaurant;
 
+    private List<String> favList;
+
     public static Intent makeIntent(Context context, int restaurantIndex) {
         Intent intent =  new Intent(context, RestaurantDetailsActivity.class);
         intent.putExtra(EXTRA_RESTAURANT_INDEX, restaurantIndex);
@@ -56,6 +65,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         getRestaurantDetails();
         updateView();
         populateListView();
+        loadFromFavourites();
         setupFavouriteButton();
         registerClickCallback();
     }
@@ -74,13 +84,62 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
                 if (isFavourite) {
                     favouriteButton.setImageResource(android.R.drawable.btn_star_big_off);
                     restaurant.setFavourite(false);
+                    updateFavourites(restaurant.getRestaurantID(), false);
                 } else {
                     favouriteButton.setImageResource(android.R.drawable.btn_star_big_on);
                     restaurant.setFavourite(true);
+                    updateFavourites(restaurant.getRestaurantID(), true);
                 }
             }
         });
 
+    }
+
+    private void updateFavourites(String id, boolean isFav) {
+        if(isFav) {
+            favList.add(id);
+        } else {
+            favList.remove(id);
+        }
+
+        for (int i = 0; i < favList.size(); i ++) {
+            Log.i("TAG", "Fave #" + i + " is " + favList.get(i));
+        }
+
+        if (favList == null) {
+            Log.i("TAG", "No favourites");
+        }
+
+//        Arrays.toString(favList.toArray());
+
+        SharedPreferences prefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(favList);
+        editor.putString("task list", json);
+        editor.apply();
+    }
+
+//    private void removeFromFavourites(String id) {
+//        favList.remove(id);
+//        SharedPreferences prefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = prefs.edit();
+//        Gson gson = new Gson();
+//        String json = gson.toJson(favList);
+//        editor.putString("task list", json);
+//        editor.apply();
+//    }
+
+    private void loadFromFavourites() {
+        SharedPreferences prefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = prefs.getString("task list", null);
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        favList = gson.fromJson(json, type);
+
+        if (favList == null) {
+            favList = new ArrayList<>();
+        }
     }
 
     private void setToolBar(){

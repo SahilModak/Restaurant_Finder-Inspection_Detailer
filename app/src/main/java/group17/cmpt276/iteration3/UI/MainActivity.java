@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity{
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            Log.i("TAG", "getview:"+position+" "+convertView);
+//            Log.i("TAG", "getview:"+position+" "+convertView);
             View restaurantView = convertView;
             if (restaurantView == null) {
                 restaurantView = getLayoutInflater().inflate(R.layout.restaurant_view, parent, false);
@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity{
             setupRestaurantView(currentRestaurant, restaurantView);
 
             restaurantView.setBackgroundColor(Color.WHITE);
-            if (restaurantManager.getRestaurant(position).isFavourite()) {
+            if (currentRestaurant.isFavourite()) {
                 restaurantView.setBackgroundColor(Color.YELLOW);
             }
 
@@ -235,9 +235,6 @@ public class MainActivity extends AppCompatActivity{
         TextView txtTimeSinceInspection = (TextView) restaurantView.findViewById(R.id.txtInspectionDate);
         setupInspectionTime(txtTimeSinceInspection,current);
 
-//        if (current.isFavourite()) {
-//            restaurantView.setBackgroundColor(Color.YELLOW);
-//        }
     }
 
     private void setupRestaurantIcon(ImageView imageRestaurant,Restaurant current){
@@ -249,27 +246,27 @@ public class MainActivity extends AppCompatActivity{
         if(restaurantName.contains("A&W")){
             //https://logos-download.com/?s=A%26W
             imageRestaurant.setImageResource(R.drawable.logo_aw);
-//            Log.i(TAG, "restaurant is A&W");
+            Log.i(TAG, "restaurant is A&W");
         }
         else if(restaurantName.contains("McDonald's")){
             //https://logos-download.com/?s=McDonald
             imageRestaurant.setImageResource(R.drawable.logo_mcdonald);
-//            Log.i(TAG, "restaurant is McDonald's");
+            Log.i(TAG, "restaurant is McDonald's");
         }
         else if(restaurantName.contains("Starbucks Coffee")){
             //https://logos-download.com/?s=starbucks
             imageRestaurant.setImageResource(R.drawable.logo_starbucks);
-//            Log.i(TAG, "restaurant is Starbucks");
+            Log.i(TAG, "restaurant is Starbucks");
         }
         else if(restaurantName.contains("Tim Hortons")){
             //https://logos-download.com/?s=tim+hortons
             imageRestaurant.setImageResource(R.drawable.logo_tim_hortons);
-//            Log.i(TAG, "restaurant is Time Hortons");
+            Log.i(TAG, "restaurant is Time Hortons");
         }
         else if(restaurantName.contains("Safeway")){
             //https://logos-download.com/?s=safeway
             imageRestaurant.setImageResource(R.drawable.logo_safeway);
-//            Log.i(TAG, "restaurant is safeway");
+            Log.i(TAG, "restaurant is safeway");
         }
     }
 
@@ -277,27 +274,27 @@ public class MainActivity extends AppCompatActivity{
         if(restaurantName.contains("KFC")){
             //https://logos-download.com/?s=KFC
             imageRestaurant.setImageResource(R.drawable.logo_kfc);
-//            Log.i(TAG, "restaurant is kfc");
+            Log.i(TAG, "restaurant is kfc");
         }
         else if(restaurantName.contains("Burger King")){
             //https://logos-download.com/?s=burger+King
             imageRestaurant.setImageResource(R.drawable.logo_burger_king);
-//            Log.i(TAG, "restaurant is burger king");
+            Log.i(TAG, "restaurant is burger king");
         }
         else if(restaurantName.contains("Pizza Hut")){
             //https://logos-download.com/?s=pizza+Hut
             imageRestaurant.setImageResource(R.drawable.logo_pizza_hut);
-//            Log.i(TAG, "restaurant is pizza hut");
+            Log.i(TAG, "restaurant is pizza hut");
         }
         else if(restaurantName.contains("7-Eleven")){
             //https://logos-download.com/?s=7-eleven
             imageRestaurant.setImageResource(R.drawable.logo_7_eleven);
-//            Log.i(TAG, "restaurant is 7-eleven");
+            Log.i(TAG, "restaurant is 7-eleven");
         }
         else if(restaurantName.contains("Blenz coffee")){
             //https://www.vcc.ca/services/eat-shop--more/blenz/
             imageRestaurant.setImageResource(R.drawable.logo_blenz_coffee);
-//            Log.i(TAG, "restaurant is blenz coffee");
+            Log.i(TAG, "restaurant is blenz coffee");
         }
     }
 

@@ -38,6 +38,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterItem;
 import com.google.maps.android.clustering.ClusterManager;
@@ -47,6 +49,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import group17.cmpt276.iteration3.Model.CSV.DatabaseInfo;
@@ -88,6 +92,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public static final int REQUEST_CODE_FOR_UPDATE = 42;
     private DatabaseInfo databaseInfo;
     SharedPreferences sharedPreferences;
+    private List<String> favList;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -117,6 +122,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        loadFromFavourites();
+        checkFavourites();
+    }
+
+    private void loadFromFavourites() {
+        SharedPreferences prefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = prefs.getString("task list", null);
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        favList = gson.fromJson(json, type);
+
+        if (favList == null) {
+            favList = new ArrayList<>();
+        }
+    }
+
+    private void checkFavourites() {
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
