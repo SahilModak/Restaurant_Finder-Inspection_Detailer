@@ -127,11 +127,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         checkFavourites();
     }
 
-    // Gets list of favourites from SharedPreferences and converts it from json to ArrayList<String>
+    /*
+        Gets list of favourites from SharedPreferences and converts it from json to ArrayList<String>
+        Adapted from https://codinginflow.com/tutorials/android/save-arraylist-to-sharedpreferences-with-gson
+     */
     private void loadFromFavourites() {
         SharedPreferences prefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = prefs.getString("task list", null);
+        String json = prefs.getString("favourite list", null);
         Type type = new TypeToken<ArrayList<String>>() {}.getType();
         favList = gson.fromJson(json, type);
 

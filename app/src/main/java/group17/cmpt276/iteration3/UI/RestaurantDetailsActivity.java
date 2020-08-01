@@ -76,7 +76,6 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
             favouriteButton.setImageResource(android.R.drawable.btn_star_big_on);
         }
 
-
         favouriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +94,11 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
 
     }
 
+    /*
+        Saves/Removes restaurantID to/from list of Favourites,
+         converts list to Json and saves to SavedPreferences
+        Adapted from https://codinginflow.com/tutorials/android/save-arraylist-to-sharedpreferences-with-gson
+     */
     private void updateFavourites(String id, boolean isFav) {
         if(isFav) {
             favList.add(id);
@@ -102,26 +106,22 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
             favList.remove(id);
         }
 
-        for (int i = 0; i < favList.size(); i ++) {
-            Log.i("TAG", "Fave #" + i + " is " + favList.get(i));
-        }
-
-        if (favList == null) {
-            Log.i("TAG", "No favourites");
-        }
-
         SharedPreferences prefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(favList);
-        editor.putString("task list", json);
+        editor.putString("favourite list", json);
         editor.apply();
     }
 
+    /*
+        Gets list of favourites from SharedPreferences and converts it from json to ArrayList<String>
+        Adapted from https://codinginflow.com/tutorials/android/save-arraylist-to-sharedpreferences-with-gson
+     */
     private void loadFromFavourites() {
         SharedPreferences prefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = prefs.getString("task list", null);
+        String json = prefs.getString("favourite list", null);
         Type type = new TypeToken<ArrayList<String>>() {}.getType();
         favList = gson.fromJson(json, type);
 
