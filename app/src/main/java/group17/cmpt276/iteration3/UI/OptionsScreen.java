@@ -21,6 +21,8 @@ public class OptionsScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options_screen);
+
+
         Button btn1 = findViewById(R.id.cancelBtn);
         btn1.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -47,10 +49,10 @@ public class OptionsScreen extends AppCompatActivity {
                 int maxV;
                 int minV;
                 boolean flag = true;
-                if(!(minViolations.getText().toString() == "")){
+                if(!(minViolations.getText().toString().equals(""))){
                     minV = Integer.parseInt(minViolations.getText().toString());
                     thisSearch.setMinViolations(minV);
-                    if(!(maxViolations.getText().toString() == "")){
+                    if(!(maxViolations.getText().toString().equals(""))){
                         maxV = Integer.parseInt(maxViolations.getText().toString());
                         if(maxV < minV){
                             flag = false;
@@ -61,15 +63,15 @@ public class OptionsScreen extends AppCompatActivity {
                         }
                     }
                 }
-                else if (!(maxViolations.getText().toString() == "")){
+                else if (!(maxViolations.getText().toString().equals(""))){
                     maxV = Integer.parseInt(maxViolations.getText().toString());
                     thisSearch.setMaxViolations(maxV);
                 }
                 if(flag) {
-                    startActivity(new Intent(OptionsScreen.this, MapsActivity.class));
+                    finish();
+                    //startActivity(new Intent(OptionsScreen.this, MapsActivity.class));
                 }
             }
         });
     }
-
 }

@@ -107,6 +107,8 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(new Intent(this, MapsActivity.class));
                 finish();
                 return true;
+            case R.id.item_menu_search:
+                startActivity(new Intent(this, OptionsScreen.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -179,9 +181,6 @@ public class MainActivity extends AppCompatActivity{
     Returns a view for each Restaurant in a collection of Restaurant objects
      */
     private class listAdapter extends ArrayAdapter<Restaurant> {
-        //todo: here is where we can use the searcher
-        //todo: use a dataset modified?
-
         public listAdapter() {
             super(MainActivity.this, R.layout.restaurant_view, restaurantManager.getAllRestaurants());
         }

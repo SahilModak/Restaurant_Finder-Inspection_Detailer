@@ -100,6 +100,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         camflag = true;
         getLocPermissions();
         getToRestaurantList();
+        startSearchInMap();
+
+
         //startLocationRunnable();
 
         if(!databaseInfo.getHasAskedForUpdate()) {
@@ -239,6 +242,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View v) {
                 startActivity(new Intent(MapsActivity.this, MainActivity.class));
                 finish();
+            }
+        });
+    }
+
+    //starts the search activity from within map
+    private void startSearchInMap(){
+        ImageButton imageButton = findViewById(R.id.IB_search_in_map);
+        imageButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MapsActivity.this, OptionsScreen.class));
             }
         });
     }
