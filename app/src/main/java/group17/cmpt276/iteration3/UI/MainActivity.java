@@ -172,9 +172,14 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void populateListView() {
-        adapter = new listAdapter();
         ListView listView = (ListView) findViewById(R.id.restaurantListView);
-        listView.setAdapter(adapter);
+
+        if (adapter == null) {
+            adapter = new listAdapter();
+            listView.setAdapter(adapter);
+        } else {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     /*
@@ -215,6 +220,7 @@ public class MainActivity extends AppCompatActivity{
             adapter.notifyDataSetChanged();
             calledSearch = false;
         }
+        populateListView();
     }
 
     // setup each restaurant view in the list
