@@ -48,7 +48,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
     private List<Inspection> inspectionsList;
     private int currentRestaurantIndex;
     private Restaurant restaurant;
-
+    private ArrayAdapter<Inspection> adapter;
     private List<String> favList;
 
     public static Intent makeIntent(Context context, int restaurantIndex) {
@@ -110,8 +110,6 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
             Log.i("TAG", "No favourites");
         }
 
-//        Arrays.toString(favList.toArray());
-
         SharedPreferences prefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
@@ -119,16 +117,6 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         editor.putString("task list", json);
         editor.apply();
     }
-
-//    private void removeFromFavourites(String id) {
-//        favList.remove(id);
-//        SharedPreferences prefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = prefs.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(favList);
-//        editor.putString("task list", json);
-//        editor.apply();
-//    }
 
     private void loadFromFavourites() {
         SharedPreferences prefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
@@ -194,9 +182,14 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
     }
 
     private void populateListView() {
-        ArrayAdapter<Inspection> adapter = new InspectionListAdapter();
         ListView list = findViewById(R.id.inspectionListView);
-        list.setAdapter(adapter);
+
+        if (adapter == null) {
+            adapter = new InspectionListAdapter();
+            list.setAdapter(adapter);
+        } else {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     /*
