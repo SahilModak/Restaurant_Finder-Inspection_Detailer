@@ -89,11 +89,9 @@ public class OptionsScreen extends AppCompatActivity {
         if(radioId != -1){
             RadioButton hazard = findViewById(radioId);
             this.searchHazard = (String) hazard.getText();
-            /*
-            if(searchHazard.equals("None")){
-                searchHazard = "";
-            }
-             */
+        }
+        else{
+            searchHazard = "";
         }
     }
     private void getUserSearchName(){

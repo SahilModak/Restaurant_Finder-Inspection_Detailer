@@ -73,10 +73,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static float newLatitude = 9999;
     private static float newLongitude = 9999;
 
-    private List<Marker> allMarkers;
     private ClusterManager<Restaurant> mClusterManager;
     private boolean flag = false;
-    private boolean show =false;
     private boolean camflag;
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
@@ -85,6 +83,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Location currentLocation;
     private RestaurantManager manager = RestaurantManager.getInstance();
     private Marker marker;
+    private boolean calledSearch = false;
 
     public static final int REQUEST_CODE_FOR_UPDATE = 42;
     private DatabaseInfo databaseInfo;
@@ -250,6 +249,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         imageButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                calledSearch = true;
                 startActivity(new Intent(MapsActivity.this, OptionsScreen.class));
             }
         });
@@ -258,8 +258,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i(TAG, "onResume: resumed maps");
-        //refreshItems();
+        if(calledSearch){
+            refreshItems();
+            calledSearch = false;
+        }
     }
 
     private void refreshItems(){

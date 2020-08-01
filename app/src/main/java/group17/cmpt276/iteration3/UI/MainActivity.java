@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity{
     SharedPreferences sharedPreferences;
 
     private ArrayAdapter<Restaurant> adapter;
+    private boolean calledSearch = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,19 +59,7 @@ public class MainActivity extends AppCompatActivity{
 
         populateListView();
         registerClickCallback();
-        //updateSearchedRestaurants();
     }
-
-    /*
-
-    //todo: add method to call when search list modified
-    private void updateSearchedRestaurants(){
-        restaurantManager.setSearchedRestaurants("bar",false,20,true,"");
-        adapter.clear();
-        adapter.addAll(restaurantManager.getAllRestaurants());
-        adapter.notifyDataSetChanged();
-    }
-     */
 
 
     @Override
@@ -111,6 +100,7 @@ public class MainActivity extends AppCompatActivity{
                 finish();
                 return true;
             case R.id.item_menu_search:
+                calledSearch = true;
                 startActivity(new Intent(this, OptionsScreen.class));
         }
         return super.onOptionsItemSelected(item);
@@ -198,6 +188,17 @@ public class MainActivity extends AppCompatActivity{
             Restaurant currentRestaurant = restaurantManager.getRestaurant(position);
             setupRestaurantView(currentRestaurant, restaurantView);
             return restaurantView;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(calledSearch){
+            adapter.clear();
+            adapter.addAll(restaurantManager.getAllRestaurants());
+            adapter.notifyDataSetChanged();
+            calledSearch = false;
         }
     }
 
