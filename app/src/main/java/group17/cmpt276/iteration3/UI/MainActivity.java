@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG, "onCreate: created");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         databaseInfo = DatabaseInfo.getInstance();

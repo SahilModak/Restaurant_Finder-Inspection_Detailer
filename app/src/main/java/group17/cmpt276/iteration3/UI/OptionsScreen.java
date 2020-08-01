@@ -30,6 +30,7 @@ public class OptionsScreen extends AppCompatActivity {
         setContentView(R.layout.activity_options_screen);
 
         restaurantManager = RestaurantManager.getInstance();
+        restaurantManager.clearSearch(); //clear search before starting a new search
 
         setCancelButton();
         setSaveSearchButton();

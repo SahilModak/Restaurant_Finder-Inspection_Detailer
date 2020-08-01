@@ -109,6 +109,7 @@ public class RestaurantManager implements Iterable<Restaurant>{
 
     public List<Restaurant> getAllRestaurants(){
         if(calledSearch){
+            Log.i(TAG, "getAllRestaurants: returning only search res");
             return searchedRestaurants;
         }
         return allRestaurants;
@@ -141,13 +142,14 @@ public class RestaurantManager implements Iterable<Restaurant>{
         allRestaurants.add(restaurant);
     }
 
-    public void deleteAllRestaurants(){
-        allRestaurants.clear();
-    }
-
+    //function to get a particular restaurant at given position
     public Restaurant getRestaurant(int position){
-        //function to get a particular restaurant at given position
-        return allRestaurants.get(position);
+        if(calledSearch){
+            return searchedRestaurants.get(position);
+        }
+        else{
+            return allRestaurants.get(position);
+        }
     }
 
     public int numOfRestaurants(){
