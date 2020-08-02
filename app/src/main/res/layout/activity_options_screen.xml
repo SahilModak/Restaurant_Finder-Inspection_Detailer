@@ -138,14 +138,15 @@
         android:layout_width="147dp"
         android:layout_height="48dp"
         android:ems="10"
+        android:autofillHints=""
+        android:hint="@string/ex_6"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.169"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7"
-        android:hint="@string/ex_6"/>
+        app:layout_constraintVertical_bias="0.7" />
 
     <Button
         android:id="@+id/saveBtn"
