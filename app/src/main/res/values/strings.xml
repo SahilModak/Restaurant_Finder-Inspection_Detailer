@@ -78,7 +78,7 @@
     <string name="month_oct">October</string>
     <string name="month_nov">November</string>
     <string name="month_dec">December</string>
-    <string name="days_ago">\" days ago\"</string>
+    <string name="days_ago"> days ago</string>
     <string name="unknown_violation">UNKNOWN VIOLATION</string>
     <string name="title_activity_maps">Map</string>
     <string name="menu_map">Map</string>
@@ -103,4 +103,10 @@
     <string name="No_inspections_found">\nNo inspections found</string>
     <string name="Hazard_level">\nHazard Level:</string>
     <string name="Update_Available">Update Available</string>
+    <string name="name_search">Name</string>
+    <string name="ex_pizza">ex: pizza</string>
+    <string name="minimum_critical_violations_inclusive">Minimum critical violations (inclusive)</string>
+    <string name="maximum_critical_violations_inclusive">Maximum Critical Violations (inclusive)</string>
+    <string name="search">Search</string>
+    <string name="ex_6">ex: 6</string>
 </resources>
