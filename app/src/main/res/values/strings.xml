@@ -103,4 +103,10 @@
     <string name="No_inspections_found">\nNo inspections found</string>
     <string name="Hazard_level">\nHazard Level:</string>
     <string name="Update_Available">Update Available</string>
+    <string name="name_search">Name</string>
+    <string name="ex_pizza">ex: pizza</string>
+    <string name="minimum_critical_violations_inclusive">Minimum critical violations (inclusive)</string>
+    <string name="maximum_critical_violations_inclusive">Maximum Critical Violations (inclusive)</string>
+    <string name="search">Search</string>
+    <string name="ex_6">ex: 6</string>
 </resources>

@@ -11,7 +11,7 @@
     <string name = "type_inspection"> Tipo di ispezione:%1$s </string>
     <string name = "image_of_hazard"> immagine di pericolo </string>
     <string name = "hazard_level_in_word_and_color_coded"> livello di pericolo in parola </string>
-    <string name = "restaurants"> Restaurants in Surrey </string>
+    <string name = "restaurants"> Ristorante in Surrey </string>
     <string name = "icon_for_hazard_level"> icona per livello di rischio </string>
     <string name = "Time_since_inspection"> Ultima ispezione: </string>
     <string name = "Inspection_Time"> Ultima ispezione:%1$s </string>
@@ -91,9 +91,9 @@
     <string name = "image_button_for_list_view"> pulsante immagine per visualizzazione elenco </string>
     <string name = "yes"> Sì </string>
     <string name = "search_in_favourites"> Cerca tra i preferiti </string>
-    <string name = "low"> Low </string>
-    <string name = "moderate"> Moderate </string>
-    <string name = "critical"> Critical </string>
+    <string name = "low"> Basso </string>
+    <string name = "moderate"> Moderare </string>
+    <string name = "critical"> Critico </string>
     <string name = "hazard_level_of_most_recent_inspection"> Livello di pericolo dell\'ispezione più recente </string>
     <string name = "save_criteria"> Salva criteri </string>
 
@@ -101,6 +101,14 @@
     <string name = "Leave_update_activity"> continua </string>
     <string name = "Address"> Indirizzo: </string>
     <string name = "No_inspections_found">\nNessuna ispezione trovata </string>
-    <string name = "Hazard_level"> \nHazard Level: </string>
+    <string name = "Hazard_level"> \nlivello di pericolo: </string>
     <string name = "Update_Available"> Aggiornamento disponibile </string>
+    <string name="name_search">Nome</string>
+    <string name = "ex_pizza"> ex: pizza </string>
+    <string name = "minimum_critical_violations_inclusive"> Minime violazioni critiche (incluso) </string>
+    <string name = "maximum_critical_violations_inclusive"> Numero massimo di violazioni critiche (incluso) </string>
+    <string name = "search"> Cerca </string>
+    <string name="ex_6">ex: 6</string>
+
+
 </resources>
