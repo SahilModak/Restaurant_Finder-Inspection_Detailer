@@ -27,6 +27,12 @@ public class RestaurantManager implements Iterable<Restaurant>{
 
     public void setSearchedRestaurants(String searchString, boolean checkFavorites, int maxCriticalViolation, int minCriticalViolation, String recentHazardLevel){
         calledSearch = true;
+        searchedRestaurants = new ArrayList<>();
+
+        if(searchString.equals("") && !checkFavorites && maxCriticalViolation == -1 && minCriticalViolation == -1 && recentHazardLevel.equals("")){
+            calledSearch = false;
+            return;
+        }
 
         Log.i(TAG, "setSearchedRestaurants: looking for restaurnats");
         Log.i(TAG, "setSearchedRestaurants: search critera:" + searchString + ":" + checkFavorites + ":" + maxCriticalViolation + ":" + minCriticalViolation + ":" + recentHazardLevel);
@@ -102,6 +108,7 @@ public class RestaurantManager implements Iterable<Restaurant>{
 
     public void clearSearch(){
         searchedRestaurants.clear();
+        searchedRestaurants = null;
         calledSearch = false;
     }
 
