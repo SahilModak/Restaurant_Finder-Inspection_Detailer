@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -61,7 +62,6 @@ public class MainActivity extends AppCompatActivity{
         populateListView();
         registerClickCallback();
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -165,9 +165,13 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void populateListView() {
-        adapter = new listAdapter();
         ListView listView = (ListView) findViewById(R.id.restaurantListView);
-        listView.setAdapter(adapter);
+        if (adapter == null) {
+            adapter = new listAdapter();
+            listView.setAdapter(adapter);
+        } else {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     /*
@@ -188,6 +192,12 @@ public class MainActivity extends AppCompatActivity{
 
             Restaurant currentRestaurant = restaurantManager.getRestaurant(position);
             setupRestaurantView(currentRestaurant, restaurantView);
+
+            restaurantView.setBackgroundColor(Color.WHITE);
+            if (currentRestaurant.isFavourite()) {
+                restaurantView.setBackgroundColor(Color.YELLOW);
+            }
+
             return restaurantView;
         }
     }
@@ -201,6 +211,7 @@ public class MainActivity extends AppCompatActivity{
             adapter.notifyDataSetChanged();
             calledSearch = false;
         }
+        populateListView();
     }
 
     // setup each restaurant view in the list
@@ -220,6 +231,7 @@ public class MainActivity extends AppCompatActivity{
 
         TextView txtTimeSinceInspection = (TextView) restaurantView.findViewById(R.id.txtInspectionDate);
         setupInspectionTime(txtTimeSinceInspection,current);
+
     }
 
     private void setupRestaurantIcon(ImageView imageRestaurant,Restaurant current){

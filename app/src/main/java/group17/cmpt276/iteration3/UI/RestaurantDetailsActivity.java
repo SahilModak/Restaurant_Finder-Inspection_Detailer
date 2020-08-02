@@ -2,14 +2,17 @@ package group17.cmpt276.iteration3.UI;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,6 +20,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import group17.cmpt276.iteration3.Model.Inspection;
@@ -39,6 +48,8 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
     private List<Inspection> inspectionsList;
     private int currentRestaurantIndex;
     private Restaurant restaurant;
+    private ArrayAdapter<Inspection> adapter;
+    private List<String> favList;
 
     public static Intent makeIntent(Context context, int restaurantIndex) {
         Intent intent =  new Intent(context, RestaurantDetailsActivity.class);
@@ -54,7 +65,69 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         getRestaurantDetails();
         updateView();
         populateListView();
+        loadFromFavourites();
+        setupFavouriteButton();
         registerClickCallback();
+    }
+
+    private void setupFavouriteButton() {
+        final ImageButton favouriteButton = (ImageButton) findViewById(R.id.btnFavourite);
+        if (restaurant.isFavourite()) {
+            favouriteButton.setImageResource(android.R.drawable.btn_star_big_on);
+        }
+
+        favouriteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isFavourite = restaurant.isFavourite();
+                if (isFavourite) {
+                    favouriteButton.setImageResource(android.R.drawable.btn_star_big_off);
+                    restaurant.setFavourite(false);
+                    updateFavourites(restaurant.getRestaurantID(), false);
+                } else {
+                    favouriteButton.setImageResource(android.R.drawable.btn_star_big_on);
+                    restaurant.setFavourite(true);
+                    updateFavourites(restaurant.getRestaurantID(), true);
+                }
+            }
+        });
+
+    }
+
+    /*
+        Saves/Removes restaurantID to/from list of Favourites,
+         converts list to Json and saves to SavedPreferences
+        Adapted from https://codinginflow.com/tutorials/android/save-arraylist-to-sharedpreferences-with-gson
+     */
+    private void updateFavourites(String id, boolean isFav) {
+        if(isFav) {
+            favList.add(id);
+        } else {
+            favList.remove(id);
+        }
+
+        SharedPreferences prefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(favList);
+        editor.putString("favourite list", json);
+        editor.apply();
+    }
+
+    /*
+        Gets list of favourites from SharedPreferences and converts it from json to ArrayList<String>
+        Adapted from https://codinginflow.com/tutorials/android/save-arraylist-to-sharedpreferences-with-gson
+     */
+    private void loadFromFavourites() {
+        SharedPreferences prefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = prefs.getString("favourite list", null);
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        favList = gson.fromJson(json, type);
+
+        if (favList == null) {
+            favList = new ArrayList<>();
+        }
     }
 
     private void setToolBar(){
@@ -109,9 +182,14 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
     }
 
     private void populateListView() {
-        ArrayAdapter<Inspection> adapter = new InspectionListAdapter();
         ListView list = findViewById(R.id.inspectionListView);
-        list.setAdapter(adapter);
+
+        if (adapter == null) {
+            adapter = new InspectionListAdapter();
+            list.setAdapter(adapter);
+        } else {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     /*

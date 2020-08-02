@@ -24,6 +24,7 @@ public class Restaurant implements Iterable<Inspection>, ClusterItem {
     private String restaurantID;
     private List<Inspection> allInspections = new ArrayList<>();
     private final LatLng mPosition;
+    private boolean isFavourite;
 
     //create new restaurant
     public Restaurant(String restaurantName, String restaurantAddress, float[] restaurantGPS, String restaurantID) {
@@ -76,7 +77,6 @@ public class Restaurant implements Iterable<Inspection>, ClusterItem {
 
     @Override
     public Iterator<Inspection> iterator() {
-        //override to make the class iterable
         return allInspections.iterator();
     }
 
@@ -184,5 +184,13 @@ public class Restaurant implements Iterable<Inspection>, ClusterItem {
     @Override
     public String getSnippet() {
         return null;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
     }
 }
