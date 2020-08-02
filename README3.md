@@ -64,3 +64,10 @@ Save/Load Arraylist to SharedPreferences <https://codinginflow.com/tutorials/and
 <https://icons8.com/icons/set/employee/>  
 <https://icons8.com/icons/set/license/>  
 <https://icons8.com/icons/set/empty/>  
+
+###supported languages
+1. French
+2. Germany
+3. Itlian
+4. Japanese
+5. Chinese(Simplified)
