@@ -231,13 +231,6 @@ public class MainActivity extends AppCompatActivity{
 
         TextView txtTimeSinceInspection = (TextView) restaurantView.findViewById(R.id.txtInspectionDate);
         setupInspectionTime(txtTimeSinceInspection,current);
-
-        ImageView imageFavourite = (ImageView) restaurantView.findViewById(R.id.iconFavourite);
-        imageFavourite.setVisibility(View.INVISIBLE);
-//        if (current.isFavourite()) {
-//            imageFavourite.setVisibility(View.VISIBLE);
-//        }
-
     }
 
     private void setupRestaurantIcon(ImageView imageRestaurant,Restaurant current){
