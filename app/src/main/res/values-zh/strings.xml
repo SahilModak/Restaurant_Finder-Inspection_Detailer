@@ -78,7 +78,7 @@
     <string name="month_oct">October</string>
     <string name="month_nov">November</string>
     <string name="month_dec">December</string>
-    <string name="days_ago"> days ago</string>
+    <string name="days_ago">\" days ago\"</string>
     <string name="unknown_violation">UNKNOWN VIOLATION</string>
     <string name="title_activity_maps">Map</string>
     <string name="menu_map">Map</string>
