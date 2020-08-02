@@ -65,4 +65,18 @@
         android:text="@string/time_since_inspection"
         android:textSize="14sp" />
 
+    <ImageView
+        android:id="@+id/iconFavourite"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignStart="@+id/iconRestaurant"
+        android:layout_alignTop="@+id/iconRestaurant"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:maxWidth="32dp"
+        android:maxHeight="32dp"
+        android:visibility="invisible"
+        app:srcCompat="@android:drawable/btn_star_big_on" />
+
+
 </RelativeLayout>
