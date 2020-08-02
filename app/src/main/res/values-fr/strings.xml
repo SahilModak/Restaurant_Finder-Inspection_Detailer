@@ -90,6 +90,14 @@
     <string name = "Leave_update_activity"> Continuer </string>
     <string name = "update_complete"> Mise à jour terminée! </string>
     <string name = "image_button_for_list_view"> bouton d\'image pour la vue de liste </string>
+    <string name = "yes"> Oui </string>
+    <string name = "search_in_favourites"> Rechercher dans les favoris </string>
+    <string name = "low"> Faible </string>
+    <string name = "moderate"> Modéré </string>
+    <string name = "critical"> Critique </string>
+    <string name = "hazard_level_of_most_recent_inspection"> Niveau de danger de la dernière inspection </string>
+    <string name = "save_criteria"> Critères d\'enregistrement </string>
+
     <string name="update">mettre à jour</string>
     <string name="Address">Adresse: </string>
     <string name="No_inspections_found"> \n Aucune inspection trouvée</string>
