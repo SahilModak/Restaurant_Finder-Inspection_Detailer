@@ -193,9 +193,9 @@ public class MainActivity extends AppCompatActivity{
             Restaurant currentRestaurant = restaurantManager.getRestaurant(position);
             setupRestaurantView(currentRestaurant, restaurantView);
 
-            restaurantView.setBackgroundColor(Color.WHITE);
+            restaurantView.setBackgroundResource(R.drawable.border);
             if (currentRestaurant.isFavourite()) {
-                restaurantView.setBackgroundColor(Color.YELLOW);
+                restaurantView.setBackgroundResource(R.drawable.border_fave);
             }
 
             return restaurantView;
@@ -231,7 +231,6 @@ public class MainActivity extends AppCompatActivity{
 
         TextView txtTimeSinceInspection = (TextView) restaurantView.findViewById(R.id.txtInspectionDate);
         setupInspectionTime(txtTimeSinceInspection,current);
-
     }
 
     private void setupRestaurantIcon(ImageView imageRestaurant,Restaurant current){
