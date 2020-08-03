@@ -43,7 +43,7 @@ public class OptionsScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 restaurantManager.clearSearch();
-                startActivity(new Intent(OptionsScreen.this, MainActivity.class));
+                finish();
             }
         });
     }
@@ -118,7 +118,7 @@ public class OptionsScreen extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(OptionsScreen.this, MainActivity.class));
+                finish();
             }
         });
     }
