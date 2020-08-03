@@ -34,6 +34,18 @@ public class OptionsScreen extends AppCompatActivity {
 
         setCancelButton();
         setSaveSearchButton();
+        setClearSearchButton();
+    }
+
+    private void setClearSearchButton() {
+        Button clear = findViewById(R.id.clearBtn);
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                restaurantManager.clearSearch();
+                startActivity(new Intent(OptionsScreen.this, MainActivity.class));
+            }
+        });
     }
 
     private void setSaveSearchButton() {
