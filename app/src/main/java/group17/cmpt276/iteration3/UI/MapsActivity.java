@@ -211,7 +211,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void checkFavouritesForUpdates() {
-        // TODO: this method
+        List<Restaurant> faveRestaurants = new ArrayList<>();
+        Restaurant rest;
+        for (Favourite fave : favList) {
+            rest = manager.searchById(fave.getID());
+            if (rest != null && fave.getDateLastInspection() != rest.getInspection(0).getDate()) {
+                faveRestaurants.add(rest);
+            }
+        }
+
+        if (faveRestaurants.size() > 0) {
+            manager.setFavesWithUpdates(faveRestaurants);
+            // TODO: new activty to display  updated favourites
+            // startActivity(new Intent(MapsActivity.this, UpdatedFavouritesActivity.class));
+        }
 
     }
 

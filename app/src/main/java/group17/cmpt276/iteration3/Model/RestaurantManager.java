@@ -17,6 +17,7 @@ public class RestaurantManager implements Iterable<Restaurant>{
     //Array List to store all Restaurants
     private List<Restaurant> allRestaurants = new ArrayList<>();
     private List<Restaurant> searchedRestaurants = new ArrayList<>();
+    private List<Restaurant> favesWithUpdates = new ArrayList<>();
     private static RestaurantManager instance;
     private boolean flag = true;
     private boolean calledSearch = false; //determines if the class should return a search list
@@ -162,6 +163,14 @@ public class RestaurantManager implements Iterable<Restaurant>{
     public int numOfRestaurants(){
         //returns the number of restaurants stored
         return allRestaurants.size();
+    }
+
+    public List<Restaurant> getFavesWithUpdates() {
+        return favesWithUpdates;
+    }
+
+    public void setFavesWithUpdates(List<Restaurant> faveRestaurants) {
+        this.favesWithUpdates = faveRestaurants;
     }
 
     @Override
