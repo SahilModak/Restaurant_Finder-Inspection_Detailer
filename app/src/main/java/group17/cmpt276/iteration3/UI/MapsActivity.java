@@ -123,7 +123,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
+        Log.i("TAG", "Loading favourites...");
         loadFromFavourites();
         resetFavourites();
     }
@@ -204,7 +204,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
+                    Log.i("TAG", "marking faves...");
                     resetFavourites();
+                    Log.i("TAG", "Checking faves for updates...");
                     checkFavouritesForUpdates();
                 }
         }
@@ -222,8 +224,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if (faveRestaurants.size() > 0) {
             manager.setFavesWithUpdates(faveRestaurants);
+            manager.setCalledFavourites(true);
             // TODO: new activty to display  updated favourites
-            // startActivity(new Intent(MapsActivity.this, UpdatedFavouritesActivity.class));
+            // possibly just use MainActivity?
+            Log.i("TAG", "Starting Main with list of updated Faves");
+            startActivity(new Intent(MapsActivity.this, MainActivity.class));
+
+
+
+            Log.i("TAG", "size of favList = " + manager.getFavesWithUpdates().size());
+            Log.i("TAG", "rest date: " + manager.getFavesWithUpdates().get(0).getInspection(0).getDate().toString());
+            Log.i("TAG", "fave date: " + favList.get(0).getDateLastInspection().toString());
         }
 
     }

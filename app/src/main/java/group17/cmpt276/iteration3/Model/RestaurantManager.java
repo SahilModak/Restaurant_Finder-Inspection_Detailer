@@ -21,6 +21,7 @@ public class RestaurantManager implements Iterable<Restaurant>{
     private static RestaurantManager instance;
     private boolean flag = true;
     private boolean calledSearch = false; //determines if the class should return a search list
+    private boolean calledFavourites = false;
 
     //private constructor to stop duplication
     private RestaurantManager(){
@@ -119,6 +120,8 @@ public class RestaurantManager implements Iterable<Restaurant>{
         if(calledSearch){
             Log.i(TAG, "getAllRestaurants: returning only search res");
             return searchedRestaurants;
+        } else if(calledFavourites) {
+            return favesWithUpdates;
         }
         return allRestaurants;
     }
@@ -144,6 +147,10 @@ public class RestaurantManager implements Iterable<Restaurant>{
 
     public boolean getFlag(){
         return flag;
+    }
+
+    public void setCalledFavourites(boolean calledFavourites) {
+        this.calledFavourites = calledFavourites;
     }
 
     public void addRestaurant(Restaurant restaurant){
