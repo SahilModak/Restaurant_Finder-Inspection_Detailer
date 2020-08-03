@@ -55,6 +55,7 @@ import java.util.List;
 
 import group17.cmpt276.iteration3.Model.CSV.DatabaseInfo;
 import group17.cmpt276.iteration3.Model.CSV.RestaurantReader;
+import group17.cmpt276.iteration3.Model.Favourite;
 import group17.cmpt276.iteration3.Model.Restaurant;
 import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.R;
@@ -92,7 +93,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public static final int REQUEST_CODE_FOR_UPDATE = 42;
     private DatabaseInfo databaseInfo;
     SharedPreferences sharedPreferences;
-    private List<String> favList;
+    private List<Favourite> favList;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -124,7 +125,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         loadFromFavourites();
-        checkFavourites();
+        resetFavourites();
     }
 
     /*
@@ -135,7 +136,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SharedPreferences prefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString("favourite list", null);
-        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        Type type = new TypeToken<ArrayList<Favourite>>() {}.getType();
         favList = gson.fromJson(json, type);
 
         if (favList == null) {
@@ -144,9 +145,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     // sets previously favourited restaurants isFavourite to true for subsequent launches
-    private void checkFavourites() {
+    private void resetFavourites() {
         for (int i = 0; i < favList.size(); i++) {
-            Restaurant restaurant = manager.searchById(favList.get(i));
+            Restaurant restaurant = manager.searchById(favList.get(i).getID());
             if (restaurant != null ) {
                 restaurant.setFavourite(true);
             }
@@ -203,9 +204,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                    checkFavourites();
+                    resetFavourites();
+                    checkFavouritesForUpdates();
                 }
         }
+    }
+
+    private void checkFavouritesForUpdates() {
+        // TODO: this method
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
