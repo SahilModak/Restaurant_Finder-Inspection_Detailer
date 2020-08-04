@@ -55,6 +55,7 @@ import java.util.List;
 
 import group17.cmpt276.iteration3.Model.CSV.DatabaseInfo;
 import group17.cmpt276.iteration3.Model.CSV.RestaurantReader;
+import group17.cmpt276.iteration3.Model.NewDataNotify;
 import group17.cmpt276.iteration3.Model.Restaurant;
 import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.R;
@@ -270,7 +271,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = MainActivity.makeIntent(MapsActivity.this);
+                Intent intent = RestaurantListActivity.makeIntent(MapsActivity.this);
                 startActivity(intent);
                 finish();
             }
@@ -284,7 +285,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 calledSearch = true;
-                startActivity(new Intent(MapsActivity.this, OptionsScreen.class));
+                startActivity(new Intent(MapsActivity.this, SearchScreen.class));
             }
         });
     }
@@ -292,10 +293,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onResume() {
         super.onResume();
-        if(calledSearch && manager.isCalledSearch()){
+        NewDataNotify newDataNotify = NewDataNotify.getInstance();
+        if(calledSearch && newDataNotify.isNewData()){
             refreshItems();
             calledSearch = false;
             mMap.animateCamera(CameraUpdateFactory.zoomTo((float) (mMap.getCameraPosition().zoom - 0.25)));
+            newDataNotify.setNewData(false);
         }
     }
 
