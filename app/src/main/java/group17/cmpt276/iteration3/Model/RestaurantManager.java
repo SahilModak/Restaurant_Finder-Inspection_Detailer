@@ -107,7 +107,6 @@ public class RestaurantManager implements Iterable<Restaurant>{
 
 
     public void clearSearch(){
-        searchedRestaurants = new ArrayList<>();
         searchedRestaurants = null;
         calledSearch = false;
     }
