@@ -20,19 +20,26 @@ public class RestaurantManager implements Iterable<Restaurant>{
     private static RestaurantManager instance;
     private boolean flag = true;
     private boolean calledSearch = false; //determines if the class should return a search list
+    private NewDataNotify newDataNotify;
 
     //private constructor to stop duplication
     private RestaurantManager(){
+        newDataNotify = NewDataNotify.getInstance();
     }
 
     public void setSearchedRestaurants(String searchString, boolean checkFavorites, int maxCriticalViolation, int minCriticalViolation, String recentHazardLevel){
-        calledSearch = true;
-        searchedRestaurants = new ArrayList<>();
-
         if(searchString.equals("") && !checkFavorites && maxCriticalViolation == -1 && minCriticalViolation == -1 && recentHazardLevel.equals("")){
+            Log.i(TAG, "setSearchedRestaurants: called empty search, should return default res");
+
+            if(calledSearch){
+                newDataNotify.setNewData(true);
+            }
             calledSearch = false;
             return;
         }
+        calledSearch = true;
+        searchedRestaurants = new ArrayList<>();
+        newDataNotify.setNewData(true);
 
         Log.i(TAG, "setSearchedRestaurants: looking for restaurnats");
         Log.i(TAG, "setSearchedRestaurants: search critera:" + searchString + ":" + checkFavorites + ":" + maxCriticalViolation + ":" + minCriticalViolation + ":" + recentHazardLevel);
@@ -111,6 +118,9 @@ public class RestaurantManager implements Iterable<Restaurant>{
         calledSearch = false;
     }
 
+    public boolean isCalledSearch() {
+        return calledSearch;
+    }
 
 
     public List<Restaurant> getAllRestaurants(){
@@ -118,6 +128,7 @@ public class RestaurantManager implements Iterable<Restaurant>{
             Log.i(TAG, "getAllRestaurants: returning only search res");
             return searchedRestaurants;
         }
+        Log.i(TAG, "getAllRestaurants: returning all res (no search)");
         return allRestaurants;
     }
 
@@ -129,6 +140,9 @@ public class RestaurantManager implements Iterable<Restaurant>{
     }
 
     public int getRestaurantPositionInArray(Restaurant restaurant){
+        if(calledSearch){
+            return searchedRestaurants.indexOf(restaurant);
+        }
         return allRestaurants.indexOf(restaurant);
     }
 
