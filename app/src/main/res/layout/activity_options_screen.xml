@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="group17.cmpt276.iteration3.UI.OptionsScreen">
+    tools:context="group17.cmpt276.iteration3.UI.SearchScreen">
 
 <!--todo: add clear search button (linear layout at bottom) -->
 
@@ -95,7 +95,7 @@
             android:id="@+id/hazard_critical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/critical">
+            android:text="@string/high">
         </RadioButton>
     </RadioGroup>
 
