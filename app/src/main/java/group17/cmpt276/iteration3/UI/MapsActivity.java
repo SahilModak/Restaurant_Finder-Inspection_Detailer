@@ -295,7 +295,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(calledSearch){
             refreshItems();
             calledSearch = false;
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(mMap.getCameraPosition().zoom - 2));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo((float) (mMap.getCameraPosition().zoom - 0.25)));
         }
     }
 
