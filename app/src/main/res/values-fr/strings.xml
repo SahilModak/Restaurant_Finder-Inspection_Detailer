@@ -111,4 +111,5 @@
     <string name="ex_6">ex: 6</string>
     <string name="search_map">recherche sur la carte</string>
     <string name="clear_search">Effacer la recherche</string>
+    <string name="high">haut</string>
 </resources>
