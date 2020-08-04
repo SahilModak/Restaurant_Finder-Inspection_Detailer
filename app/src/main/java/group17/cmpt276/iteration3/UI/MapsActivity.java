@@ -224,12 +224,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if (faveRestaurants.size() > 0) {
             manager.setFavesWithUpdates(faveRestaurants);
-            manager.setCalledFavourites(true);
+//            manager.setCalledFavourites(true);
             // TODO: new activty to display  updated favourites
             // possibly just use MainActivity?
             Log.i("TAG", "Starting Main with list of updated Faves");
-            startActivity(new Intent(MapsActivity.this, MainActivity.class));
-
+//            startActivity(new Intent(MapsActivity.this, MainActivity.class));
+            showFavouriteDialog();
 
 
             Log.i("TAG", "size of favList = " + manager.getFavesWithUpdates().size());
@@ -238,6 +238,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
     }
+
+    // Create and show dialog that prompts user for update
+    public void showFavouriteDialog() {
+        Log.i(TAG, "showFavouriteDialog: showing favourite dialog");
+        DialogFragment dialog = new FavouriteDialog();
+        manager.setCalledFavourites(true);
+//        dialog.show(getSupportFragmentManager(), "FavouriteDialog");
+//        databaseInfo.setHasAskedForUpdate();
+    }
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void getRestaurantManager() throws FileNotFoundException {

@@ -161,8 +161,9 @@ public class RestaurantManager implements Iterable<Restaurant>{
     public Restaurant getRestaurant(int position){
         if(calledSearch){
             return searchedRestaurants.get(position);
-        }
-        else{
+        } else if (calledFavourites) {
+            return favesWithUpdates.get(position);
+        } else{
             return allRestaurants.get(position);
         }
     }
