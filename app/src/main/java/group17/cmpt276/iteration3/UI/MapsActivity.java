@@ -223,7 +223,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             manager.setFavesWithUpdates(faveRestaurants);
 //            manager.setCalledFavourites(true);
             // TODO: new activty to display  updated favourites
-
+            showFavouriteDialog();
         }
 
     }
@@ -233,8 +233,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.i(TAG, "showFavouriteDialog: showing favourite dialog");
         DialogFragment dialog = new FavouriteDialog();
 //        manager.setCalledFavourites(true);
-//        dialog.show(getSupportFragmentManager(), "FavouriteDialog");
-//        databaseInfo.setHasAskedForUpdate();
+        dialog.show(getSupportFragmentManager(), "FavouriteDialog");
     }
 
 
