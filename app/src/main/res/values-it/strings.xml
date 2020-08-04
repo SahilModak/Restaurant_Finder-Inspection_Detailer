@@ -109,6 +109,6 @@
     <string name = "maximum_critical_violations_inclusive"> Numero massimo di violazioni critiche (incluso) </string>
     <string name = "search"> Cerca </string>
     <string name="ex_6">ex: 6</string>
-
-
+    <string name="search_map">mappa di ricerca</string>
+    <string name="clear_search">Cancella ricerca</string>
 </resources>

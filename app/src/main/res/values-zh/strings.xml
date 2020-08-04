@@ -109,4 +109,6 @@
     <string name ="maximum_critical_violations_inclusive">最大严重违反行为（包括）</string>
     <string name ="search">搜索</string>
     <string name="ex_6">例如：6</string>
+    <string name="search_map">搜索地图</string>
+    <string name="clear_search">清除搜寻</string>
 </resources>

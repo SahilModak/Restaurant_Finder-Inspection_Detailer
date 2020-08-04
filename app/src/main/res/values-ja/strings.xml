@@ -109,4 +109,6 @@
     <string name = "maximum_critical_violations_inclusive">最大の重大な違反（包括的）</string>
     <string name = "search">検索</string>
     <string name="ex_6">例：6</string>
+    <string name="search_map">地図を検索</string>
+    <string name="clear_search">検索をクリア</string>
 </resources>
