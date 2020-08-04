@@ -26,21 +26,14 @@ import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.R;
 
 /*
-Builds and displays AlertDialog which prompts user to update data.
+Builds and displays AlertDialog which informs user of new inspections for Favourites
 */
 public class FavouriteDialog extends AppCompatDialogFragment {
-
-    private static final String TAG = "Favourite fragment";
-    private RestaurantManager manager = RestaurantManager.getInstance();
-    private ArrayAdapter<Restaurant> adapter;
-    private List<Restaurant> faveList = manager.getAllRestaurants();
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // create view
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.favourite_layout, null);
-//        adapter = new RestaurantListAdapter(getActivity(), R.layout.restaurant_view, (ArrayList<Restaurant>) faveList);
-//        populateListView(view);
 
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
@@ -50,21 +43,9 @@ public class FavouriteDialog extends AppCompatDialogFragment {
             }
         };
 
-        return new AlertDialog.Builder(getActivity()).setTitle("New inspections for your favourites!")
+        return new AlertDialog.Builder(getActivity()).setTitle("Attention!")
                 .setView(view)
                 .setPositiveButton(android.R.string.ok, listener)
                 .create();
     }
-
-    private void populateListView(View view) {
-
-        ListView listView = (ListView) view.findViewById(R.id.favouritesListView);
-        if (adapter == null) {
-            adapter = new RestaurantListAdapter(getActivity(), R.layout.restaurant_view, (ArrayList<Restaurant>) faveList);
-            listView.setAdapter(adapter);
-        } else {
-            adapter.notifyDataSetChanged();
-        }
-    }
-
 }
