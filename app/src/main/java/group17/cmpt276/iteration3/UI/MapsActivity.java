@@ -221,8 +221,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if (faveRestaurants.size() > 0) {
             manager.setFavesWithUpdates(faveRestaurants);
-//            manager.setCalledFavourites(true);
-            // TODO: new activty to display  updated favourites
             showFavouriteDialog();
         }
 

@@ -35,7 +35,7 @@ public class UpdatedFavouritesActivity extends AppCompatActivity {
 
         manager = RestaurantManager.getInstance();
         populateListView();
-        registerClickCallback();
+//        registerClickCallback();
 
     }
 
