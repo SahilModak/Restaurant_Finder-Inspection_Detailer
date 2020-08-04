@@ -113,6 +113,11 @@ public class RestaurantManager implements Iterable<Restaurant>{
         calledSearch = false;
     }
 
+    public boolean isCalledSearch() {
+        return calledSearch;
+    }
+
+
     public List<Restaurant> getAllRestaurants(){
         if(calledSearch){
             Log.i(TAG, "getAllRestaurants: returning only search res");

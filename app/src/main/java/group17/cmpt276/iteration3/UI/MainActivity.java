@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -205,7 +204,7 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        if(calledSearch){
+        if(calledSearch && restaurantManager.isCalledSearch()){
             adapter.clear();
             adapter.addAll(restaurantManager.getAllRestaurants());
             adapter.notifyDataSetChanged();
@@ -331,5 +330,10 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+    }
+
+
+    public static Intent makeIntent(Context context) {
+        return new Intent(context,MainActivity.class);
     }
 }
