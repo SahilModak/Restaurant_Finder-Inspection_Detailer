@@ -47,7 +47,7 @@ public class RestaurantManager implements Iterable<Restaurant>{
 
             //check if it is a favorite
             if(checkFavorites){
-                if(restaurant.isFav()){
+                if(restaurant.isFavourite()){
                     matchFavorite = true;
                 }
             }

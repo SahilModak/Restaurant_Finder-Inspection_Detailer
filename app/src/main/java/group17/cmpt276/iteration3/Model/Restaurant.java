@@ -47,12 +47,6 @@ public class Restaurant implements Iterable<Inspection>, ClusterItem {
         return restaurantID;
     }
 
-
-    //template
-    public boolean isFav(){
-        return false;
-    }
-
     //returns number of critical violations a restaurant had within the last year
     public int getNCriticalLastYear(){
         if(allInspections.size() == 0){
