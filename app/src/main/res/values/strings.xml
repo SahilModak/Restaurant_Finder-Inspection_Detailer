@@ -111,5 +111,6 @@
     <string name="ex_6">ex: 6</string>
     <string name="search_map">search map</string>
     <string name="clear_search">Clear Search</string>
+    <string name="high">High</string>
     <string name="inputError">The maximum number of violations cant be less than the minimum number of of violations</string>
 </resources>
