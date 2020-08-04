@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UI.OptionsScreen"></activity>
+        <activity android:name=".UI.SearchScreen"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -44,7 +44,7 @@
             android:label="@string/restaurant_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".UI.MainActivity"
+            android:name=".UI.RestaurantListActivity"
             android:label="@string/restaurants" />
         <activity
             android:name=".UI.MapsActivity"

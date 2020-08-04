@@ -26,6 +26,7 @@ import java.io.Reader;
 
 import group17.cmpt276.iteration3.Model.CSV.DatabaseInfo;
 import group17.cmpt276.iteration3.Model.CSV.RestaurantReader;
+import group17.cmpt276.iteration3.Model.NewDataNotify;
 import group17.cmpt276.iteration3.Model.Restaurant;
 import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.R;
@@ -34,7 +35,7 @@ import group17.cmpt276.iteration3.R;
 Display a scrollable list of restaurants with their number of violations and last inspection date.
 User may select a restaurant for more information.
  */
-public class MainActivity extends AppCompatActivity{
+public class RestaurantListActivity extends AppCompatActivity{
     private static final String TAG = "Main";
     public static final int REQUEST_CODE_FOR_UPDATE = 42;
     RestaurantManager restaurantManager;
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity{
                 return true;
             case R.id.item_menu_search:
                 calledSearch = true;
-                startActivity(new Intent(this, OptionsScreen.class));
+                startActivity(new Intent(this, SearchScreen.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -179,7 +180,7 @@ public class MainActivity extends AppCompatActivity{
      */
     private class listAdapter extends ArrayAdapter<Restaurant> {
         public listAdapter() {
-            super(MainActivity.this, R.layout.restaurant_view, restaurantManager.getAllRestaurants());
+            super(RestaurantListActivity.this, R.layout.restaurant_view, restaurantManager.getAllRestaurants());
         }
 
         @Override
@@ -204,13 +205,14 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        if(calledSearch && restaurantManager.isCalledSearch()){
-            adapter.clear();
+        NewDataNotify newDataNotify = NewDataNotify.getInstance();
+        if(calledSearch && newDataNotify.isNewData()){
+            Log.i(TAG, "onResume: need to refresh data");
             adapter.addAll(restaurantManager.getAllRestaurants());
             adapter.notifyDataSetChanged();
             calledSearch = false;
+            newDataNotify.setNewData(false);
         }
-        populateListView();
     }
 
     // setup each restaurant view in the list
@@ -326,7 +328,7 @@ public class MainActivity extends AppCompatActivity{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = RestaurantDetailsActivity.makeIntent(MainActivity.this, position);
+                Intent intent = RestaurantDetailsActivity.makeIntent(RestaurantListActivity.this, position);
                 startActivity(intent);
             }
         });
@@ -334,6 +336,6 @@ public class MainActivity extends AppCompatActivity{
 
 
     public static Intent makeIntent(Context context) {
-        return new Intent(context,MainActivity.class);
+        return new Intent(context, RestaurantListActivity.class);
     }
 }

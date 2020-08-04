@@ -20,21 +20,26 @@ public class RestaurantManager implements Iterable<Restaurant>{
     private static RestaurantManager instance;
     private boolean flag = true;
     private boolean calledSearch = false; //determines if the class should return a search list
+    private NewDataNotify newDataNotify;
 
     //private constructor to stop duplication
     private RestaurantManager(){
+        newDataNotify = NewDataNotify.getInstance();
     }
 
     public void setSearchedRestaurants(String searchString, boolean checkFavorites, int maxCriticalViolation, int minCriticalViolation, String recentHazardLevel){
         if(searchString.equals("") && !checkFavorites && maxCriticalViolation == -1 && minCriticalViolation == -1 && recentHazardLevel.equals("")){
             Log.i(TAG, "setSearchedRestaurants: called empty search, should return default res");
+
+            if(calledSearch){
+                newDataNotify.setNewData(true);
+            }
             calledSearch = false;
             return;
         }
-        else{
-            calledSearch = true;
-            searchedRestaurants = new ArrayList<>();
-        }
+        calledSearch = true;
+        searchedRestaurants = new ArrayList<>();
+        newDataNotify.setNewData(true);
 
         Log.i(TAG, "setSearchedRestaurants: looking for restaurnats");
         Log.i(TAG, "setSearchedRestaurants: search critera:" + searchString + ":" + checkFavorites + ":" + maxCriticalViolation + ":" + minCriticalViolation + ":" + recentHazardLevel);

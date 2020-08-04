@@ -2,6 +2,7 @@ package group17.cmpt276.iteration3.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import group17.cmpt276.iteration3.Model.NewDataNotify;
 import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.Model.SearchCriteria;
 import group17.cmpt276.iteration3.R;
@@ -14,7 +15,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-public class OptionsScreen extends AppCompatActivity {
+public class SearchScreen extends AppCompatActivity {
 
     Boolean searchFav = false;
     String searchResName;
@@ -23,6 +24,7 @@ public class OptionsScreen extends AppCompatActivity {
     String searchHazard;
     RestaurantManager restaurantManager;
     boolean flagValidInput = true;
+    NewDataNotify newDataNotify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class OptionsScreen extends AppCompatActivity {
         setContentView(R.layout.activity_options_screen);
 
         restaurantManager = RestaurantManager.getInstance();
+        newDataNotify = NewDataNotify.getInstance();
 
         setCancelButton();
         setSaveSearchButton();
@@ -41,7 +44,12 @@ public class OptionsScreen extends AppCompatActivity {
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                restaurantManager.clearSearch();
+                //if search active
+                if(restaurantManager.isCalledSearch()){
+                    restaurantManager.clearSearch();
+                    newDataNotify.setNewData(true);
+                    restaurantManager.clearSearch();
+                }
                 finish();
             }
         });
@@ -57,7 +65,6 @@ public class OptionsScreen extends AppCompatActivity {
                 getUserSearchName();
                 getUserMinMaxViolations();
                 if(flagValidInput){
-                    restaurantManager.clearSearch();
                     restaurantManager.setSearchedRestaurants(searchResName,searchFav,searchMaxVio,searchMinVio,searchHazard);
                     finish();
                 }
@@ -111,12 +118,13 @@ public class OptionsScreen extends AppCompatActivity {
         searchResName = editTextName.getText().toString();
     }
 
-
+    //returns to previous screen with search results intact
     private void setCancelButton() {
         Button btn1 = findViewById(R.id.cancelBtn);
         btn1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                newDataNotify.setNewData(false);
                 finish();
             }
         });
