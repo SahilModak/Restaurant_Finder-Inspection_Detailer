@@ -55,6 +55,8 @@ import java.util.List;
 
 import group17.cmpt276.iteration3.Model.CSV.DatabaseInfo;
 import group17.cmpt276.iteration3.Model.CSV.RestaurantReader;
+import group17.cmpt276.iteration3.Model.Favourite;
+import group17.cmpt276.iteration3.Model.NewDataNotify;
 import group17.cmpt276.iteration3.Model.Restaurant;
 import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.R;
@@ -92,7 +94,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public static final int REQUEST_CODE_FOR_UPDATE = 42;
     private DatabaseInfo databaseInfo;
     SharedPreferences sharedPreferences;
-    private List<String> favList;
+    private List<Favourite> favList;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
