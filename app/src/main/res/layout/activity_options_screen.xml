@@ -177,7 +177,7 @@
         android:id="@+id/clearBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Clear Search"
+        android:text="@string/clear_search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/saveBtn"
         app:layout_constraintHorizontal_bias="0.0"
