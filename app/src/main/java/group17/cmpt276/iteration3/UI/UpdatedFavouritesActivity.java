@@ -42,6 +42,19 @@ public class UpdatedFavouritesActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        manager.setCalledFavourites(true);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        manager.setCalledFavourites(false);
+
+    }
+
     private void populateListView() {
 
         ListView listView = (ListView) findViewById(R.id.favouritesListView);
