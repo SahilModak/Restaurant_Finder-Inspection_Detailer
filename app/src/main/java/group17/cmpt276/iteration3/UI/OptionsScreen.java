@@ -30,7 +30,6 @@ public class OptionsScreen extends AppCompatActivity {
         setContentView(R.layout.activity_options_screen);
 
         restaurantManager = RestaurantManager.getInstance();
-        restaurantManager.clearSearch(); //clear search before starting a new search
 
         setCancelButton();
         setSaveSearchButton();
@@ -53,12 +52,12 @@ public class OptionsScreen extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
                 getUserSearchFavorite();
                 getUserSearchHazardLevel();
                 getUserSearchName();
                 getUserMinMaxViolations();
                 if(flagValidInput){
+                    restaurantManager.clearSearch();
                     restaurantManager.setSearchedRestaurants(searchResName,searchFav,searchMaxVio,searchMinVio,searchHazard);
                     finish();
                 }
