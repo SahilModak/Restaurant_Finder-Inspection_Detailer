@@ -213,6 +213,7 @@ public class RestaurantListActivity extends AppCompatActivity{
             calledSearch = false;
             newDataNotify.setNewData(false);
         }
+        populateListView();
     }
 
     // setup each restaurant view in the list
