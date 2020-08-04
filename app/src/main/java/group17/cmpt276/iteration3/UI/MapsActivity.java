@@ -223,15 +223,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             manager.setFavesWithUpdates(faveRestaurants);
 //            manager.setCalledFavourites(true);
             // TODO: new activty to display  updated favourites
-            // possibly just use MainActivity?
-            Log.i("TAG", "Starting Main with list of updated Faves");
-//            startActivity(new Intent(MapsActivity.this, MainActivity.class));
-            showFavouriteDialog();
 
-
-            Log.i("TAG", "size of favList = " + manager.getFavesWithUpdates().size());
-            Log.i("TAG", "rest date: " + manager.getFavesWithUpdates().get(0).getInspection(0).getDate().toString());
-            Log.i("TAG", "fave date: " + favList.get(0).getDateLastInspection().toString());
         }
 
     }
@@ -240,7 +232,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void showFavouriteDialog() {
         Log.i(TAG, "showFavouriteDialog: showing favourite dialog");
         DialogFragment dialog = new FavouriteDialog();
-        manager.setCalledFavourites(true);
+//        manager.setCalledFavourites(true);
 //        dialog.show(getSupportFragmentManager(), "FavouriteDialog");
 //        databaseInfo.setHasAskedForUpdate();
     }

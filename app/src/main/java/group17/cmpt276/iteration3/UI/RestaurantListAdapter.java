@@ -19,17 +19,15 @@ import group17.cmpt276.iteration3.R;
 
 public class RestaurantListAdapter extends ArrayAdapter<Restaurant> {
     private static final String TAG = "List Adapter";
-    private LayoutInflater inflater;
     private Context context;
     private int layout;
     private List<Restaurant> myList;
 
-    public RestaurantListAdapter(@NonNull Context context, int resource, ArrayList<Restaurant> myList) {
-        super(context, resource, myList);
+    public RestaurantListAdapter(@NonNull Context context, int layout, ArrayList<Restaurant> myList) {
+        super(context, layout, myList);
 
-        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;
-        this.layout = resource;
+        this.layout = layout;
         this.myList = myList;
     }
 
@@ -37,8 +35,10 @@ public class RestaurantListAdapter extends ArrayAdapter<Restaurant> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View restaurantView = convertView;
         if (restaurantView == null) {
-            restaurantView = inflater.inflate(R.layout.inspection_view, parent, false);
+            restaurantView = LayoutInflater.from(context).inflate(R.layout.restaurant_view, parent, false);
+
         }
+
         Restaurant currentRestaurant = myList.get(position);
         setupRestaurantView(currentRestaurant, restaurantView);
 
