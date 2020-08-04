@@ -85,7 +85,7 @@ public class OptionsScreen extends AppCompatActivity {
 
         if(searchMinVio != -1 && searchMaxVio != -1){
             if(searchMinVio > searchMaxVio) {
-                maxViolations.setError("The maximum number of violations cant be less than the minimum number of of violations");
+                maxViolations.setError(getString(R.string.inputError));
                 flagValidInput = false;
             }
         }
