@@ -38,7 +38,7 @@
         android:layout_height="34dp"
         android:layout_marginTop="12dp"
         android:background="#BFC8C5C5"
-        android:contentDescription="search map"
+        android:contentDescription="@string/search_map"
         android:src="@android:drawable/ic_menu_search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

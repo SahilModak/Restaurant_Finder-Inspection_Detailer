@@ -55,7 +55,6 @@ import java.util.List;
 
 import group17.cmpt276.iteration3.Model.CSV.DatabaseInfo;
 import group17.cmpt276.iteration3.Model.CSV.RestaurantReader;
-import group17.cmpt276.iteration3.Model.Favourite;
 import group17.cmpt276.iteration3.Model.Restaurant;
 import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.R;
@@ -93,7 +92,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public static final int REQUEST_CODE_FOR_UPDATE = 42;
     private DatabaseInfo databaseInfo;
     SharedPreferences sharedPreferences;
-    private List<Favourite> favList;
+    private List<String> favList;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -107,9 +106,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         getToRestaurantList();
         startSearchInMap();
 
-        Log.i(TAG, "onCreate: (resume????)");
-        //startLocationRunnable();
-
+        //check for updates
         if(!databaseInfo.getHasAskedForUpdate()) {
             try {
                 updateCheck();
@@ -123,7 +120,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        Log.i("TAG", "Loading favourites...");
+
         loadFromFavourites();
         resetFavourites();
     }
@@ -204,9 +201,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                    Log.i("TAG", "marking faves...");
                     resetFavourites();
-                    Log.i("TAG", "Checking faves for updates...");
                     checkFavouritesForUpdates();
                 }
         }
@@ -312,7 +307,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MapsActivity.this, MainActivity.class));
+                Intent intent = RestaurantListActivity.makeIntent(MapsActivity.this);
+                startActivity(intent);
                 finish();
             }
         });
@@ -325,7 +321,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 calledSearch = true;
-                startActivity(new Intent(MapsActivity.this, OptionsScreen.class));
+                startActivity(new Intent(MapsActivity.this, SearchScreen.class));
             }
         });
     }
@@ -333,18 +329,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onResume() {
         super.onResume();
-        if(calledSearch){
+        NewDataNotify newDataNotify = NewDataNotify.getInstance();
+        if(calledSearch && newDataNotify.isNewData()){
             refreshItems();
             calledSearch = false;
+            mMap.animateCamera(CameraUpdateFactory.zoomTo((float) (mMap.getCameraPosition().zoom - 0.25)));
+            newDataNotify.setNewData(false);
         }
     }
 
+    //refreshes the markers on the map
     private void refreshItems(){
         mMap.clear();
         mClusterManager.clearItems();  // calling just in case (may not be needed)
         mClusterManager.addItems(manager.getAllRestaurants());
     }
 
+    //sets up the cluster manager
     private void setmClusterManager(){
         mClusterManager = new ClusterManager<>(this,mMap);
         //todo: set sorted restaurants here
@@ -435,7 +436,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void updateLocation() {
         Log.d(TAG, "getting current location");
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        FusedLocationProviderClient mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         try {
             if (flag) {
                 Task location = mFusedLocationProviderClient.getLastLocation();
@@ -518,7 +519,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Intent intent = getIntent();
 
             int pos = intent.getIntExtra(RestaurantDetailsActivity.RESTAURANTINDEX,0);
-            marker = mMap.addMarker(new MarkerOptions().position(new LatLng(manager.getRestaurant(pos).getLatitude(),
+            Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(manager.getRestaurant(pos).getLatitude(),
                     manager.getRestaurant(pos).getLongitude()))
                     .title(manager.getRestaurant(pos).getRestaurantName())
                     .snippet(getInfoWindowStr(manager.getRestaurant(pos)))

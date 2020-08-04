@@ -2,6 +2,7 @@ package group17.cmpt276.iteration3.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import group17.cmpt276.iteration3.Model.NewDataNotify;
 import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.Model.SearchCriteria;
 import group17.cmpt276.iteration3.R;
@@ -14,7 +15,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-public class OptionsScreen extends AppCompatActivity {
+public class SearchScreen extends AppCompatActivity {
 
     Boolean searchFav = false;
     String searchResName;
@@ -23,6 +24,7 @@ public class OptionsScreen extends AppCompatActivity {
     String searchHazard;
     RestaurantManager restaurantManager;
     boolean flagValidInput = true;
+    NewDataNotify newDataNotify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +32,27 @@ public class OptionsScreen extends AppCompatActivity {
         setContentView(R.layout.activity_options_screen);
 
         restaurantManager = RestaurantManager.getInstance();
-        restaurantManager.clearSearch(); //clear search before starting a new search
+        newDataNotify = NewDataNotify.getInstance();
 
         setCancelButton();
         setSaveSearchButton();
+        setClearSearchButton();
+    }
+
+    private void setClearSearchButton() {
+        Button clear = findViewById(R.id.clearBtn);
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //if search active
+                if(restaurantManager.isCalledSearch()){
+                    restaurantManager.clearSearch();
+                    newDataNotify.setNewData(true);
+                    restaurantManager.clearSearch();
+                }
+                finish();
+            }
+        });
     }
 
     private void setSaveSearchButton() {
@@ -41,7 +60,6 @@ public class OptionsScreen extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
                 getUserSearchFavorite();
                 getUserSearchHazardLevel();
                 getUserSearchName();
@@ -100,13 +118,14 @@ public class OptionsScreen extends AppCompatActivity {
         searchResName = editTextName.getText().toString();
     }
 
-
+    //returns to previous screen with search results intact
     private void setCancelButton() {
         Button btn1 = findViewById(R.id.cancelBtn);
         btn1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(OptionsScreen.this, MainActivity.class));
+                newDataNotify.setNewData(false);
+                finish();
             }
         });
     }
