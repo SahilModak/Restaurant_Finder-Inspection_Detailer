@@ -26,12 +26,14 @@ public class RestaurantManager implements Iterable<Restaurant>{
     }
 
     public void setSearchedRestaurants(String searchString, boolean checkFavorites, int maxCriticalViolation, int minCriticalViolation, String recentHazardLevel){
-        calledSearch = true;
-        searchedRestaurants = new ArrayList<>();
-
         if(searchString.equals("") && !checkFavorites && maxCriticalViolation == -1 && minCriticalViolation == -1 && recentHazardLevel.equals("")){
+            Log.i(TAG, "setSearchedRestaurants: called empty search, should return default res");
             calledSearch = false;
             return;
+        }
+        else{
+            calledSearch = true;
+            searchedRestaurants = new ArrayList<>();
         }
 
         Log.i(TAG, "setSearchedRestaurants: looking for restaurnats");
@@ -111,13 +113,12 @@ public class RestaurantManager implements Iterable<Restaurant>{
         calledSearch = false;
     }
 
-
-
     public List<Restaurant> getAllRestaurants(){
         if(calledSearch){
             Log.i(TAG, "getAllRestaurants: returning only search res");
             return searchedRestaurants;
         }
+        Log.i(TAG, "getAllRestaurants: returning all res (no search)");
         return allRestaurants;
     }
 
@@ -129,6 +130,9 @@ public class RestaurantManager implements Iterable<Restaurant>{
     }
 
     public int getRestaurantPositionInArray(Restaurant restaurant){
+        if(calledSearch){
+            return searchedRestaurants.indexOf(restaurant);
+        }
         return allRestaurants.indexOf(restaurant);
     }
 
