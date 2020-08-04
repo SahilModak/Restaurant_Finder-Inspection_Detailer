@@ -59,6 +59,8 @@ public class RestaurantListActivity extends AppCompatActivity{
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        restaurantManager.setCalledFavourites(false);
+
 
         populateListView();
         registerClickCallback();
@@ -178,6 +180,7 @@ public class RestaurantListActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
+        restaurantManager.setCalledFavourites(false);
         NewDataNotify newDataNotify = NewDataNotify.getInstance();
         if(calledSearch && newDataNotify.isNewData()){
             Log.i(TAG, "onResume: need to refresh data");

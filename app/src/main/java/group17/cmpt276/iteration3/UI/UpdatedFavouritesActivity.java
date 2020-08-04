@@ -35,7 +35,7 @@ public class UpdatedFavouritesActivity extends AppCompatActivity {
 
         manager = RestaurantManager.getInstance();
         populateListView();
-//        registerClickCallback();
+        registerClickCallback();
 
     }
 
@@ -48,7 +48,7 @@ public class UpdatedFavouritesActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        manager.setCalledFavourites(false);
+//        manager.setCalledFavourites(false);
 
     }
 
@@ -69,6 +69,7 @@ public class UpdatedFavouritesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = RestaurantDetailsActivity.makeIntent(UpdatedFavouritesActivity.this, position);
+                manager.setCalledFavourites(true);
                 startActivity(intent);
             }
         });
