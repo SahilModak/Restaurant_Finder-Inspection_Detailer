@@ -83,18 +83,18 @@ public class RestaurantListActivity extends AppCompatActivity{
         }
     }
 
+    // Inflate the menu; this adds items to the action bar if it is present.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
+    // Handle action bar item clicks here. The action bar will
+    // automatically handle clicks on the Home/Up button, so long
+    // as you specify a parent activity in AndroidManifest.xml.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()){
             case R.id.item_menu_map:
                 startActivity(new Intent(this, MapsActivity.class));
@@ -106,6 +106,7 @@ public class RestaurantListActivity extends AppCompatActivity{
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     private void getRestaurantManager() throws FileNotFoundException {
         restaurantManager = RestaurantManager.getInstance();
@@ -120,12 +121,9 @@ public class RestaurantListActivity extends AppCompatActivity{
     //loads restaurant data from a csv file (either stored locally or pre-installed)
     private void loadFromCSV(Context context) throws FileNotFoundException {
         RestaurantReader csvReader = new RestaurantReader();
-
         SharedPreferences sharedPreferences = this.getSharedPreferences("shared preferences",MODE_PRIVATE);
-        //first time install, set the reader to old style reader
 
         boolean hasUpdated = DatabaseInfo.filesUpdated(this);
-
         InputStream restFileStream = null;
         InputStream inspFileStream = null;
 
@@ -146,7 +144,6 @@ public class RestaurantListActivity extends AppCompatActivity{
             }
         }
 
-        Log.i(TAG, "onCreate: created csvreader");
         try {
             assert restFileStream != null;
             Reader readerR = new InputStreamReader(restFileStream);
@@ -158,7 +155,7 @@ public class RestaurantListActivity extends AppCompatActivity{
             csvReader.readInspectionCSV(readerI,this);
             readerI.close();
         } catch (IOException e) {
-            Log.i(TAG, "onCreate: caught exception");
+            Log.e(TAG, "onCreate: caught exception");
             e.printStackTrace();
         }
 
@@ -181,12 +178,12 @@ public class RestaurantListActivity extends AppCompatActivity{
         NewDataNotify newDataNotify = NewDataNotify.getInstance();
         if(calledSearch && newDataNotify.isNewData()){
             Log.i(TAG, "onResume: need to refresh data");
-            adapter.addAll(restaurantManager.getAllRestaurants());
-            adapter.notifyDataSetChanged();
-            calledSearch = false;
+            ListView listView = findViewById(R.id.restaurantListView);
+            adapter = new RestaurantListAdapter(this, R.layout.restaurant_view, (ArrayList<Restaurant>) restaurantManager.getAllRestaurants());
+            listView.setAdapter(adapter);
+            registerClickCallback();
             newDataNotify.setNewData(false);
         }
-        populateListView();
     }
 
     // go to the specific restaurant detail page when user click on that restaurant
