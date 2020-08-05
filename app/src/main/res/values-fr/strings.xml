@@ -114,4 +114,9 @@
     <string name="high">haut</string>
     <string name= "ok">D\'accord</string>
     <string name= "no">Annuler</string>
+
+    <string name = "inputError"> Le nombre maximal de violations ne peut pas être inférieur au nombre minimal de violations </string>
+    <string name = "locsationPermissionDenied"> Impossible d\'obtenir l\'emplacement de l\'appareil, veuillez vérifier vos autorisations dans les paramètres </string>
+    <string name = "attention"> Attention! </string>
+    <string name = "favourite_message"> Il y a de nouvelles inspections pour vos restaurants préférés. \n\nCliquez sur OK pour les voir. </string>
 </resources>

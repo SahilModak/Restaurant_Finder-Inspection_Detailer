@@ -114,4 +114,9 @@
     <string name="high">高</string>
     <string name= "ok">好</string>
     <string name= "no">取消</string>
+
+    <string name ="inputError">最大违规次数不能小于最小违规次数</string>
+    <string name ="locsationPermissionDenied">无法获取设备位置，请检查您在设置中的权限</string>
+    <string name ="attention">注意！</string>
+    <string name ="favourite_message">对您最喜欢的餐馆进行了新的检查。\n\n单击“确定”以查看它们。</string>
 </resources>
