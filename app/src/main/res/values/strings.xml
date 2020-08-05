@@ -105,12 +105,13 @@
     <string name="Update_Available">Update Available</string>
     <string name="name_search">Name</string>
     <string name="ex_pizza">ex: pizza</string>
-    <string name="minimum_critical_violations_inclusive">Minimum critical violations (inclusive)</string>
+    <string name="minimum_critical_violations_inclusive">Minimum Critical Violations (inclusive)</string>
     <string name="maximum_critical_violations_inclusive">Maximum Critical Violations (inclusive)</string>
     <string name="search">Search</string>
     <string name="ex_6">ex: 6</string>
     <string name="search_map">search map</string>
     <string name="clear_search">Clear Search</string>
     <string name="high">High</string>
-    <string name="inputError">The maximum number of violations cant be less than the minimum number of of violations</string>
+    <string name="inputError">The maximum number of violations cannot be less than the minimum number of violations</string>
+    <string name="locsationPermissionDenied">Unable to get device location, please check your permissions within settings</string>
 </resources>

@@ -419,7 +419,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         else {
                             Log.d(TAG, "Device Location Not Found");
                             Toast.makeText(MapsActivity.this,
-                                    "unable to get device location, please check your permissions",
+                                    R.string.locsationPermissionDenied,
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -546,7 +546,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onClusterInfoWindowClick(Cluster cluster) {
         Toast.makeText(MapsActivity.this,
-                "unable to get device location, please check your permissions",
+                "Restaurant cluster clicked, tap again to zoom in and view more restaurants",
                 Toast.LENGTH_SHORT).show();
     }
 
