@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,17 +24,19 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import group17.cmpt276.iteration3.Model.Date;
+import group17.cmpt276.iteration3.Model.Favourite;
 import group17.cmpt276.iteration3.Model.Inspection;
 import group17.cmpt276.iteration3.Model.Restaurant;
 import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.R;
 
-/*
-Display name, address and gps coordinates of selected restaurant, along with
-a scrollable list of inspections. User may select an inspection for more information.
+
+/**
+ * Display name, address and gps coordinates of selected restaurant, along with
+ * a scrollable list of inspections. User may select an inspection for more information.
  */
 public class RestaurantDetailsActivity extends AppCompatActivity {
 
@@ -49,7 +50,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
     private int currentRestaurantIndex;
     private Restaurant restaurant;
     private ArrayAdapter<Inspection> adapter;
-    private List<String> favList;
+    private List<Favourite> favList;
 
     public static Intent makeIntent(Context context, int restaurantIndex) {
         Intent intent =  new Intent(context, RestaurantDetailsActivity.class);
@@ -83,11 +84,11 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
                 if (isFavourite) {
                     favouriteButton.setImageResource(android.R.drawable.btn_star_big_off);
                     restaurant.setFavourite(false);
-                    updateFavourites(restaurant.getRestaurantID(), false);
+                    updateFavourites(false);
                 } else {
                     favouriteButton.setImageResource(android.R.drawable.btn_star_big_on);
                     restaurant.setFavourite(true);
-                    updateFavourites(restaurant.getRestaurantID(), true);
+                    updateFavourites(true);
                 }
             }
         });
@@ -99,11 +100,22 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
          converts list to Json and saves to SavedPreferences
         Adapted from https://codinginflow.com/tutorials/android/save-arraylist-to-sharedpreferences-with-gson
      */
-    private void updateFavourites(String id, boolean isFav) {
-        if(isFav) {
-            favList.add(id);
+    private void updateFavourites(boolean isFav) {
+        Date defaultDate;
+        String currentDate = "";
+        Favourite fave;
+
+        if (restaurant.getAllInspections().size() == 0) {
+            defaultDate = new Date(Date.getCurrentDateAsString(currentDate));
+            fave = new Favourite(restaurant.getRestaurantID(), defaultDate);
         } else {
-            favList.remove(id);
+            fave = new Favourite(restaurant.getRestaurantID(), restaurant.getInspection(0).getDate());
+        }
+
+        if(isFav) {
+            favList.add(fave);
+        } else {
+            favList.remove(fave);
         }
 
         SharedPreferences prefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
@@ -122,7 +134,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString("favourite list", null);
-        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        Type type = new TypeToken<ArrayList<Favourite>>() {}.getType();
         favList = gson.fromJson(json, type);
 
         if (favList == null) {

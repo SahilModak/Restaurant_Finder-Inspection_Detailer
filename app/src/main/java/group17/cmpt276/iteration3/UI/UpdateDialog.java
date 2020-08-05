@@ -13,9 +13,9 @@ import androidx.fragment.app.DialogFragment;
 
 import group17.cmpt276.iteration3.R;
 
-/*
-Builds and displays AlertDialog which prompts user to update data.
-*/
+/**
+ * Builds and displays AlertDialog which prompts user to update data.
+ */
 public class UpdateDialog extends AppCompatDialogFragment {
 
     private static final String TAG = "Update fragment";

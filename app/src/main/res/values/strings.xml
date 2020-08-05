@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">group17_iteration1</string>
+    <string name="app_name">CMPT 276 - Restaurant Inspectors</string>
     <string name="num_crit">%1$d critical violations </string>
     <string name="num_non_crit">%1$d non-critical violations </string>
     <string name="a_brief_description_of_violation_needs_changed">A brief description of violation(needs changed)</string>
@@ -80,7 +80,7 @@
     <string name="month_dec">December</string>
     <string name="days_ago"> days ago</string>
     <string name="unknown_violation">UNKNOWN VIOLATION</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps">RestInspect</string>
     <string name="menu_map">Map</string>
     <string name="menu_restaurant_list">Restaurant List</string>
     <string name="update_prompt">There is new data available, would you like to download now?</string>
@@ -114,4 +114,6 @@
     <string name="high">High</string>
     <string name="inputError">The maximum number of violations cannot be less than the minimum number of violations</string>
     <string name="locsationPermissionDenied">Unable to get device location, please check your permissions within settings</string>
+    <string name="attention">Attention!</string>
+    <string name="favourite_message">There are new inspections for your favourite restaurants.\n\nClick OK to see them.</string>
 </resources>
