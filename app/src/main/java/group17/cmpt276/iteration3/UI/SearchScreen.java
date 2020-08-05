@@ -84,10 +84,12 @@ public class SearchScreen extends AppCompatActivity {
         minV = minViolations.getText().toString();
 
         if(!maxV.equals("")){
+            //making sure value is entered
             searchMaxVio = Integer.parseInt(maxV);
         }
 
         if(!minV.equals("")){
+            //making sure value is entered
             searchMinVio = Integer.parseInt(minV);
         }
 
@@ -95,6 +97,7 @@ public class SearchScreen extends AppCompatActivity {
             if(searchMinVio > searchMaxVio) {
                 //setting error messages for invalid input
                 maxViolations.setError(getString(R.string.inputError));
+                minViolations.setError(getString(R.string.inputError));
                 flagValidInput = false;
             }
         }
