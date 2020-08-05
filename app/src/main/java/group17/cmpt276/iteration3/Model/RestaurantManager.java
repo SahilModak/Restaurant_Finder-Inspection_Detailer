@@ -240,7 +240,6 @@ public class RestaurantManager implements Iterable<Restaurant>{
         List<Restaurant> listToSort = new ArrayList<>();
 
         if(calledFavourites){
-//            listToSort = favesWithUpdates;
             Collections.sort(favesWithUpdates);
         } else {
             listToSort = allRestaurants;

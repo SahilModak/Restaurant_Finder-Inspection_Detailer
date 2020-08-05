@@ -232,7 +232,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void showFavouriteDialog() {
         Log.i(TAG, "showFavouriteDialog: showing favourite dialog");
         DialogFragment dialog = new FavouriteDialog();
-//        manager.setCalledFavourites(true);
         dialog.show(getSupportFragmentManager(), "FavouriteDialog");
     }
 

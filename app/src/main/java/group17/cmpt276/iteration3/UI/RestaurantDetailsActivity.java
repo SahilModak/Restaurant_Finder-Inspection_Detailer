@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import group17.cmpt276.iteration3.Model.Date;
 import group17.cmpt276.iteration3.Model.Favourite;
 import group17.cmpt276.iteration3.Model.Inspection;
 import group17.cmpt276.iteration3.Model.Restaurant;
@@ -101,7 +102,16 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         Adapted from https://codinginflow.com/tutorials/android/save-arraylist-to-sharedpreferences-with-gson
      */
     private void updateFavourites(boolean isFav) {
-        Favourite fave = new Favourite(restaurant.getRestaurantID(), restaurant.getInspection(0).getDate());
+        Date defaultDate;
+        String currentDate = "";
+        Favourite fave;
+
+        if (restaurant.getAllInspections().size() == 0) {
+            defaultDate = new Date(Date.getCurrentDateAsString(currentDate));
+            fave = new Favourite(restaurant.getRestaurantID(), defaultDate);
+        } else {
+            fave = new Favourite(restaurant.getRestaurantID(), restaurant.getInspection(0).getDate());
+        }
 
         if(isFav) {
             favList.add(fave);

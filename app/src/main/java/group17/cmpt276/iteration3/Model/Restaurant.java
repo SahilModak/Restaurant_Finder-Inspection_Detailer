@@ -191,6 +191,7 @@ public class Restaurant implements Iterable<Inspection>, ClusterItem, Comparable
     @Override
     public int compareTo(Restaurant otherRestaurant) {
         int result = this.restaurantName.compareTo(otherRestaurant.restaurantName);
+
         if (result < 0) {
             return -1;
         }

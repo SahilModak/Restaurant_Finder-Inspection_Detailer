@@ -50,6 +50,17 @@ public class Date {
         return  dtf.format(currDate);
     }
 
+    public static String getCurrentDateAsString(String date){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime currDate = LocalDateTime.now();
+        Log.i(TAG, "getCurrentDateAsString: current date " + dtf.format(currDate));
+        return  date = dtf.format(currDate);
+    }
+
+    public void getCurrentDateAsDate() {
+
+    }
+
     //builds a string to save a date object
     public String getSaveTag(){
         StringBuilder stringBuilder = new StringBuilder();
