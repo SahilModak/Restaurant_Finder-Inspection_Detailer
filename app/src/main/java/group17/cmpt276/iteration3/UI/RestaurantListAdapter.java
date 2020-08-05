@@ -17,6 +17,10 @@ import java.util.List;
 import group17.cmpt276.iteration3.Model.Restaurant;
 import group17.cmpt276.iteration3.R;
 
+/**
+ * Custom adapter to provide a view for a ListView
+ * Returns a view for each Restaurant in a collection of Restaurant objects
+ */
 public class RestaurantListAdapter extends ArrayAdapter<Restaurant> {
     private static final String TAG = "List Adapter";
     private Context context;

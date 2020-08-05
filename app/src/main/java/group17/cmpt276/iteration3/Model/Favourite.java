@@ -1,5 +1,8 @@
 package group17.cmpt276.iteration3.Model;
 
+/**
+ * Favourite Class stores data to identify Restaurants that have been marked as Favourite
+ */
 public class Favourite {
     private String ID;
     private Date dateLastInspection;
@@ -13,15 +16,8 @@ public class Favourite {
         return ID;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
-    }
-
     public Date getDateLastInspection() {
         return dateLastInspection;
     }
 
-    public void setDateLastInspection(Date dateLastInspection) {
-        this.dateLastInspection = dateLastInspection;
-    }
 }

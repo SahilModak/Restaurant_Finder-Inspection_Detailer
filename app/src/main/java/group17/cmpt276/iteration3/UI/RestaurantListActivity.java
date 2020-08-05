@@ -32,9 +32,9 @@ import group17.cmpt276.iteration3.Model.Restaurant;
 import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.R;
 
-/*
-Display a scrollable list of restaurants with their number of violations and last inspection date.
-User may select a restaurant for more information.
+/**
+ * Display a scrollable list of restaurants with their number of violations and last inspection date.
+ * User may select a restaurant for more information.
  */
 public class RestaurantListActivity extends AppCompatActivity{
     private static final String TAG = "Main";

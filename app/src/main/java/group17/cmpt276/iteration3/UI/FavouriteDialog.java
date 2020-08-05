@@ -25,9 +25,9 @@ import group17.cmpt276.iteration3.Model.Restaurant;
 import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.R;
 
-/*
-Builds and displays AlertDialog which informs user of new inspections for Favourites
-*/
+/**
+ * Builds and displays AlertDialog which informs user of new inspections for Favourites
+ */
 public class FavouriteDialog extends AppCompatDialogFragment {
 
     @Override

@@ -57,10 +57,6 @@ public class Date {
         return  date = dtf.format(currDate);
     }
 
-    public void getCurrentDateAsDate() {
-
-    }
-
     //builds a string to save a date object
     public String getSaveTag(){
         StringBuilder stringBuilder = new StringBuilder();

@@ -7,9 +7,9 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-/*
-Restaurant Manager class (Singleton)
-Implements an arraylist of Restaurants and methods to operate and access this list
+/**
+ * Restaurant Manager class (Singleton)
+ * Implements an arraylist of Restaurants and methods to operate and access this list
  */
 
 public class RestaurantManager implements Iterable<Restaurant>{
@@ -248,7 +248,6 @@ public class RestaurantManager implements Iterable<Restaurant>{
         if(listToSort.size() == 0){
             return;
         }
-        List<Restaurant> sortedList = new ArrayList<>();
         for(int i = 0; i < listToSort.size(); i++){
             for(int j = 0; j < listToSort.size();j++){
                 if(listToSort.get(i).getRestaurantID().compareTo(listToSort.get(j).getRestaurantID()) == 0){

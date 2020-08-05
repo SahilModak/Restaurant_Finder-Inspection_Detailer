@@ -35,9 +35,10 @@ import group17.cmpt276.iteration3.Model.Restaurant;
 import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.R;
 
-/*
-Display name, address and gps coordinates of selected restaurant, along with
-a scrollable list of inspections. User may select an inspection for more information.
+
+/**
+ * Display name, address and gps coordinates of selected restaurant, along with
+ * a scrollable list of inspections. User may select an inspection for more information.
  */
 public class RestaurantDetailsActivity extends AppCompatActivity {
 
