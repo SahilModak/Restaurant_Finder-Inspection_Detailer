@@ -221,6 +221,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if (faveRestaurants.size() > 0) {
             manager.setFavesWithUpdates(faveRestaurants);
+            manager.setCalledFavourites(true);
+            manager.sortByRestaurantName();
             showFavouriteDialog();
         }
 
@@ -230,7 +232,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void showFavouriteDialog() {
         Log.i(TAG, "showFavouriteDialog: showing favourite dialog");
         DialogFragment dialog = new FavouriteDialog();
-        manager.setCalledFavourites(true);
+//        manager.setCalledFavourites(true);
         dialog.show(getSupportFragmentManager(), "FavouriteDialog");
     }
 

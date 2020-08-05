@@ -236,16 +236,24 @@ public class RestaurantManager implements Iterable<Restaurant>{
 
 
     public void sortByRestaurantName(){
-        if(allRestaurants.size() == 0){
+        List<Restaurant> listToSort;
+
+        if(calledFavourites){
+            listToSort = favesWithUpdates;
+        } else {
+            listToSort = allRestaurants;
+        }
+
+        if(listToSort.size() == 0){
             return;
         }
         List<Restaurant> sortedList = new ArrayList<>();
-        for(int i = 0; i < allRestaurants.size(); i++){
-            for(int j = 0; j < allRestaurants.size();j++){
-                if(allRestaurants.get(i).getRestaurantID().compareTo(allRestaurants.get(j).getRestaurantID()) == 0){
+        for(int i = 0; i < listToSort.size(); i++){
+            for(int j = 0; j < listToSort.size();j++){
+                if(listToSort.get(i).getRestaurantID().compareTo(listToSort.get(j).getRestaurantID()) == 0){
                     continue;
                 }
-                if (allRestaurants.get(i).getRestaurantName().compareTo(allRestaurants.get(j).getRestaurantName()) < 0){
+                if (listToSort.get(i).getRestaurantName().compareTo(listToSort.get(j).getRestaurantName()) < 0){
                     swapPositions(i, j);
                 }
             }

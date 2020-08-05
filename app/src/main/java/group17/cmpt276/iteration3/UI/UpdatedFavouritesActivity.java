@@ -34,6 +34,7 @@ public class UpdatedFavouritesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_updated_favourites);
 
         manager = RestaurantManager.getInstance();
+        manager.sortByRestaurantName();
         populateListView();
         registerClickCallback();
 
