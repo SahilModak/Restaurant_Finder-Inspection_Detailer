@@ -20,6 +20,7 @@ public class SearchScreen extends AppCompatActivity {
 
     Boolean searchFav = false;
     String searchResName;
+    //default min, max for violations
     int searchMaxVio = -1;
     int searchMinVio = -1;
     String searchHazard;
@@ -92,6 +93,7 @@ public class SearchScreen extends AppCompatActivity {
 
         if(searchMinVio != -1 && searchMaxVio != -1){
             if(searchMinVio > searchMaxVio) {
+                //setting error messages for invalid input
                 maxViolations.setError(getString(R.string.inputError));
                 flagValidInput = false;
             }
@@ -107,6 +109,7 @@ public class SearchScreen extends AppCompatActivity {
         RadioGroup hazardGroup = findViewById(R.id.hazardGroup);
         int radioId = hazardGroup.getCheckedRadioButtonId();
         if(radioId != -1){
+            //check to make sure something from the RadioGroup is selected
             RadioButton hazard = findViewById(radioId);
             this.searchHazard = (String) hazard.getText();
         }
