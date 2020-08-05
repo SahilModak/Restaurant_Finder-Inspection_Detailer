@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -19,6 +20,7 @@ public class SearchScreen extends AppCompatActivity {
 
     Boolean searchFav = false;
     String searchResName;
+    //default min, max for violations
     int searchMaxVio = -1;
     int searchMinVio = -1;
     String searchHazard;
@@ -82,23 +84,27 @@ public class SearchScreen extends AppCompatActivity {
         minV = minViolations.getText().toString();
 
         if(!maxV.equals("")){
+            //making sure value is entered
             searchMaxVio = Integer.parseInt(maxV);
         }
 
         if(!minV.equals("")){
+            //making sure value is entered
             searchMinVio = Integer.parseInt(minV);
         }
 
         if(searchMinVio != -1 && searchMaxVio != -1){
             if(searchMinVio > searchMaxVio) {
-                maxViolations.setError("The maximum number of violations cant be less than the minimum number of of violations");
+                //setting error messages for invalid input
+                maxViolations.setError(getString(R.string.inputError));
+                minViolations.setError(getString(R.string.inputError));
                 flagValidInput = false;
             }
         }
     }
 
     private void getUserSearchFavorite() {
-        RadioButton fav = (RadioButton) findViewById(R.id.favouriteCheck);
+        CheckBox fav = (CheckBox) findViewById(R.id.favCheckBox);
         searchFav = fav.isChecked();
     }
 
@@ -106,6 +112,7 @@ public class SearchScreen extends AppCompatActivity {
         RadioGroup hazardGroup = findViewById(R.id.hazardGroup);
         int radioId = hazardGroup.getCheckedRadioButtonId();
         if(radioId != -1){
+            //check to make sure something from the RadioGroup is selected
             RadioButton hazard = findViewById(radioId);
             this.searchHazard = (String) hazard.getText();
         }
