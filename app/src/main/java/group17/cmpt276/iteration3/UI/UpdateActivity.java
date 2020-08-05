@@ -17,9 +17,9 @@ import group17.cmpt276.iteration3.Model.CSV.CSVUpdater;
 import group17.cmpt276.iteration3.Model.CSV.DatabaseInfo;
 import group17.cmpt276.iteration3.R;
 
-/*
-  Display a spinning progressbar to indicate update is being completed
-  User may cancel update to return to restaurant view with last updated data
+/**
+ * Display a spinning progressbar to indicate update is being completed
+ * User may cancel update to return to restaurant view with last updated data
  */
 public class UpdateActivity extends AppCompatActivity {
     private static final String TAG = "Update";

@@ -3,12 +3,13 @@ package group17.cmpt276.iteration3.Model;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-/*
-Restaurant Manager class (Singleton)
-Implements an arraylist of Restaurants and methods to operate and access this list
+/**
+ * Restaurant Manager class (Singleton)
+ * Implements an arraylist of Restaurants and methods to operate and access this list
  */
 
 public class RestaurantManager implements Iterable<Restaurant>{
@@ -17,9 +18,11 @@ public class RestaurantManager implements Iterable<Restaurant>{
     //Array List to store all Restaurants
     private List<Restaurant> allRestaurants = new ArrayList<>();
     private List<Restaurant> searchedRestaurants = new ArrayList<>();
+    private List<Restaurant> favesWithUpdates = new ArrayList<>();
     private static RestaurantManager instance;
     private boolean flag = true;
     private boolean calledSearch = false; //determines if the class should return a search list
+    private boolean calledFavourites = false;
     private NewDataNotify newDataNotify;
 
     //private constructor to stop duplication
@@ -127,6 +130,8 @@ public class RestaurantManager implements Iterable<Restaurant>{
         if(calledSearch){
             Log.i(TAG, "getAllRestaurants: returning only search res");
             return searchedRestaurants;
+        } else if(calledFavourites) {
+            return favesWithUpdates;
         }
         Log.i(TAG, "getAllRestaurants: returning all res (no search)");
         return allRestaurants;
@@ -158,6 +163,10 @@ public class RestaurantManager implements Iterable<Restaurant>{
         return flag;
     }
 
+    public void setCalledFavourites(boolean calledFavourites) {
+        this.calledFavourites = calledFavourites;
+    }
+
     public void addRestaurant(Restaurant restaurant){
         allRestaurants.add(restaurant);
     }
@@ -166,8 +175,9 @@ public class RestaurantManager implements Iterable<Restaurant>{
     public Restaurant getRestaurant(int position){
         if(calledSearch){
             return searchedRestaurants.get(position);
-        }
-        else{
+        } else if (calledFavourites) {
+            return favesWithUpdates.get(position);
+        } else{
             return allRestaurants.get(position);
         }
     }
@@ -175,6 +185,14 @@ public class RestaurantManager implements Iterable<Restaurant>{
     public int numOfRestaurants(){
         //returns the number of restaurants stored
         return allRestaurants.size();
+    }
+
+    public List<Restaurant> getFavesWithUpdates() {
+        return favesWithUpdates;
+    }
+
+    public void setFavesWithUpdates(List<Restaurant> faveRestaurants) {
+        this.favesWithUpdates = faveRestaurants;
     }
 
     @Override
@@ -219,16 +237,23 @@ public class RestaurantManager implements Iterable<Restaurant>{
 
 
     public void sortByRestaurantName(){
-        if(allRestaurants.size() == 0){
+        List<Restaurant> listToSort = new ArrayList<>();
+
+        if(calledFavourites){
+            Collections.sort(favesWithUpdates);
+        } else {
+            listToSort = allRestaurants;
+        }
+
+        if(listToSort.size() == 0){
             return;
         }
-        List<Restaurant> sortedList = new ArrayList<>();
-        for(int i = 0; i < allRestaurants.size(); i++){
-            for(int j = 0; j < allRestaurants.size();j++){
-                if(allRestaurants.get(i).getRestaurantID().compareTo(allRestaurants.get(j).getRestaurantID()) == 0){
+        for(int i = 0; i < listToSort.size(); i++){
+            for(int j = 0; j < listToSort.size();j++){
+                if(listToSort.get(i).getRestaurantID().compareTo(listToSort.get(j).getRestaurantID()) == 0){
                     continue;
                 }
-                if (allRestaurants.get(i).getRestaurantName().compareTo(allRestaurants.get(j).getRestaurantName()) < 0){
+                if (listToSort.get(i).getRestaurantName().compareTo(listToSort.get(j).getRestaurantName()) < 0){
                     swapPositions(i, j);
                 }
             }

@@ -55,6 +55,7 @@ import java.util.List;
 
 import group17.cmpt276.iteration3.Model.CSV.DatabaseInfo;
 import group17.cmpt276.iteration3.Model.CSV.RestaurantReader;
+import group17.cmpt276.iteration3.Model.Favourite;
 import group17.cmpt276.iteration3.Model.NewDataNotify;
 import group17.cmpt276.iteration3.Model.Restaurant;
 import group17.cmpt276.iteration3.Model.RestaurantManager;
@@ -68,9 +69,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         ClusterManager.OnClusterInfoWindowClickListener,
         UpdateDialog.UpdateDialogListener{
 
-    private static final String TAG = "MapActivity";
 
-    //maps specific constants
+    private static final String TAG = "MapActivity";
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int REQUEST_CODE = 1234;
@@ -79,22 +79,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static float newLatitude = 9999;
     private static float newLongitude = 9999;
 
-    //map tools
     private ClusterManager<Restaurant> mClusterManager;
     private boolean flag = false;
     private boolean camflag;
     private GoogleMap mMap;
+    private FusedLocationProviderClient mFusedLocationProviderClient;
     private Handler mapHandler = new Handler();
     private Runnable mapRunnable;
     private Location currentLocation;
     private RestaurantManager manager = RestaurantManager.getInstance();
+    private Marker marker;
     private boolean calledSearch = false;
 
-    //interaction with model
     public static final int REQUEST_CODE_FOR_UPDATE = 42;
     private DatabaseInfo databaseInfo;
     SharedPreferences sharedPreferences;
-    private List<String> favList;
+    private List<Favourite> favList;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -124,7 +124,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         loadFromFavourites();
-        checkFavourites();
+        resetFavourites();
     }
 
     /*
@@ -135,7 +135,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SharedPreferences prefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString("favourite list", null);
-        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        Type type = new TypeToken<ArrayList<Favourite>>() {}.getType();
         favList = gson.fromJson(json, type);
 
         if (favList == null) {
@@ -144,9 +144,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     // sets previously favourited restaurants isFavourite to true for subsequent launches
-    private void checkFavourites() {
+    private void resetFavourites() {
         for (int i = 0; i < favList.size(); i++) {
-            Restaurant restaurant = manager.searchById(favList.get(i));
+            Restaurant restaurant = manager.searchById(favList.get(i).getID());
             if (restaurant != null ) {
                 restaurant.setFavourite(true);
             }
@@ -203,10 +203,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                    checkFavourites();
+                    resetFavourites();
+                    checkFavouritesForUpdates();
                 }
         }
     }
+
+    private void checkFavouritesForUpdates() {
+        List<Restaurant> faveRestaurants = new ArrayList<>();
+        Restaurant rest;
+        for (Favourite fave : favList) {
+            rest = manager.searchById(fave.getID());
+            if (rest != null && fave.getDateLastInspection() != rest.getInspection(0).getDate()) {
+                faveRestaurants.add(rest);
+            }
+        }
+
+        if (faveRestaurants.size() > 0) {
+            manager.setFavesWithUpdates(faveRestaurants);
+            manager.setCalledFavourites(true);
+            manager.sortByRestaurantName();
+            showFavouriteDialog();
+        }
+
+    }
+
+    // Create and show dialog that prompts user for update
+    public void showFavouriteDialog() {
+        Log.i(TAG, "showFavouriteDialog: showing favourite dialog");
+        DialogFragment dialog = new FavouriteDialog();
+        dialog.show(getSupportFragmentManager(), "FavouriteDialog");
+    }
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void getRestaurantManager() throws FileNotFoundException {
@@ -419,7 +447,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         else {
                             Log.d(TAG, "Device Location Not Found");
                             Toast.makeText(MapsActivity.this,
-                                    "unable to get device location, please check your permissions",
+                                    R.string.locsationPermissionDenied,
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -546,7 +574,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onClusterInfoWindowClick(Cluster cluster) {
         Toast.makeText(MapsActivity.this,
-                "unable to get device location, please check your permissions",
+                "Restaurant cluster clicked, tap again to zoom in and view more restaurants",
                 Toast.LENGTH_SHORT).show();
     }
 

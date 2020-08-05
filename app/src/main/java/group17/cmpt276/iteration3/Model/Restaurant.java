@@ -12,12 +12,12 @@ import java.util.List;
 
 import group17.cmpt276.iteration3.Model.CSV.DatabaseInfo;
 
-/*
-Restaurant Class contains metadata about a single restaurant including a list of inspections,
-name, address, id and gps coordinates and methods to access these fields
+/**
+ * Restaurant Class contains metadata about a single restaurant including a list of inspections,
+ * name, address, id and gps coordinates and methods to access these fields
  */
 
-public class Restaurant implements Iterable<Inspection>, ClusterItem {
+public class Restaurant implements Iterable<Inspection>, ClusterItem, Comparable<Restaurant> {
     private String restaurantName;
     private String restaurantAddress; //consider making address an object if we need them searchable (hard to parse text)
     private float[] restaurantGPS;
@@ -186,5 +186,19 @@ public class Restaurant implements Iterable<Inspection>, ClusterItem {
 
     public void setFavourite(boolean favourite) {
         isFavourite = favourite;
+    }
+
+    @Override
+    public int compareTo(Restaurant otherRestaurant) {
+        int result = this.restaurantName.compareTo(otherRestaurant.restaurantName);
+
+        if (result < 0) {
+            return -1;
+        }
+        else if (result > 0) {
+            return 1;
+        }else {
+            return 0;
+        }
     }
 }
