@@ -112,4 +112,6 @@
     <string name="search_map">Karte suchen</string>
     <string name="clear_search">Saubere Suche</string>
     <string name="high">hoch</string>
+    <string name= "ok">in Ordnung</string>
+    <string name= "no">stornieren</string>
 </resources>

@@ -112,4 +112,6 @@
     <string name="search_map">地図を検索</string>
     <string name="clear_search">検索をクリア</string>
     <string name="high">高い</string>
+    <string name= "ok">はい</string>
+    <string name= "no">キャンセル</string>
 </resources>

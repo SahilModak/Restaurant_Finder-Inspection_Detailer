@@ -112,4 +112,6 @@
     <string name="search_map">mappa di ricerca</string>
     <string name="clear_search">Cancella ricerca</string>
     <string name="high">alto</string>
+    <string name= "ok">Va bene</string>
+    <string name= "no">Annulla</string>
 </resources>

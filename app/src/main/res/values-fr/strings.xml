@@ -112,4 +112,6 @@
     <string name="search_map">recherche sur la carte</string>
     <string name="clear_search">Effacer la recherche</string>
     <string name="high">haut</string>
+    <string name= "ok">D\'accord</string>
+    <string name= "no">Annuler</string>
 </resources>

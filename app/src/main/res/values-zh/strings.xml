@@ -112,4 +112,6 @@
     <string name="search_map">搜索地图</string>
     <string name="clear_search">清除搜寻</string>
     <string name="high">高</string>
+    <string name= "ok">好</string>
+    <string name= "no">取消</string>
 </resources>

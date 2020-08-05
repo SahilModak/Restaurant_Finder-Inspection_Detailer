@@ -36,20 +36,20 @@ public class UpdateDialog extends AppCompatDialogFragment {
             throw new ClassCastException(getActivity().toString() + " must implement UpdateDialogListener");
         }
     }
-
+    
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // create view
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.update_layout, null);
 
         return new AlertDialog.Builder(getActivity()).setTitle(R.string.Update_Available).setView(view)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // Send the positive button event back to the host activity
                         listener.onDialogPositiveClick(UpdateDialog.this);
                     }
                 })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // Send the negative button event back to the host activity
                         listener.onDialogNegativeClick(UpdateDialog.this);
