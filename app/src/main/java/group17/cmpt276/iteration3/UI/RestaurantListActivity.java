@@ -184,6 +184,7 @@ public class RestaurantListActivity extends AppCompatActivity{
             registerClickCallback();
             newDataNotify.setNewData(false);
         }
+        populateListView();
     }
 
     // go to the specific restaurant detail page when user click on that restaurant
