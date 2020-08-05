@@ -1,7 +1,6 @@
 package group17.cmpt276.iteration3.UI;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;

@@ -2,27 +2,12 @@ package group17.cmpt276.iteration3.UI;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatDialogFragment;
-import androidx.fragment.app.DialogFragment;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import group17.cmpt276.iteration3.Model.Restaurant;
-import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.R;
 
 /**
@@ -43,7 +28,7 @@ public class FavouriteDialog extends AppCompatDialogFragment {
             }
         };
 
-        return new AlertDialog.Builder(getActivity()).setTitle("Attention!")
+        return new AlertDialog.Builder(getActivity()).setTitle(R.string.attention)
                 .setView(view)
                 .setPositiveButton(android.R.string.ok, listener)
                 .create();
