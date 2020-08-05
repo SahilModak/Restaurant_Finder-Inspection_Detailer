@@ -33,29 +33,15 @@
         app:layout_constraintVertical_bias="0.093"
         android:autofillHints="" />
 
+
     <TextView
         android:id="@+id/favouriteLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/search_in_favourites"
         android:textSize="17sp"
-        app:layout_constraintBottom_toTopOf="@+id/favouriteCheck"
-        app:layout_constraintStart_toStartOf="@+id/favouriteCheck" />
-
-
-    <RadioButton
-        android:id="@+id/favouriteCheck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/yes"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.087"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.23">
-    </RadioButton>
-
+        app:layout_constraintBottom_toTopOf="@+id/favCheckBox"
+        app:layout_constraintStart_toStartOf="@+id/favCheckBox" />
 
     <TextView
         android:id="@+id/hazardLevel"
@@ -182,5 +168,19 @@
             android:text="@string/save_criteria"
             android:layout_weight="1"/>
     </LinearLayout>
+
+
+    <CheckBox
+        android:id="@+id/favCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/yes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.097"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.23" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

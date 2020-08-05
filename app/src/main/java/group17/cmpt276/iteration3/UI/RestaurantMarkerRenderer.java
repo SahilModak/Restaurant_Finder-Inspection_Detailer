@@ -12,6 +12,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
@@ -97,5 +98,10 @@ public class RestaurantMarkerRenderer extends DefaultClusterRenderer<Restaurant>
                 + restaurant.getRestaurantAddress()
                 + mContext.getString(R.string.Hazard_level)
                 + restaurant.getInspection(0).getHazardLevel();
+    }
+
+    @Override
+    public Marker getMarker(Restaurant clusterItem) {
+        return super.getMarker(clusterItem);
     }
 }
