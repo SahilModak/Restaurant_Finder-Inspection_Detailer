@@ -10,5 +10,5 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="14dp"
         android:layout_marginTop="18dp"
-        android:text="There are new inspections for your favourite restaurants.\n\nClick OK to see them." />
+        android:text="@string/favourite_message" />
 </RelativeLayout>
