@@ -3,6 +3,7 @@ package group17.cmpt276.iteration3.Model;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -236,10 +237,11 @@ public class RestaurantManager implements Iterable<Restaurant>{
 
 
     public void sortByRestaurantName(){
-        List<Restaurant> listToSort;
+        List<Restaurant> listToSort = new ArrayList<>();
 
         if(calledFavourites){
-            listToSort = favesWithUpdates;
+//            listToSort = favesWithUpdates;
+            Collections.sort(favesWithUpdates);
         } else {
             listToSort = allRestaurants;
         }
