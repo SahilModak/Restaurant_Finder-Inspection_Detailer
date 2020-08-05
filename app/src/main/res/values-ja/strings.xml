@@ -109,4 +109,14 @@
     <string name = "maximum_critical_violations_inclusive">最大の重大な違反（包括的）</string>
     <string name = "search">検索</string>
     <string name="ex_6">例：6</string>
+    <string name="search_map">地図を検索</string>
+    <string name="clear_search">検索をクリア</string>
+    <string name="high">高い</string>
+    <string name= "ok">はい</string>
+    <string name= "no">キャンセル</string>
+
+    <string name = "inputError">違反の最大数は、違反の最小数より少なくすることはできません</string>
+    <string name = "locsationPermissionDenied">デバイスの場所を取得できません。設定内で権限を確認してください</string>
+    <string name = "attention">注意！</string>
+    <string name = "favourite_message">お気に入りのレストランの新しい検査があります。\ n \ n [OK]をクリックして表示してください。</string>
 </resources>
