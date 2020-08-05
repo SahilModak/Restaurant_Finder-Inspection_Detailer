@@ -89,6 +89,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Location currentLocation;
     private RestaurantManager manager = RestaurantManager.getInstance();
     private boolean calledSearch = false;
+    RestaurantMarkerRenderer renderer;
 
     //interaction with model
     public static final int REQUEST_CODE_FOR_UPDATE = 42;
@@ -314,7 +315,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mClusterManager = new ClusterManager<>(this,mMap);
         //todo: set sorted restaurants here
         mClusterManager.addItems(manager.getAllRestaurants());
-        RestaurantMarkerRenderer renderer = new RestaurantMarkerRenderer(this,mMap,mClusterManager);
+        renderer = new RestaurantMarkerRenderer(this,mMap,mClusterManager);
         mClusterManager.setRenderer(renderer);
         mMap.setOnCameraIdleListener(mClusterManager);
         mMap.setOnMarkerClickListener(mClusterManager);
@@ -481,16 +482,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             currentLocation.setLongitude(newLongitude);
             LatLng latLng = new LatLng(newLatitude,newLongitude);
             Intent intent = getIntent();
-
             int pos = intent.getIntExtra(RestaurantDetailsActivity.RESTAURANTINDEX,0);
-            Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(manager.getRestaurant(pos).getLatitude(),
-                    manager.getRestaurant(pos).getLongitude()))
-                    .title(manager.getRestaurant(pos).getRestaurantName())
-                    .snippet(getInfoWindowStr(manager.getRestaurant(pos)))
-                    .icon(getIcon(manager.getRestaurant(pos))));
-            marker.setTag(pos);
-            mMap.setInfoWindowAdapter(new CustomWindowAdapter(MapsActivity.this));
-            marker.showInfoWindow();
+            moveCamera(new LatLng(49.1913, 122.8490), 20f);
+            setmClusterManager();
+            Marker marker = renderer.getMarker(manager.getRestaurant(pos));
+//            Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(manager.getRestaurant(pos).getLatitude(),
+//                    manager.getRestaurant(pos).getLongitude()))
+//                    .title(manager.getRestaurant(pos).getRestaurantName())
+//                    .snippet(getInfoWindowStr(manager.getRestaurant(pos)))
+//                    .icon(getIcon(manager.getRestaurant(pos))));
+//            marker.setTag(pos);
+//            mMap.setInfoWindowAdapter(new CustomWindowAdapter(MapsActivity.this));
+            if(marker != null) {
+                marker.showInfoWindow();
+                Log.i("ngjgjgjyjyjhjjgg", "marker window not shown");
+            }
 
         }
 
@@ -546,7 +552,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onClusterInfoWindowClick(Cluster cluster) {
         Toast.makeText(MapsActivity.this,
-                "unable to get device location, please check your permissions",
+                "Restaurants in Surrey",
                 Toast.LENGTH_SHORT).show();
     }
 
