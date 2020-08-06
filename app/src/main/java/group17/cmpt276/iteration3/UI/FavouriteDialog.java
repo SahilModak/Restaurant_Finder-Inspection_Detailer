@@ -30,7 +30,7 @@ public class FavouriteDialog extends AppCompatDialogFragment {
 
         return new AlertDialog.Builder(getActivity()).setTitle(R.string.attention)
                 .setView(view)
-                .setPositiveButton(android.R.string.ok, listener)
+                .setPositiveButton(R.string.ok, listener)
                 .create();
     }
 }

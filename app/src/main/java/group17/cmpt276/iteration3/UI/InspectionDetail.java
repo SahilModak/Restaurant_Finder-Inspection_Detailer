@@ -24,10 +24,10 @@ import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.Model.Violation;
 import group17.cmpt276.iteration3.R;
 
-/*
-Displays details of selected inspection. Shows date of inspection, number of critical
-and non-critical violations, type of inspection, along with a scrollable list of violations
-with brief descriptions. User may select a violation to see the full description.
+/**
+ * Displays details of selected inspection. Shows date of inspection, number of critical
+ * and non-critical violations, type of inspection, along with a scrollable list of violations
+ * with brief descriptions. User may select a violation to see the full description.
  */
 public class InspectionDetail extends AppCompatActivity {
 

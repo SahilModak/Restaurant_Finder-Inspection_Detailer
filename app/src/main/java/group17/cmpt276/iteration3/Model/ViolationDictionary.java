@@ -7,11 +7,10 @@ import android.util.Log;
 import java.util.Hashtable;
 import group17.cmpt276.iteration3.R;
 
-/*
-Violation Dictionary Class (Singleton)
-Contains resources to organize the different types of violations
+/**
+ * Violation Dictionary Class (Singleton)
+ * Contains resources to organize the different types of violations
  */
-
 public class ViolationDictionary {
     private static final String TAG = "Violation Dictionary";
     private static Hashtable<Integer, String> violationDescriptionDictionary;

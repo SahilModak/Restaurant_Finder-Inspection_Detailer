@@ -120,5 +120,6 @@
     <string name = "attention"> Achtung! </string>
     <string name = "favourite_message"> Es gibt neue Inspektionen für Ihre Lieblingsrestaurants. \ n \ nKlicken Sie auf OK, um sie anzuzeigen. </string>
 
-
+    <string name="Updated_favourites">Aktualisierte Favoriten</string>
+    <string name="Search_screen">Suchbildschirm</string>
 </resources>

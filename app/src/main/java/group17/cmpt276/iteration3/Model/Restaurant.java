@@ -16,7 +16,6 @@ import group17.cmpt276.iteration3.Model.CSV.DatabaseInfo;
  * Restaurant Class contains metadata about a single restaurant including a list of inspections,
  * name, address, id and gps coordinates and methods to access these fields
  */
-
 public class Restaurant implements Iterable<Inspection>, ClusterItem, Comparable<Restaurant> {
     private String restaurantName;
     private String restaurantAddress; //consider making address an object if we need them searchable (hard to parse text)

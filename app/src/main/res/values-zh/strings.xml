@@ -119,4 +119,6 @@
     <string name ="locsationPermissionDenied">无法获取设备位置，请检查您在设置中的权限</string>
     <string name ="attention">注意！</string>
     <string name ="favourite_message">对您最喜欢的餐馆进行了新的检查。\n\n单击“确定”以查看它们。</string>
+    <string name="Updated_favourites">更新的收藏夹</string>
+    <string name="Search_screen">搜索画面</string>
 </resources>
