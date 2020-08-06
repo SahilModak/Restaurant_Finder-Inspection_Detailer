@@ -20,11 +20,11 @@ import com.google.maps.android.clustering.view.DefaultClusterRenderer;
 import group17.cmpt276.iteration3.Model.Restaurant;
 import group17.cmpt276.iteration3.R;
 
-/*
-The RestaurantMarkerRenderer renders the clusters of restaurants, determines if they should be a cluster, and defines the style for
-a restaurant not in a cluster
+/**
+ * The RestaurantMarkerRenderer renders the clusters of restaurants,
+ * determines if they should be a cluster, and defines the style for
+ * a restaurant not in a cluster
  */
-
 public class RestaurantMarkerRenderer extends DefaultClusterRenderer<Restaurant> {
 
     private Context mContext;

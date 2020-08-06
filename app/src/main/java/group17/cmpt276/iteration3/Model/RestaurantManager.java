@@ -11,7 +11,6 @@ import java.util.List;
  * Restaurant Manager class (Singleton)
  * Implements an arraylist of Restaurants and methods to operate and access this list
  */
-
 public class RestaurantManager implements Iterable<Restaurant>{
 
     private static final String TAG = "RestaurantManager";

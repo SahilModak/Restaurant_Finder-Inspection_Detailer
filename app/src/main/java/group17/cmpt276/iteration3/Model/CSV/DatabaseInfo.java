@@ -1,12 +1,5 @@
 package group17.cmpt276.iteration3.Model.CSV;
 
-/*
-Stores metadata obtained from Surrey JSON
-Stores information about last update and if it is the first time opening app
-Singleton class
- */
-
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -14,6 +7,11 @@ import java.io.File;
 
 import group17.cmpt276.iteration3.Model.Date;
 
+/**
+ * Stores metadata obtained from Surrey JSON
+ * Stores information about last update and if it is the first time opening app
+ * Singleton class
+ */
 public class DatabaseInfo {
     private static final String TAG = "Database info";
     private static DatabaseInfo databaseInfo;

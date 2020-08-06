@@ -15,12 +15,12 @@ import group17.cmpt276.iteration3.Model.Restaurant;
 import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.Model.Violation;
 
-/*
-Restaurant Reader Class,
-Takes a file streams from activity, parses and creates new model objects from CSV files
-
-CSV reading adapted from
-https://www.callicoder.com/java-read-write-csv-file-opencsv/
+/**
+ * Restaurant Reader Class,
+ * Takes a file streams from activity, parses and creates new model objects from CSV files
+ *
+ * CSV reading adapted from
+ * https://www.callicoder.com/java-read-write-csv-file-opencsv/
  */
 
 public class RestaurantReader {

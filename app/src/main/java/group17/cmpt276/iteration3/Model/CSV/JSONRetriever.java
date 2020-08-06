@@ -12,11 +12,10 @@ import java.net.URL;
 
 import group17.cmpt276.iteration3.Model.Date;
 
-/*
-JSON retriever class.
-Handles downloading JSON files as string and extracting the relevant JSON objects to be used by the CSV downloader
+/**
+ * JSON retriever class.
+ * Handles downloading JSON files as string and extracting the relevant JSON objects to be used by the CSV downloader
  */
-
 public class JSONRetriever extends Thread{
     private static final String TAG = "JSONRetriever" ;
     private DatabaseInfo databaseInfo;

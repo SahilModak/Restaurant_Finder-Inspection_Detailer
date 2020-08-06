@@ -62,11 +62,11 @@ import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.R;
 
 
-/*
-    the activity uses the google maps api to display the map,
-    display restaurant pegs and the user location.
-    Clusters are animated nad shown for clustered markers.
-    Markers are set to show a custom info window as well
+/**
+ * The activity uses the google maps api to display the map,
+ * display restaurant pegs and the user location.
+ * Clusters are animated nad shown for clustered markers.
+ * Markers are set to show a custom info window as well
 */
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         ClusterManager.OnClusterItemInfoWindowClickListener,

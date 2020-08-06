@@ -9,9 +9,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 
-/*
-Download and updates the saved csv files
-Threaded to run in background
+/**
+ * Download and updates the saved csv files
  */
 public class CSVUpdater{
     private static final String TAG = "internet CSV reader";

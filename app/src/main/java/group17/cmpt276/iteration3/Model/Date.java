@@ -10,12 +10,11 @@ import java.util.List;
 
 import group17.cmpt276.iteration3.R;
 
-/*
-Inspection Date is a class that models the dates used in the program
-includes features to output the date in correct format based on how long ago the inspection occurred
-includes both update dates and inspection dates
+/**
+ * Inspection Date is a class that models the dates used in the program
+ * includes features to output the date in correct format based on how long ago the inspection occurred
+ * includes both update dates and inspection dates
  */
-
 public class Date {
 
     private static final String TAG = "Inspection Date";

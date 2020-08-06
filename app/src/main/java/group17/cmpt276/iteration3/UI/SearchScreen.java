@@ -15,10 +15,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 /**
-    Search screen class is an activity to used to take input for the search functions
-    within the the restaurant manager singleton.
- **/
-
+ * Search screen class is an activity to used to take input for the search functions
+ * within the the restaurant manager singleton.
+ */
 public class SearchScreen extends AppCompatActivity {
 
     Boolean searchFav = false;
