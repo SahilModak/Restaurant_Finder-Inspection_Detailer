@@ -1,5 +1,8 @@
+This is the .txt version of the readme for cmpt276, group 17, iteration 3
+
 # CMPT276 Group 17 Project Iteration 3
 ## Restaurant Inspector
+
 
 ### Members
 | ID | Name | Role |
@@ -9,8 +12,7 @@
 | jmt24 | **James Thompson** | Scrum Master |
 | yizhongw | **Yizhong Wang** | Team Member |
   
----  
-
+---
 ### Features
 
 ##### Supported Languages
@@ -38,8 +40,7 @@ App to support more than one language
 App should automatically change to devices set language if that language is supported
 All user facing strings should be translated with possible exception of dynamically downloaded strings and errors
 
----  
-
+---
 ### Code review Synopsis  
 
 #### Code review 1
@@ -77,15 +78,13 @@ All these issues were addressed for the final build
 |Android Gradle Plugin | 4.0.0 |
 |Gradle | 6.1.1 |
 
----  
+#### Notes
 
 #### Acknowledgements
 CSV Reading <https://www.callicoder.com/java-read-write-csv-file-opencsv/>  
 UpdateRunnable <https://www.youtube.com/watch?v=QfQE1ayCzf8&list=PLrnPJCHvNZuD52mtV8NvazNYIyIVPVZRa>
 Save/Load Arraylist to SharedPreferences <https://codinginflow.com/tutorials/android/save-arraylist-to-sharedpreferences-with-gson>
 
----  
-  
 #### Citations
 ###### Icons
 <https://icons8.com/icons/set/food-icons/>  
@@ -95,4 +94,3 @@ Save/Load Arraylist to SharedPreferences <https://codinginflow.com/tutorials/and
 <https://icons8.com/icons/set/license/>  
 <https://icons8.com/icons/set/empty/>  
 <https://material.io/resources/icons/?style=baseline>
-
