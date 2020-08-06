@@ -1,7 +1,8 @@
 package group17.cmpt276.iteration3.Model;
 
-/*
-UI classes will check with this class if there is new data to display
+/**
+ * UI classes will check with this class if there is new data to display
+ * or tell this class that the new data has been read/used
  */
 
 

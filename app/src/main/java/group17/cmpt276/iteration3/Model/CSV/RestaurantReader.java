@@ -31,12 +31,9 @@ public class RestaurantReader {
 
     //parse restaurant csv, add restaurants to list
     public void readRestaurantCSV(Reader reader) throws IOException {
-        try (
-                CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build()
-        ) {
+        try ( CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build() ) {
             String[] nextRecord;
 
-            int i = 0;
             while ((nextRecord = csvReader.readNext()) != null) {
                 float[] gps = new float[] {Float.parseFloat(nextRecord[5]),Float.parseFloat(nextRecord[6])};
                 Restaurant restaurant = new Restaurant(nextRecord[1],nextRecord[2]+", "+nextRecord[3],
@@ -44,8 +41,6 @@ public class RestaurantReader {
 
                 restaurantManager = RestaurantManager.getInstance();
                 restaurantManager.addRestaurant(restaurant);
-                //logRestaurantRead(nextRecord, i);
-                i++;
             }
         }
         catch (FileNotFoundException fnf){
@@ -62,9 +57,7 @@ public class RestaurantReader {
 
     //parse inspection csv, add inspections to
     public void readInspectionCSV(Reader reader, Context context) throws IOException {
-        try (
-                CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build()
-        ) {
+        try ( CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build() ) {
             String[] nextRecord;
             while ((nextRecord = csvReader.readNext()) != null) {
                 //logInspectionRead(nextRecord);

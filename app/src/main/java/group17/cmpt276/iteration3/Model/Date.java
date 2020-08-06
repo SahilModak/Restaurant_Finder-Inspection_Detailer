@@ -43,6 +43,7 @@ public class Date {
         Log.i(TAG, "InspectionDate: (new create)" + this.toString());
     }
 
+    //return the current date as a string
     public String getCurrentDateAsString(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime currDate = LocalDateTime.now();
@@ -122,6 +123,8 @@ public class Date {
         months.add(res.getString(R.string.month_nov));
         months.add(res.getString(R.string.month_dec));
     }
+
+    //make a date object a string for printing to ui
     public String makeActivityString(Context context){
         Resources res = context.getResources();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -130,9 +133,7 @@ public class Date {
                 (currDate.getMonthValue() - this.month)*30 +
                 (currDate.getYear() - this.year)*365;
         String str;
-        Log.i(TAG, "makeActivityString: ndays: " + days);
         if(days <= 30){
-            Log.i(TAG, "makeActivityString: triggered less than 30 days ago!");
             str = days + res.getString(R.string.days_ago);
         }
         else if(days <= 365){

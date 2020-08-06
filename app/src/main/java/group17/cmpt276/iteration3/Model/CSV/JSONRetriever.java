@@ -12,9 +12,9 @@ import java.net.URL;
 
 import group17.cmpt276.iteration3.Model.Date;
 
-/*
-JSON retriever class.
-Handles downloading JSON files as string and extracting the relevant JSON objects to be used by the CSV downloader
+/**
+ * JSON retriever class (threaded)
+ * Handles downloading JSON files as string and extracting the relevant JSON objects to be used by the CSV downloader
  */
 
 public class JSONRetriever extends Thread{
@@ -24,10 +24,11 @@ public class JSONRetriever extends Thread{
     public JSONRetriever(){
     }
 
+    //run retriever thread
     public void run(){
         databaseInfo = DatabaseInfo.getInstance();
         try {
-            parseRestaurantJSON(getJSONFromURL(databaseInfo.getSurreyDataRestaruantsURL()));
+            parseRestaurantJSON(getJSONFromURL(databaseInfo.getSurreyDataRestaurantsURL()));
             parseInspectionJSON(getJSONFromURL(databaseInfo.getGetSurreyDataInspectionURL()));
         }
         catch (JSONException e) {
@@ -43,7 +44,6 @@ public class JSONRetriever extends Thread{
             JSONArray jsonArray = jar.getJSONArray("resources");
             JSONObject JO_1 = (JSONObject) jsonArray.get(0);
             String inspURL = JO_1.getString("url");
-            Log.i(TAG, "parseInspectionJSON: ispectionurl: "  + inspURL);
             databaseInfo.setInspectionCSVDataURL(inspURL);
         }
         catch(JSONException je){

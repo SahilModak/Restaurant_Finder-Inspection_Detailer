@@ -62,11 +62,6 @@ public class Inspection implements Iterable<Violation>{
         allViolations.add(x);
     }
 
-    public Violation getViolations(int position){
-        //function to get violation at position
-        return allViolations.get(position);
-    }
-
     public int numOfViolations(){
         //function to get total number of violations for the given inspection
         return allViolations.size();

@@ -67,15 +67,13 @@ public class Restaurant implements Iterable<Inspection>, ClusterItem, Comparable
         return nCrit;
     }
 
-
-
     @Override
     public Iterator<Inspection> iterator() {
         return allInspections.iterator();
     }
 
+    //add an inspection to a given restaurant
     public void addInspection(Inspection x){
-        //add function to add new inspection
         int i = 0;
         while(i < allInspections.size()){
             if(allInspections.get(i) == x){

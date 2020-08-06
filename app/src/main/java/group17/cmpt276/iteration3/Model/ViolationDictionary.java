@@ -62,7 +62,7 @@ public class ViolationDictionary {
         return isIn;
     }
 
-    //todo: extract to strings.xml
+    //
     private static void addViolationDesciptions(Context context) {
         Resources res = context.getResources();
         violationDescriptionDictionary = new Hashtable<>();
