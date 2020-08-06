@@ -12,7 +12,7 @@
 ---
 ### Features
 
-##### supported languages
+##### Supported Languages
 1. French
 2. Germany
 3. Itlian
