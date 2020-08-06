@@ -118,5 +118,8 @@
     <string name = "inputError"> Le nombre maximal de violations ne peut pas être inférieur au nombre minimal de violations </string>
     <string name = "locsationPermissionDenied"> Impossible d\'obtenir l\'emplacement de l\'appareil, veuillez vérifier vos autorisations dans les paramètres </string>
     <string name = "attention"> Attention! </string>
-    <string name = "favourite_message"> Il y a de nouvelles inspections pour vos restaurants préférés. \n\nCliquez sur OK pour les voir. </string>
+    <string name = "favourite_message"> Il y a de nouvelles inspections pour vos restaurants préférés.\n\nCliquez sur OK pour les voir. </string>
+
+    <string name="Updated_favourites">Mis à jour</string>
+    <string name="Search_screen">Écran de recherche</string>
 </resources>

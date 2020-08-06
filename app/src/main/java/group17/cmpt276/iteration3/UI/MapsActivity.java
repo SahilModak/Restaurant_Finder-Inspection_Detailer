@@ -62,6 +62,12 @@ import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.R;
 
 
+/**
+ * The activity uses the google maps api to display the map,
+ * display restaurant pegs and the user location.
+ * Clusters are animated nad shown for clustered markers.
+ * Markers are set to show a custom info window as well
+*/
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         ClusterManager.OnClusterItemInfoWindowClickListener,
         ClusterManager.OnClusterItemClickListener<Restaurant>,
@@ -83,12 +89,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private boolean flag = false;
     private boolean camflag;
     private GoogleMap mMap;
-    private FusedLocationProviderClient mFusedLocationProviderClient;
     private Handler mapHandler = new Handler();
     private Runnable mapRunnable;
     private Location currentLocation;
     private RestaurantManager manager = RestaurantManager.getInstance();
-    private Marker marker;
     private boolean calledSearch = false;
 
     public static final int REQUEST_CODE_FOR_UPDATE = 42;
@@ -127,7 +131,66 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         resetFavourites();
     }
 
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        startLocationRunnable();
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        stopLocationRunnable();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_CODE_FOR_UPDATE:
+                if (resultCode == Activity.RESULT_OK) {
+                    try {
+                        manager.getAllRestaurants().clear();
+                        manager.setFlagTrue();
+                        getRestaurantManager();
+                        setmClusterManager();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    resetFavourites();
+                    checkFavouritesForUpdates();
+                }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        NewDataNotify newDataNotify = NewDataNotify.getInstance();
+        if(calledSearch && newDataNotify.isNewData()){
+            refreshItems();
+            calledSearch = false;
+            mMap.animateCamera(CameraUpdateFactory.zoomTo((float) (mMap.getCameraPosition().zoom - 0.25)));
+            newDataNotify.setNewData(false);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void getRestaurantManager() throws FileNotFoundException {
+        manager = RestaurantManager.getInstance();
+        if(manager.getFlag()){
+            loadFromCSV(this);
+            manager.sortByRestaurantName();
+            manager.setFlagFalse();
+            manager.sortAllRestaurantsInspections();
+        }
+    }
+
     /*
+        Favorite handling
+
         Gets list of favourites from SharedPreferences and converts it from json to ArrayList<String>
         Adapted from https://codinginflow.com/tutorials/android/save-arraylist-to-sharedpreferences-with-gson
      */
@@ -152,6 +215,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
     }
+
+    private void checkFavouritesForUpdates() {
+        List<Restaurant> faveRestaurants = new ArrayList<>();
+        Restaurant rest;
+        for (Favourite fave : favList) {
+            rest = manager.searchById(fave.getID());
+            if (rest != null && fave.getDateLastInspection() != rest.getInspection(0).getDate()) {
+                faveRestaurants.add(rest);
+            }
+        }
+
+        if (faveRestaurants.size() > 0) {
+            manager.setFavesWithUpdates(faveRestaurants);
+            manager.setCalledFavourites(true);
+            manager.sortByRestaurantName();
+            showFavouriteDialog();
+        }
+
+    }
+
+    // Create and show dialog that prompts user for update
+    public void showFavouriteDialog() {
+        Log.i(TAG, "showFavouriteDialog: showing favourite dialog");
+        DialogFragment dialog = new FavouriteDialog();
+        dialog.show(getSupportFragmentManager(), "FavouriteDialog");
+    }
+
+    /*
+    Update check methods
+     */
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void  updateCheck() throws InterruptedException {
@@ -188,65 +281,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         dialog.dismiss();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case REQUEST_CODE_FOR_UPDATE:
-                if (resultCode == Activity.RESULT_OK) {
-                    try {
-                        manager.getAllRestaurants().clear();
-                        manager.setFlagTrue();
-                        getRestaurantManager();
-                        setmClusterManager();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    resetFavourites();
-                    checkFavouritesForUpdates();
-                }
-        }
-    }
-
-    private void checkFavouritesForUpdates() {
-        List<Restaurant> faveRestaurants = new ArrayList<>();
-        Restaurant rest;
-        for (Favourite fave : favList) {
-            rest = manager.searchById(fave.getID());
-            if (rest != null && fave.getDateLastInspection() != rest.getInspection(0).getDate()) {
-                faveRestaurants.add(rest);
-            }
-        }
-
-        if (faveRestaurants.size() > 0) {
-            manager.setFavesWithUpdates(faveRestaurants);
-            manager.setCalledFavourites(true);
-            manager.sortByRestaurantName();
-            showFavouriteDialog();
-        }
-
-    }
-
-    // Create and show dialog that prompts user for update
-    public void showFavouriteDialog() {
-        Log.i(TAG, "showFavouriteDialog: showing favourite dialog");
-        DialogFragment dialog = new FavouriteDialog();
-        dialog.show(getSupportFragmentManager(), "FavouriteDialog");
-    }
-
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void getRestaurantManager() throws FileNotFoundException {
-        manager = RestaurantManager.getInstance();
-        if(manager.getFlag()){
-            loadFromCSV(this);
-            manager.sortByRestaurantName();
-            manager.setFlagFalse();
-            manager.sortAllRestaurantsInspections();
-        }
-    }
-
     //loads restaurant data from a csv file (either stored locally or pre-installed)
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void loadFromCSV(Context context) throws FileNotFoundException {
@@ -264,7 +298,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(databaseInfo.firstOpen(sharedPreferences) == 0 || !hasUpdated){
             restFileStream = getResources().openRawResource(R.raw.restaurants_itr1);
             inspFileStream = getResources().openRawResource(R.raw.inspectionreports_itr1);
-            Log.i(TAG, "loadFromCSV: reading default rests");
         }
         else{   //use previously downloaded files
             try {
@@ -272,7 +305,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 inspFileStream = context.openFileInput(databaseInfo.getInspectionFileName());
 
             } catch (IOException e) {
-                Log.i(TAG, "onCreate: caught exception");
+                Log.e(TAG, "onCreate: caught exception");
                 e.printStackTrace();
             }
         }
@@ -289,70 +322,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             csvReader.readInspectionCSV(readerI,this);
             readerI.close();
         } catch (IOException e) {
-            Log.i(TAG, "onCreate: caught exception");
+            Log.e(TAG, "onCreate: caught exception");
             e.printStackTrace();
         }
     }
 
-    private void getToRestaurantList() {
-        ImageButton imageButton = findViewById(R.id.IB_restaurant_List);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = RestaurantListActivity.makeIntent(MapsActivity.this);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
-
-    //starts the search activity from within map
-    private void startSearchInMap(){
-        ImageButton imageButton = findViewById(R.id.IB_search_in_map);
-        imageButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                calledSearch = true;
-                startActivity(new Intent(MapsActivity.this, SearchScreen.class));
-            }
-        });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        NewDataNotify newDataNotify = NewDataNotify.getInstance();
-        if(calledSearch && newDataNotify.isNewData()){
-            refreshItems();
-            calledSearch = false;
-            mMap.animateCamera(CameraUpdateFactory.zoomTo((float) (mMap.getCameraPosition().zoom - 0.25)));
-            newDataNotify.setNewData(false);
-        }
-    }
-
-    //refreshes the markers on the map
-    private void refreshItems(){
-        mMap.clear();
-        mClusterManager.clearItems();  // calling just in case (may not be needed)
-        mClusterManager.addItems(manager.getAllRestaurants());
-    }
-
-    //sets up the cluster manager
-    private void setmClusterManager(){
-        mClusterManager = new ClusterManager<>(this,mMap);
-        //todo: set sorted restaurants here
-        mClusterManager.addItems(manager.getAllRestaurants());
-        RestaurantMarkerRenderer renderer = new RestaurantMarkerRenderer(this,mMap,mClusterManager);
-        mClusterManager.setRenderer(renderer);
-        mMap.setOnCameraIdleListener(mClusterManager);
-        mMap.setOnMarkerClickListener(mClusterManager);
-        mMap.setOnInfoWindowClickListener(mClusterManager);
-        mClusterManager.getMarkerCollection().setInfoWindowAdapter( new CustomWindowAdapter(this));
-        mClusterManager.getClusterMarkerCollection().setInfoWindowAdapter(new CustomWindowAdapter(this));
-        mClusterManager.setOnClusterItemInfoWindowClickListener(this);
-        mClusterManager.setOnClusterClickListener(this);
-        mClusterManager.setOnClusterInfoWindowClickListener(this);
-    }
+    /*
+    Map Methods
+     */
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -373,8 +350,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.setInfoWindowAdapter(new CustomWindowAdapter(MapsActivity.this));
     }
-
-
 
     private void getLocPermissions() {
         Log.d(TAG, "Getting Location Permissions");
@@ -465,16 +440,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, zoomFactor));
     }
 
-
-    private BitmapDescriptor getMarkerIconFromDrawable(Drawable drawable) {
-        Canvas canvas = new Canvas();
-        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        canvas.setBitmap(bitmap);
-        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-        drawable.draw(canvas);
-        return BitmapDescriptorFactory.fromBitmap(bitmap);
-    }
-
     private void startLocationRunnable(){
         Log.d(TAG, "startsLocationRunnable: starting runnable for retrieving updated device location");
         mapHandler.postDelayed(mapRunnable = new Runnable() {
@@ -490,17 +455,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapHandler.removeCallbacks(mapRunnable);
     }
 
-    @Override
-    public void onStart(){
-        super.onStart();
-        startLocationRunnable();
-    }
-
-    @Override
-    public void onDestroy(){
-        super.onDestroy();
-        stopLocationRunnable();
-    }
 
     private void changeLocations(){
         getCoord();// get coordinates from restaurant detail activity
@@ -519,23 +473,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             marker.setTag(pos);
             mMap.setInfoWindowAdapter(new CustomWindowAdapter(MapsActivity.this));
             marker.showInfoWindow();
-
         }
-
-    }
-
-    private String getInfoWindowStr(Restaurant restaurant){
-        if(restaurant.getAllInspections().size() == 0)
-        {
-            return  getString(R.string.Address)
-                    + restaurant.getRestaurantAddress()
-                    + getString(R.string.No_inspections_found);
-        }
-
-        return getString(R.string.Address)
-                + restaurant.getRestaurantAddress()
-                + getString(R.string.Hazard_level)
-                + restaurant.getInspection(0).getHazardLevel();
     }
 
     private void getCoord(){
@@ -554,18 +492,93 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    /*
+    UI buttons and special elements
+     */
 
+    private BitmapDescriptor getMarkerIconFromDrawable(Drawable drawable) {
+        Canvas canvas = new Canvas();
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        canvas.setBitmap(bitmap);
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        drawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
+    private String getInfoWindowStr(Restaurant restaurant){
+        if(restaurant.getAllInspections().size() == 0)
+        {
+            return  getString(R.string.Address)
+                    + restaurant.getRestaurantAddress()
+                    + getString(R.string.No_inspections_found);
+        }
+
+        return getString(R.string.Address)
+                + restaurant.getRestaurantAddress()
+                + getString(R.string.Hazard_level)
+                + restaurant.getInspection(0).getHazardLevel();
+    }
+
+    private void getToRestaurantList() {
+        ImageButton imageButton = findViewById(R.id.IB_restaurant_List);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = RestaurantListActivity.makeIntent(MapsActivity.this);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    //starts the search activity from within map
+    private void startSearchInMap(){
+        ImageButton imageButton = findViewById(R.id.IB_search_in_map);
+        imageButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                calledSearch = true;
+                startActivity(new Intent(MapsActivity.this, SearchScreen.class));
+            }
+        });
+    }
+
+    /*
+    Clustering methods
+     */
+
+    //refreshes the markers on the map
+    private void refreshItems(){
+        mMap.clear();
+        mClusterManager.clearItems();  // calling just in case (may not be needed)
+        mClusterManager.addItems(manager.getAllRestaurants());
+    }
+
+    //sets up the cluster manager
+    private void setmClusterManager(){
+        mClusterManager = new ClusterManager<>(this,mMap);
+        //todo: set sorted restaurants here
+        mClusterManager.addItems(manager.getAllRestaurants());
+        RestaurantMarkerRenderer renderer = new RestaurantMarkerRenderer(this,mMap,mClusterManager);
+        mClusterManager.setRenderer(renderer);
+        mMap.setOnCameraIdleListener(mClusterManager);
+        mMap.setOnMarkerClickListener(mClusterManager);
+        mMap.setOnInfoWindowClickListener(mClusterManager);
+        mClusterManager.getMarkerCollection().setInfoWindowAdapter( new CustomWindowAdapter(this));
+        mClusterManager.getClusterMarkerCollection().setInfoWindowAdapter(new CustomWindowAdapter(this));
+        mClusterManager.setOnClusterItemInfoWindowClickListener(this);
+        mClusterManager.setOnClusterClickListener(this);
+        mClusterManager.setOnClusterInfoWindowClickListener(this);
+    }
 
     @Override
     public boolean onClusterItemClick(Restaurant item) {
         return false;
     }
 
-
     @Override
     public void onClusterItemInfoWindowClick(ClusterItem restaurant) {
         Log.i(TAG, "onClusterItemInfoWindowClick: registered click on restaurant : " + restaurant.toString());
-        //todo: change to sorted list
         Intent intent = RestaurantDetailsActivity.makeIntent(MapsActivity.this, (Integer) manager.getRestaurantPositionInArray((Restaurant)restaurant));
         startActivity(intent);
     }

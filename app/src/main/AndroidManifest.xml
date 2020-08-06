@@ -18,8 +18,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UI.UpdatedFavouritesActivity"></activity>
-        <activity android:name=".UI.SearchScreen" />
+        <activity
+            android:name=".UI.UpdatedFavouritesActivity"
+            android:label="@string/Updated_favourites" />
+        <activity
+            android:name=".UI.SearchScreen"
+            android:label="@string/Search_screen" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

@@ -15,12 +15,12 @@ import group17.cmpt276.iteration3.Model.Restaurant;
 import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.Model.Violation;
 
-/*
-Restaurant Reader Class,
-Takes a file streams from activity, parses and creates new model objects from CSV files
-
-CSV reading adapted from
-https://www.callicoder.com/java-read-write-csv-file-opencsv/
+/**
+ * Restaurant Reader Class,
+ * Takes a file streams from activity, parses and creates new model objects from CSV files
+ *
+ * CSV reading adapted from
+ * https://www.callicoder.com/java-read-write-csv-file-opencsv/
  */
 
 public class RestaurantReader {
@@ -31,12 +31,9 @@ public class RestaurantReader {
 
     //parse restaurant csv, add restaurants to list
     public void readRestaurantCSV(Reader reader) throws IOException {
-        try (
-                CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build()
-        ) {
+        try ( CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build() ) {
             String[] nextRecord;
 
-            int i = 0;
             while ((nextRecord = csvReader.readNext()) != null) {
                 float[] gps = new float[] {Float.parseFloat(nextRecord[5]),Float.parseFloat(nextRecord[6])};
                 Restaurant restaurant = new Restaurant(nextRecord[1],nextRecord[2]+", "+nextRecord[3],
@@ -44,16 +41,14 @@ public class RestaurantReader {
 
                 restaurantManager = RestaurantManager.getInstance();
                 restaurantManager.addRestaurant(restaurant);
-                //logRestaurantRead(nextRecord, i);
-                i++;
             }
         }
         catch (FileNotFoundException fnf){
-            Log.i(TAG, "readRestaurantCSV: file not found!");
+            Log.e(TAG, "readRestaurantCSV: file not found!");
             fnf.printStackTrace();
         }
         catch (IOException ioe){
-            Log.i(TAG, "readRestaurantCSV: IOE exception");
+            Log.e(TAG, "readRestaurantCSV: IOE exception");
             ioe.printStackTrace();
         } catch (CsvValidationException e) {
             e.printStackTrace();
@@ -62,9 +57,7 @@ public class RestaurantReader {
 
     //parse inspection csv, add inspections to
     public void readInspectionCSV(Reader reader, Context context) throws IOException {
-        try (
-                CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build()
-        ) {
+        try ( CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build() ) {
             String[] nextRecord;
             while ((nextRecord = csvReader.readNext()) != null) {
                 //logInspectionRead(nextRecord);

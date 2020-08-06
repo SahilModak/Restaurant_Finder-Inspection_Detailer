@@ -24,10 +24,10 @@ import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.Model.Violation;
 import group17.cmpt276.iteration3.R;
 
-/*
-Displays details of selected inspection. Shows date of inspection, number of critical
-and non-critical violations, type of inspection, along with a scrollable list of violations
-with brief descriptions. User may select a violation to see the full description.
+/**
+ * Displays details of selected inspection. Shows date of inspection, number of critical
+ * and non-critical violations, type of inspection, along with a scrollable list of violations
+ * with brief descriptions. User may select a violation to see the full description.
  */
 public class InspectionDetail extends AppCompatActivity {
 
@@ -70,18 +70,18 @@ public class InspectionDetail extends AppCompatActivity {
         currentInspectionIndex = getIntent().getIntExtra(EXTRA_INSPECTION_INDEX, 0);
     }
 
+    // Inflate the menu; this adds items to the action bar if it is present.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_inspection_detail, menu);
         return true;
     }
 
+    // Handle action bar item clicks here. The action bar will
+    // automatically handle clicks on the Home/Up button, so long
+    // as you specify a parent activity in AndroidManifest.xml.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         if(item.getItemId() == R.id.item_inspectionDetail_back){
                 finish();
                 return true;
@@ -183,7 +183,6 @@ public class InspectionDetail extends AppCompatActivity {
 
     // set up a short description for each violation
     private void setupShortDescription(TextView txtDescription,Violation current){
-        Log.i(TAG, "getView: brief description" + current.getDescription());
         String violationDetails = current.getDescription();
         if(violationDetails == null){
             violationDetails = getString(R.string.unknown_violation);

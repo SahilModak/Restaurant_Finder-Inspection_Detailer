@@ -11,7 +11,6 @@ import java.util.List;
  * Restaurant Manager class (Singleton)
  * Implements an arraylist of Restaurants and methods to operate and access this list
  */
-
 public class RestaurantManager implements Iterable<Restaurant>{
 
     private static final String TAG = "RestaurantManager";
@@ -30,10 +29,9 @@ public class RestaurantManager implements Iterable<Restaurant>{
         newDataNotify = NewDataNotify.getInstance();
     }
 
+    //sets the array list that contains restaurant the meet parameter search criteria
     public void setSearchedRestaurants(String searchString, boolean checkFavorites, int maxCriticalViolation, int minCriticalViolation, String recentHazardLevel){
         if(searchString.equals("") && !checkFavorites && maxCriticalViolation == -1 && minCriticalViolation == -1 && recentHazardLevel.equals("")){
-            Log.i(TAG, "setSearchedRestaurants: called empty search, should return default res");
-
             if(calledSearch){
                 newDataNotify.setNewData(true);
             }
@@ -44,10 +42,7 @@ public class RestaurantManager implements Iterable<Restaurant>{
         searchedRestaurants = new ArrayList<>();
         newDataNotify.setNewData(true);
 
-        Log.i(TAG, "setSearchedRestaurants: looking for restaurnats");
-        Log.i(TAG, "setSearchedRestaurants: search critera:" + searchString + ":" + checkFavorites + ":" + maxCriticalViolation + ":" + minCriticalViolation + ":" + recentHazardLevel);
-
-        //iterate though all resaurants, selecting only those that match criteria
+        //iterate though all restaurants, selecting only those that match criteria
         for(int i = 0; i < allRestaurants.size(); i++){
             Restaurant restaurant = allRestaurants.get(i);
             boolean matchSearchString = false;
@@ -71,7 +66,6 @@ public class RestaurantManager implements Iterable<Restaurant>{
             }
             else{
                 if (restaurant.getRestaurantName().toLowerCase().contains(searchString.toLowerCase())){
-                    Log.i(TAG, "setSearchedRestaurants: found match" + restaurant.getRestaurantName() +" : " + searchString);
                     matchSearchString = true;
                 }
             }
@@ -102,15 +96,12 @@ public class RestaurantManager implements Iterable<Restaurant>{
                 if(restaurant.numOfInspections() > 0){
                     if(restaurant.getInspection(0).getHazardLevel().toLowerCase().equals(recentHazardLevel.toLowerCase())){
                         matchHazard = true;
-                        Log.i(TAG, "setSearchedRestaurants: found match" + restaurant.getInspection(0).getHazardLevel() +" : " + recentHazardLevel);
                     }
                 }
             }
 
-            Log.i(TAG, "setSearchedRestaurants: " + matchFavorite + matchHazard + matchNCritical + matchSearchString);
             if(matchFavorite && matchHazard && matchNCritical && matchSearchString){
                 searchedRestaurants.add(restaurant);
-                Log.i(TAG, "setSearchedRestaurants: found matching restaurnat" + restaurant.toString());
             }
         }
     }
@@ -128,12 +119,10 @@ public class RestaurantManager implements Iterable<Restaurant>{
 
     public List<Restaurant> getAllRestaurants(){
         if(calledSearch){
-            Log.i(TAG, "getAllRestaurants: returning only search res");
             return searchedRestaurants;
         } else if(calledFavourites) {
             return favesWithUpdates;
         }
-        Log.i(TAG, "getAllRestaurants: returning all res (no search)");
         return allRestaurants;
     }
 
@@ -208,19 +197,6 @@ public class RestaurantManager implements Iterable<Restaurant>{
             }
         }
         return null;
-    }
-
-    public ArrayList<Restaurant> searchByName(String name){
-        ArrayList<Restaurant> searchedRestaurants = new ArrayList<>();
-        for(Restaurant x : allRestaurants){
-            if(x.getRestaurantName().contains(name) ){
-                searchedRestaurants.add(x);
-            }
-        }
-        if(searchedRestaurants.size() == 0){
-            return null;
-        }
-        return searchedRestaurants;
     }
 
     private void swapPositions(int i, int j){

@@ -118,7 +118,8 @@
     <string name = "inputError"> Die maximale Anzahl von Verstößen darf nicht geringer sein als die minimale Anzahl von Verstößen </string>
     <string name = "locsationPermissionDenied"> Der Gerätestandort kann nicht abgerufen werden. Überprüfen Sie Ihre Berechtigungen in den Einstellungen </string>
     <string name = "attention"> Achtung! </string>
-    <string name = "favourite_message"> Es gibt neue Inspektionen für Ihre Lieblingsrestaurants. \ n \ nKlicken Sie auf OK, um sie anzuzeigen. </string>
+    <string name = "favourite_message"> Es gibt neue Inspektionen für Ihre Lieblingsrestaurants. \n\n Klicken Sie auf OK, um sie anzuzeigen. </string>
 
-
+    <string name="Updated_favourites">Aktualisierte Favoriten</string>
+    <string name="Search_screen">Suchbildschirm</string>
 </resources>

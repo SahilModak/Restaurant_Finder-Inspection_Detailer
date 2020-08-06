@@ -4,10 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import group17.cmpt276.iteration3.Model.NewDataNotify;
 import group17.cmpt276.iteration3.Model.RestaurantManager;
-import group17.cmpt276.iteration3.Model.SearchCriteria;
 import group17.cmpt276.iteration3.R;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +14,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+/**
+ * Search screen class is an activity to used to take input for the search functions
+ * within the the restaurant manager singleton.
+ */
 public class SearchScreen extends AppCompatActivity {
 
     Boolean searchFav = false;
@@ -36,6 +38,7 @@ public class SearchScreen extends AppCompatActivity {
         restaurantManager = RestaurantManager.getInstance();
         newDataNotify = NewDataNotify.getInstance();
 
+        //setting OnClickListeners for all buttons on screen
         setCancelButton();
         setSaveSearchButton();
         setClearSearchButton();
@@ -103,11 +106,13 @@ public class SearchScreen extends AppCompatActivity {
         }
     }
 
+    //check if favorites need to be used as search criteria
     private void getUserSearchFavorite() {
         CheckBox fav = (CheckBox) findViewById(R.id.favCheckBox);
         searchFav = fav.isChecked();
     }
 
+    //get hazard level for user entry if entered
     private void getUserSearchHazardLevel() {
         RadioGroup hazardGroup = findViewById(R.id.hazardGroup);
         int radioId = hazardGroup.getCheckedRadioButtonId();
@@ -120,6 +125,8 @@ public class SearchScreen extends AppCompatActivity {
             searchHazard = "";
         }
     }
+
+    // get the search string if entered
     private void getUserSearchName(){
         EditText editTextName = findViewById(R.id.editText_search_name);
         searchResName = editTextName.getText().toString();

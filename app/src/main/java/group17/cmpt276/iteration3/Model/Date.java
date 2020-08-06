@@ -10,12 +10,11 @@ import java.util.List;
 
 import group17.cmpt276.iteration3.R;
 
-/*
-Inspection Date is a class that models the dates used in the program
-includes features to output the date in correct format based on how long ago the inspection occurred
-includes both update dates and inspection dates
+/**
+ * Inspection Date is a class that models the dates used in the program
+ * includes features to output the date in correct format based on how long ago the inspection occurred
+ * includes both update dates and inspection dates
  */
-
 public class Date {
 
     private static final String TAG = "Inspection Date";
@@ -40,21 +39,19 @@ public class Date {
         this.hour = Integer.parseInt(dateTimeAsString.substring(11,13));
         this.minute = Integer.parseInt(dateTimeAsString.substring(14,16));
         this.seconds = Integer.parseInt(dateTimeAsString.substring(17,19));
-        Log.i(TAG, "InspectionDate: (new create)" + this.toString());
     }
 
+    //return the current date as a string
     public String getCurrentDateAsString(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime currDate = LocalDateTime.now();
-        Log.i(TAG, "getCurrentDateAsString: current date " + dtf.format(currDate));
         return  dtf.format(currDate);
     }
 
     public static String getCurrentDateAsString(String date){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime currDate = LocalDateTime.now();
-        Log.i(TAG, "getCurrentDateAsString: current date " + dtf.format(currDate));
-        return  date = dtf.format(currDate);
+        return dtf.format(currDate);
     }
 
     //builds a string to save a date object
@@ -122,6 +119,8 @@ public class Date {
         months.add(res.getString(R.string.month_nov));
         months.add(res.getString(R.string.month_dec));
     }
+
+    //make a date object a string for printing to ui
     public String makeActivityString(Context context){
         Resources res = context.getResources();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -130,9 +129,7 @@ public class Date {
                 (currDate.getMonthValue() - this.month)*30 +
                 (currDate.getYear() - this.year)*365;
         String str;
-        Log.i(TAG, "makeActivityString: ndays: " + days);
         if(days <= 30){
-            Log.i(TAG, "makeActivityString: triggered less than 30 days ago!");
             str = days + res.getString(R.string.days_ago);
         }
         else if(days <= 365){

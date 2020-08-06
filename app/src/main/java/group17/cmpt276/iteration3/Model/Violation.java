@@ -1,11 +1,10 @@
 package group17.cmpt276.iteration3.Model;
 import android.content.Context;
 
-/*
-Violation Class, contains metadata about a single violation within an inspection
-Data members include: the criticality of the violation, a description and the violation number
+/**
+ * Violation Class, contains metadata about a single violation within an inspection
+ * Data members include: the criticality of the violation, a description and the violation number
  */
-
 public class Violation {
     private static final String TAG = "Violation Class";
     private boolean isCritical;

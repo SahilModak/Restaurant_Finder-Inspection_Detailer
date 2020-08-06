@@ -12,11 +12,14 @@ import java.net.URL;
 
 import group17.cmpt276.iteration3.Model.Date;
 
-/*
-JSON retriever class.
-Handles downloading JSON files as string and extracting the relevant JSON objects to be used by the CSV downloader
+/**
+<<<<<<< HEAD
+ * JSON retriever class (threaded)
+=======
+ * JSON retriever class.
+>>>>>>> ff2a1f7e537700fdc0272aca0ab1b059e7c3f4ad
+ * Handles downloading JSON files as string and extracting the relevant JSON objects to be used by the CSV downloader
  */
-
 public class JSONRetriever extends Thread{
     private static final String TAG = "JSONRetriever" ;
     private DatabaseInfo databaseInfo;
@@ -24,10 +27,11 @@ public class JSONRetriever extends Thread{
     public JSONRetriever(){
     }
 
+    //run retriever thread
     public void run(){
         databaseInfo = DatabaseInfo.getInstance();
         try {
-            parseRestaurantJSON(getJSONFromURL(databaseInfo.getSurreyDataRestaruantsURL()));
+            parseRestaurantJSON(getJSONFromURL(databaseInfo.getSurreyDataRestaurantsURL()));
             parseInspectionJSON(getJSONFromURL(databaseInfo.getGetSurreyDataInspectionURL()));
         }
         catch (JSONException e) {
@@ -43,7 +47,6 @@ public class JSONRetriever extends Thread{
             JSONArray jsonArray = jar.getJSONArray("resources");
             JSONObject JO_1 = (JSONObject) jsonArray.get(0);
             String inspURL = JO_1.getString("url");
-            Log.i(TAG, "parseInspectionJSON: ispectionurl: "  + inspURL);
             databaseInfo.setInspectionCSVDataURL(inspURL);
         }
         catch(JSONException je){
@@ -60,10 +63,6 @@ public class JSONRetriever extends Thread{
             JSONObject JO_1 = (JSONObject) jsonArray.get(0);
             String restURL = JO_1.getString("url");
             Log.i(TAG, "run: restURL: " + restURL);
-
-            // get format
-            String format = JO_1.getString("format");
-            Log.i(TAG, "run: format: " + format);
 
             // get last modified
             String date = JO_1.getString("last_modified");

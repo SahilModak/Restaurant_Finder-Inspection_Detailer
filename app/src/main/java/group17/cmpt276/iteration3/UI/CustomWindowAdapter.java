@@ -10,9 +10,10 @@ import com.google.android.gms.maps.model.Marker;
 
 import group17.cmpt276.iteration3.R;
 
-//adapter for making a custom info window for all markers, used to display the restauarant name as
-// the title and the address and hazard level as the snippet
-
+/**
+ * adapter for making a custom info window for all markers, used to display the restaurant name as
+ * the title and the address and hazard level as the snippet
+ */
 public class CustomWindowAdapter implements GoogleMap.InfoWindowAdapter {
     private final View mWindow;
     private Context mContext;

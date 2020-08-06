@@ -123,7 +123,7 @@ public class UpdateActivity extends AppCompatActivity {
                 }
             }
             CSVUpdater csvUpdater = new CSVUpdater(UpdateActivity.this);
-            csvUpdater.update(UpdateActivity.this, sharedPreferences);
+            csvUpdater.update(UpdateActivity.this);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() { updateProgressBar.setVisibility(View.GONE);

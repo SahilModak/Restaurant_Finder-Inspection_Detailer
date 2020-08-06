@@ -45,7 +45,6 @@ public class RestaurantListActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i(TAG, "onCreate: created");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         databaseInfo = DatabaseInfo.getInstance();
@@ -57,7 +56,6 @@ public class RestaurantListActivity extends AppCompatActivity{
             e.printStackTrace();
         }
         restaurantManager.setCalledFavourites(false);
-
 
         populateListView();
         registerClickCallback();
@@ -77,8 +75,6 @@ public class RestaurantListActivity extends AppCompatActivity{
                         e.printStackTrace();
                     }
                     adapter.notifyDataSetChanged();
-                } else {
-                    // do nothing
                 }
         }
     }
@@ -131,7 +127,6 @@ public class RestaurantListActivity extends AppCompatActivity{
         if(databaseInfo.firstOpen(sharedPreferences) == 0 || !hasUpdated){
             restFileStream = getResources().openRawResource(R.raw.restaurants_itr1);
             inspFileStream = getResources().openRawResource(R.raw.inspectionreports_itr1);
-            Log.i(TAG, "loadFromCSV: reading default rests");
         }
         else{   //use previously downloaded files
             try {
@@ -139,7 +134,7 @@ public class RestaurantListActivity extends AppCompatActivity{
                 inspFileStream = context.openFileInput(databaseInfo.getInspectionFileName());
 
             } catch (IOException e) {
-                Log.i(TAG, "onCreate: caught exception");
+                Log.e(TAG, "onCreate: caught exception");
                 e.printStackTrace();
             }
         }
@@ -171,13 +166,13 @@ public class RestaurantListActivity extends AppCompatActivity{
         }
     }
 
+    //on resume, check if there is new data for array adapter
     @Override
     protected void onResume() {
         super.onResume();
         restaurantManager.setCalledFavourites(false);
         NewDataNotify newDataNotify = NewDataNotify.getInstance();
         if(calledSearch && newDataNotify.isNewData()){
-            Log.i(TAG, "onResume: need to refresh data");
             ListView listView = findViewById(R.id.restaurantListView);
             adapter = new RestaurantListAdapter(this, R.layout.restaurant_view, (ArrayList<Restaurant>) restaurantManager.getAllRestaurants());
             listView.setAdapter(adapter);

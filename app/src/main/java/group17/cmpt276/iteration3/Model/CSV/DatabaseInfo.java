@@ -1,12 +1,5 @@
 package group17.cmpt276.iteration3.Model.CSV;
 
-/*
-Stores metadata obtained from Surrey JSON
-Stores information about last update and if it is the first time opening app
-Singleton class
- */
-
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -14,23 +7,23 @@ import java.io.File;
 
 import group17.cmpt276.iteration3.Model.Date;
 
+/**
+ * Stores metadata obtained from Surrey JSON
+ * Stores information about last update and if it is the first time opening app
+ * Singleton class
+ */
+
 public class DatabaseInfo {
     private static final String TAG = "Database info";
     private static DatabaseInfo databaseInfo;
-
-    //where json files containing metadata are stored
-    private String surreyDataRestaruantsURL = "http://data.surrey.ca/api/3/action/package_show?id=restaurants";
-    private String getSurreyDataInspectionURL = "http://data.surrey.ca/api/3/action/package_show?id=fraser-health-restaurant-inspection-reports";
 
     //urls from where data can be downloaded
     private String restaurantCSVDataURL;
     private String inspectionCSVDataURL;
 
-    private String restaurantLastUpdate;
-    private String inspectionLastUpdate;
-
     private String restaurantFileName;
     private String inspectionFileName;
+
     //file names for newly downloaded files
     private String newRestaurantFileName;
     private String newInspectionFileName;
@@ -38,7 +31,6 @@ public class DatabaseInfo {
     String firstOpenKey = "firstOpen";
     String lastUpdateKey = "lastUpdate";
     static final String FILESUPDATEDKEY = "filesUpdated";
-
 
     private Date lastUpdateDate;
     private Date serverLastUpdate;
@@ -74,7 +66,6 @@ public class DatabaseInfo {
 
     public int firstOpen(SharedPreferences sharedPreferences){
         int firstOpen = sharedPreferences.getInt(firstOpenKey,0);
-        //first open
         if(firstOpen == 0){
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putInt(firstOpenKey,1);
@@ -126,7 +117,6 @@ public class DatabaseInfo {
         //check
         double timeSinceLastUpdate = dateDifference(currDate,lastUpdateDate);
         if(timeSinceLastUpdate >= 20){
-            Log.i(TAG, "needToUpdate: need to update!!!");
             getMetaData();
             double differenceFromServerUpdate = dateDifference(serverLastUpdate,lastUpdateDate);
             return Math.abs(differenceFromServerUpdate) >= 5;
@@ -150,7 +140,6 @@ public class DatabaseInfo {
 
     //get the metadata from surrey website
     private void getMetaData(){
-        Log.i(TAG, "getMetaData: getting metadata from server");
         JSONRetriever jsonRetriever = new JSONRetriever();
         jsonRetriever.start();
         try{
@@ -184,24 +173,17 @@ public class DatabaseInfo {
         return restaurantFileName;
     }
 
-    public void setRestaurantFileName(String restaurantFileName) {
-        this.restaurantFileName = restaurantFileName;
-    }
-
     public String getInspectionFileName() {
         return inspectionFileName;
     }
 
-    public void setInspectionFileName(String inspectionFileName) {
-        this.inspectionFileName = inspectionFileName;
-    }
-
-    public String getSurreyDataRestaruantsURL() {
-        return surreyDataRestaruantsURL;
+    //where json files containing metadata are stored
+    public String getSurreyDataRestaurantsURL() {
+        return "http://data.surrey.ca/api/3/action/package_show?id=restaurants";
     }
 
     public String getGetSurreyDataInspectionURL() {
-        return getSurreyDataInspectionURL;
+        return "http://data.surrey.ca/api/3/action/package_show?id=fraser-health-restaurant-inspection-reports";
     }
 
     public String getRestaurantCSVDataURL() {
@@ -218,21 +200,5 @@ public class DatabaseInfo {
 
     public void setInspectionCSVDataURL(String inspectionCSVDataURL) {
         this.inspectionCSVDataURL = inspectionCSVDataURL;
-    }
-
-    public String getRestaurantLastUpdate() {
-        return restaurantLastUpdate;
-    }
-
-    public void setRestaurantLastUpdate(String restaurantLastUpdate) {
-        this.restaurantLastUpdate = restaurantLastUpdate;
-    }
-
-    public String getInspectionLastUpdate() {
-        return inspectionLastUpdate;
-    }
-
-    public void setInspectionLastUpdate(String inspectionLastUpdate) {
-        this.inspectionLastUpdate = inspectionLastUpdate;
     }
 }

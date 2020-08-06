@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/*
-Inspection Class, contains metadata about a restaurant inspection including date and violations found
-Contains a list of violations observed during the given inspection
+/**
+ * Inspection Class, contains metadata about a restaurant inspection including date and violations found
+ * Contains a list of violations observed during the given inspection
  */
-
 public class Inspection implements Iterable<Violation>{
     private Date date;
     private String inspectionType;
@@ -60,11 +59,6 @@ public class Inspection implements Iterable<Violation>{
     public void addViolation(Violation x){
         //add violation to list of all violations
         allViolations.add(x);
-    }
-
-    public Violation getViolations(int position){
-        //function to get violation at position
-        return allViolations.get(position);
     }
 
     public int numOfViolations(){
