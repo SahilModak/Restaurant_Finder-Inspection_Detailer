@@ -83,10 +83,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private boolean flag = false;
     private boolean camflag;
     private GoogleMap mMap;
+    private FusedLocationProviderClient mFusedLocationProviderClient;
     private Handler mapHandler = new Handler();
     private Runnable mapRunnable;
     private Location currentLocation;
     private RestaurantManager manager = RestaurantManager.getInstance();
+    private Marker marker;
     private boolean calledSearch = false;
 
     public static final int REQUEST_CODE_FOR_UPDATE = 42;
@@ -505,7 +507,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(newLatitude!= 9999 &&  newLongitude!= 9999){ // check whether latitude and longitude is modified by intent
             currentLocation.setLatitude(newLatitude);   //modify the current location if we get new coordinate
             currentLocation.setLongitude(newLongitude);
+            LatLng latLng = new LatLng(newLatitude,newLongitude);
             Intent intent = getIntent();
+
             int pos = intent.getIntExtra(RestaurantDetailsActivity.RESTAURANTINDEX,0);
             Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(manager.getRestaurant(pos).getLatitude(),
                     manager.getRestaurant(pos).getLongitude()))
