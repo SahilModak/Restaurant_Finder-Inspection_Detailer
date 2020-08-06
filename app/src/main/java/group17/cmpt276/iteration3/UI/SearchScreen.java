@@ -14,6 +14,12 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+/*
+    Search screen class is an activity to used to take input for the search functions
+    within the the restaurant manager singleton.
+
+ */
+
 public class SearchScreen extends AppCompatActivity {
 
     Boolean searchFav = false;
@@ -34,6 +40,7 @@ public class SearchScreen extends AppCompatActivity {
         restaurantManager = RestaurantManager.getInstance();
         newDataNotify = NewDataNotify.getInstance();
 
+        //setting OnClickListeners for all buttons on screen
         setCancelButton();
         setSaveSearchButton();
         setClearSearchButton();
@@ -102,11 +109,13 @@ public class SearchScreen extends AppCompatActivity {
     }
 
     private void getUserSearchFavorite() {
+        //getting the value from checkbox
         CheckBox fav = (CheckBox) findViewById(R.id.favCheckBox);
         searchFav = fav.isChecked();
     }
 
     private void getUserSearchHazardLevel() {
+        //get hazard level for user entry if entered
         RadioGroup hazardGroup = findViewById(R.id.hazardGroup);
         int radioId = hazardGroup.getCheckedRadioButtonId();
         if(radioId != -1){
@@ -119,6 +128,7 @@ public class SearchScreen extends AppCompatActivity {
         }
     }
     private void getUserSearchName(){
+        // get the search string if entered
         EditText editTextName = findViewById(R.id.editText_search_name);
         searchResName = editTextName.getText().toString();
     }
