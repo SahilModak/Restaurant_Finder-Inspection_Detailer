@@ -28,11 +28,7 @@
         android:src="@drawable/ic_restaurant_lilst"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-<<<<<<< HEAD
         app:layout_constraintHorizontal_bias="0.167"
-=======
-        app:layout_constraintHorizontal_bias="0.716"
->>>>>>> ff2a1f7e537700fdc0272aca0ab1b059e7c3f4ad
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.004" />
@@ -47,11 +43,7 @@
         android:src="@android:drawable/ic_menu_search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-<<<<<<< HEAD
         app:layout_constraintHorizontal_bias="0.046"
-=======
-        app:layout_constraintHorizontal_bias="0.111"
->>>>>>> ff2a1f7e537700fdc0272aca0ab1b059e7c3f4ad
         app:layout_constraintStart_toEndOf="@+id/IB_restaurant_List"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.004" />
