@@ -119,4 +119,7 @@
     <string name="locsationPermissionDenied">Unable to get device location, please check your permissions within settings</string>
     <string name="attention">Attention!</string>
     <string name="favourite_message">There are new inspections for your favourite restaurants.\n\nClick OK to see them.</string>
+
+    <string name="Updated_favourites">Updated Favourites</string>
+    <string name="Search_screen">Search Screen</string>
 </resources>
