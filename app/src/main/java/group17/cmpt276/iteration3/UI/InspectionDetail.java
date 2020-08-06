@@ -183,7 +183,6 @@ public class InspectionDetail extends AppCompatActivity {
 
     // set up a short description for each violation
     private void setupShortDescription(TextView txtDescription,Violation current){
-        Log.i(TAG, "getView: brief description" + current.getDescription());
         String violationDetails = current.getDescription();
         if(violationDetails == null){
             violationDetails = getString(R.string.unknown_violation);

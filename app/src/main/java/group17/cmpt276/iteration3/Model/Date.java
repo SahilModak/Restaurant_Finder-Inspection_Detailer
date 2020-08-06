@@ -39,22 +39,19 @@ public class Date {
         this.hour = Integer.parseInt(dateTimeAsString.substring(11,13));
         this.minute = Integer.parseInt(dateTimeAsString.substring(14,16));
         this.seconds = Integer.parseInt(dateTimeAsString.substring(17,19));
-        Log.i(TAG, "InspectionDate: (new create)" + this.toString());
     }
 
     //return the current date as a string
     public String getCurrentDateAsString(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime currDate = LocalDateTime.now();
-        Log.i(TAG, "getCurrentDateAsString: current date " + dtf.format(currDate));
         return  dtf.format(currDate);
     }
 
     public static String getCurrentDateAsString(String date){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime currDate = LocalDateTime.now();
-        Log.i(TAG, "getCurrentDateAsString: current date " + dtf.format(currDate));
-        return  date = dtf.format(currDate);
+        return dtf.format(currDate);
     }
 
     //builds a string to save a date object

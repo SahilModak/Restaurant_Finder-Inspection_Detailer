@@ -51,7 +51,6 @@ public class UpdatedFavouritesActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-//        manager.setCalledFavourites(false);
 
     }
 

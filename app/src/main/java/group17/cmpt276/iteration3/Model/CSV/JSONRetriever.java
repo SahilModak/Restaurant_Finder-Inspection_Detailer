@@ -64,10 +64,6 @@ public class JSONRetriever extends Thread{
             String restURL = JO_1.getString("url");
             Log.i(TAG, "run: restURL: " + restURL);
 
-            // get format
-            String format = JO_1.getString("format");
-            Log.i(TAG, "run: format: " + format);
-
             // get last modified
             String date = JO_1.getString("last_modified");
             Log.i(TAG, "run: last modified: " + date);

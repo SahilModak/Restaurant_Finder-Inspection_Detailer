@@ -40,12 +40,9 @@ import group17.cmpt276.iteration3.R;
  */
 public class RestaurantDetailsActivity extends AppCompatActivity {
 
-    public static final String NEW_LATITUDE = "new latitude";
     private static final String EXTRA_RESTAURANT_INDEX = "jmt24.cmpt276.group17_iteration1.restaurant_index";
-    public static final String NEW_LONGITUDE = "new longitude";
     public static final String CODE = "code";
     public static final String RESTAURANTINDEX = "restindex";
-    public static final String NEW_RESTAURANT_NAME = "newRestaurant name";
     private List<Inspection> inspectionsList;
     private int currentRestaurantIndex;
     private Restaurant restaurant;
@@ -161,11 +158,12 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         return true;
     }
 
+    // Handle action bar item clicks here. The action bar will
+    // automatically handle clicks on the Home/Up button, so long
+    // as you specify a parent activity in AndroidManifest.xml.
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()){
             case R.id.item_restaurant_detail_back:
                 finish();

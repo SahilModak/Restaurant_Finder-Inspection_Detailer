@@ -12,10 +12,7 @@ import group17.cmpt276.iteration3.Model.Date;
  * Stores information about last update and if it is the first time opening app
  * Singleton class
  */
-<<<<<<< HEAD
 
-=======
->>>>>>> ff2a1f7e537700fdc0272aca0ab1b059e7c3f4ad
 public class DatabaseInfo {
     private static final String TAG = "Database info";
     private static DatabaseInfo databaseInfo;
@@ -120,7 +117,6 @@ public class DatabaseInfo {
         //check
         double timeSinceLastUpdate = dateDifference(currDate,lastUpdateDate);
         if(timeSinceLastUpdate >= 20){
-            Log.i(TAG, "needToUpdate: need to update!!!");
             getMetaData();
             double differenceFromServerUpdate = dateDifference(serverLastUpdate,lastUpdateDate);
             return Math.abs(differenceFromServerUpdate) >= 5;

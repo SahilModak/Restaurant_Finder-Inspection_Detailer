@@ -82,27 +82,22 @@ public class RestaurantListAdapter extends ArrayAdapter<Restaurant> {
         if(restaurantName.contains("A&W")){
             //https://logos-download.com/?s=A%26W
             imageRestaurant.setImageResource(R.drawable.logo_aw);
-            Log.i(TAG, "restaurant is A&W");
         }
         else if(restaurantName.contains("McDonald's")){
             //https://logos-download.com/?s=McDonald
             imageRestaurant.setImageResource(R.drawable.logo_mcdonald);
-            Log.i(TAG, "restaurant is McDonald's");
         }
         else if(restaurantName.contains("Starbucks Coffee")){
             //https://logos-download.com/?s=starbucks
             imageRestaurant.setImageResource(R.drawable.logo_starbucks);
-            Log.i(TAG, "restaurant is Starbucks");
         }
         else if(restaurantName.contains("Tim Hortons")){
             //https://logos-download.com/?s=tim+hortons
             imageRestaurant.setImageResource(R.drawable.logo_tim_hortons);
-            Log.i(TAG, "restaurant is Time Hortons");
         }
         else if(restaurantName.contains("Safeway")){
             //https://logos-download.com/?s=safeway
             imageRestaurant.setImageResource(R.drawable.logo_safeway);
-            Log.i(TAG, "restaurant is safeway");
         }
     }
 
@@ -110,27 +105,22 @@ public class RestaurantListAdapter extends ArrayAdapter<Restaurant> {
         if(restaurantName.contains("KFC")){
             //https://logos-download.com/?s=KFC
             imageRestaurant.setImageResource(R.drawable.logo_kfc);
-            Log.i(TAG, "restaurant is kfc");
         }
         else if(restaurantName.contains("Burger King")){
             //https://logos-download.com/?s=burger+King
             imageRestaurant.setImageResource(R.drawable.logo_burger_king);
-            Log.i(TAG, "restaurant is burger king");
         }
         else if(restaurantName.contains("Pizza Hut")){
             //https://logos-download.com/?s=pizza+Hut
             imageRestaurant.setImageResource(R.drawable.logo_pizza_hut);
-            Log.i(TAG, "restaurant is pizza hut");
         }
         else if(restaurantName.contains("7-Eleven")){
             //https://logos-download.com/?s=7-eleven
             imageRestaurant.setImageResource(R.drawable.logo_7_eleven);
-            Log.i(TAG, "restaurant is 7-eleven");
         }
         else if(restaurantName.contains("Blenz coffee")){
             //https://www.vcc.ca/services/eat-shop--more/blenz/
             imageRestaurant.setImageResource(R.drawable.logo_blenz_coffee);
-            Log.i(TAG, "restaurant is blenz coffee");
         }
     }
 

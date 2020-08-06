@@ -44,11 +44,11 @@ public class RestaurantReader {
             }
         }
         catch (FileNotFoundException fnf){
-            Log.i(TAG, "readRestaurantCSV: file not found!");
+            Log.e(TAG, "readRestaurantCSV: file not found!");
             fnf.printStackTrace();
         }
         catch (IOException ioe){
-            Log.i(TAG, "readRestaurantCSV: IOE exception");
+            Log.e(TAG, "readRestaurantCSV: IOE exception");
             ioe.printStackTrace();
         } catch (CsvValidationException e) {
             e.printStackTrace();

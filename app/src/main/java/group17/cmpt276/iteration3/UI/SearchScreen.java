@@ -106,14 +106,14 @@ public class SearchScreen extends AppCompatActivity {
         }
     }
 
+    //check if favorites need to be used as search criteria
     private void getUserSearchFavorite() {
-        //getting the value from checkbox
         CheckBox fav = (CheckBox) findViewById(R.id.favCheckBox);
         searchFav = fav.isChecked();
     }
 
+    //get hazard level for user entry if entered
     private void getUserSearchHazardLevel() {
-        //get hazard level for user entry if entered
         RadioGroup hazardGroup = findViewById(R.id.hazardGroup);
         int radioId = hazardGroup.getCheckedRadioButtonId();
         if(radioId != -1){
@@ -125,8 +125,9 @@ public class SearchScreen extends AppCompatActivity {
             searchHazard = "";
         }
     }
+
+    // get the search string if entered
     private void getUserSearchName(){
-        // get the search string if entered
         EditText editTextName = findViewById(R.id.editText_search_name);
         searchResName = editTextName.getText().toString();
     }

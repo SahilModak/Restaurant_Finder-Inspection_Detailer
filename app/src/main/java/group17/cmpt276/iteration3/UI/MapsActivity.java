@@ -298,7 +298,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(databaseInfo.firstOpen(sharedPreferences) == 0 || !hasUpdated){
             restFileStream = getResources().openRawResource(R.raw.restaurants_itr1);
             inspFileStream = getResources().openRawResource(R.raw.inspectionreports_itr1);
-            Log.i(TAG, "loadFromCSV: reading default rests");
         }
         else{   //use previously downloaded files
             try {
@@ -306,7 +305,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 inspFileStream = context.openFileInput(databaseInfo.getInspectionFileName());
 
             } catch (IOException e) {
-                Log.i(TAG, "onCreate: caught exception");
+                Log.e(TAG, "onCreate: caught exception");
                 e.printStackTrace();
             }
         }
@@ -323,7 +322,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             csvReader.readInspectionCSV(readerI,this);
             readerI.close();
         } catch (IOException e) {
-            Log.i(TAG, "onCreate: caught exception");
+            Log.e(TAG, "onCreate: caught exception");
             e.printStackTrace();
         }
     }
@@ -580,7 +579,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onClusterItemInfoWindowClick(ClusterItem restaurant) {
         Log.i(TAG, "onClusterItemInfoWindowClick: registered click on restaurant : " + restaurant.toString());
-        //todo: change to sorted list
         Intent intent = RestaurantDetailsActivity.makeIntent(MapsActivity.this, (Integer) manager.getRestaurantPositionInArray((Restaurant)restaurant));
         startActivity(intent);
     }
