@@ -62,6 +62,12 @@ import group17.cmpt276.iteration3.Model.RestaurantManager;
 import group17.cmpt276.iteration3.R;
 
 
+/*
+    the activity uses the google maps api to display the map,
+    display restaurant pegs and the user location.
+    Clusters are animated nad shown for clustered markers.
+    Markers are set to show a custom info window as well
+*/
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         ClusterManager.OnClusterItemInfoWindowClickListener,
         ClusterManager.OnClusterItemClickListener<Restaurant>,
@@ -505,7 +511,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(newLatitude!= 9999 &&  newLongitude!= 9999){ // check whether latitude and longitude is modified by intent
             currentLocation.setLatitude(newLatitude);   //modify the current location if we get new coordinate
             currentLocation.setLongitude(newLongitude);
+            LatLng latLng = new LatLng(newLatitude,newLongitude);
             Intent intent = getIntent();
+
             int pos = intent.getIntExtra(RestaurantDetailsActivity.RESTAURANTINDEX,0);
             Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(manager.getRestaurant(pos).getLatitude(),
                     manager.getRestaurant(pos).getLongitude()))
